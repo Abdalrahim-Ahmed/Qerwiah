@@ -1,11 +1,13 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { useBrand } from '../../context/BrandContext';
 import { LiquidButton } from '../LiquidButton';
-import heroBg from '../../assets/images/hero-bg.jpg';
+import heroBgArabic from '../../assets/images/hero-bg-ar.jpg';
+import heroBgEnglish from '../../assets/images/hero-bg-en.png';
 
 export const HeroSection = () => {
   const { t, language } = useBrand();
   const prefersReduced = useReducedMotion();
+  const heroBg = language === 'ar' ? heroBgArabic : heroBgEnglish;
 
   return (
     <section className="relative z-10 overflow-hidden min-h-[580px] sm:min-h-[640px] lg:min-h-[720px] flex items-center py-16 sm:py-20 lg:py-28">
