@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { BrandProvider } from './context/BrandContext';
 import { CinematicIntro } from './components/CinematicIntro';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { BananaFiberThread } from './components/BananaFiberThread';
+import { ScrollToTop } from './components/ScrollToTop';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ProductsPage } from './pages/ProductsPage';
@@ -13,14 +13,6 @@ import { CustomDesign } from './pages/CustomDesign';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { LoginPage } from './pages/LoginPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, [pathname]);
-  return null;
-};
 
 export default function App() {
   // BrandProvider lives inside the router because the shared login flow navigates.

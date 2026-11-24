@@ -16,7 +16,6 @@ import {
   UserCheck,
   UserX,
   Menu,
-  X,
   LayoutDashboard,
   ChevronLeft,
   ArrowRight,
@@ -256,9 +255,9 @@ export const AdminDashboardPage = () => {
   const closeSidebar = () => setSidebarOpen(false);
 
   const inputClass =
-    'w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#640018]/20 text-sm text-[#2A0E14] outline-none focus:border-[#640018] focus:ring-2 focus:ring-[#640018]/10 transition-all';
+    'w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#4B0011]/20 text-sm text-[#2A0E14] outline-none focus:border-[#4B0011] focus:ring-2 focus:ring-[#4B0011]/10 transition-all';
 
-  const labelClass = 'block text-xs font-medium text-[#640018] mb-2';
+  const labelClass = 'block text-xs font-medium text-[#4B0011] mb-2';
 
   return (
     <div
@@ -280,10 +279,11 @@ export const AdminDashboardPage = () => {
         {/* SIDEBAR */}
         <aside
           className={`
-            fixed lg:sticky top-0 z-50 lg:z-20
-            h-screen w-[270px] shrink-0
-            bg-[#640018] text-[#FFF7EB]
-            flex flex-col
+            fixed lg:sticky top-0 lg:top-[var(--header-height,5rem)] z-50 lg:z-20
+            h-screen lg:h-[calc(100vh-var(--header-height,5rem))] w-[270px] shrink-0
+            admin-sidebar-sticky
+            bg-[#4B0011] text-[#FFF7EB]
+            flex flex-col overflow-y-auto overscroll-contain
             transition-transform duration-300
             ${isArabic ? 'right-0' : 'left-0'}
             ${sidebarOpen
@@ -294,37 +294,14 @@ export const AdminDashboardPage = () => {
             }
           `}
         >
-          {/* Brand */}
-          <div className="px-7 pt-8 pb-7 border-b border-[#FFF7EB]/15">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-semibold tracking-wide">
-                  AL QERWIAH
-                </h2>
-                <p className="mt-1 text-[10px] tracking-[3px] text-[#DFAC6D]">
-                  HERITAGE ATELIER
-                </p>
-              </div>
-
-              <button
-                type="button"
-                onClick={closeSidebar}
-                className="lg:hidden p-2 rounded-lg hover:bg-white/10"
-                aria-label="Close menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-
           {/* Admin Profile */}
-          <div className="mx-5 mt-6 mb-7 p-4 rounded-2xl bg-[#FFF7EB]/10 border border-[#FFF7EB]/10">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-[#DFAC6D] flex items-center justify-center text-[#640018]">
+          <div className="mx-5 mt-5 mb-5 p-3.5 rounded-2xl bg-[#FFF7EB]/10 border-b border-[#FFF7EB]/15">
+            <div className="flex flex-row-reverse items-center gap-3">
+              <div className="w-11 h-11 rounded-full bg-[#DFAC6D] flex items-center justify-center text-[#4B0011] shrink-0">
                 <Users className="w-5 h-5" />
               </div>
 
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1 text-end">
                 <p className="text-sm font-semibold truncate">
                   {currentAdmin.name}
                 </p>
@@ -337,10 +314,6 @@ export const AdminDashboardPage = () => {
 
           {/* Navigation */}
           <div className="px-5">
-            <p className="px-3 mb-3 text-[10px] tracking-[2px] text-[#DFAC6D]/80 uppercase">
-              {isArabic ? 'القائمة الرئيسية' : 'MAIN MENU'}
-            </p>
-
             <nav className="space-y-2">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
@@ -361,7 +334,7 @@ export const AdminDashboardPage = () => {
                       rounded-xl text-sm font-medium
                       transition-all duration-200
                       ${active
-                        ? 'bg-[#FFF7EB] text-[#640018] shadow-lg'
+                        ? 'bg-[#FFF7EB] text-[#4B0011] shadow-lg'
                         : 'text-[#FFF7EB]/75 hover:text-[#FFF7EB] hover:bg-[#FFF7EB]/10'
                       }
                     `}
@@ -404,43 +377,32 @@ export const AdminDashboardPage = () => {
         <main className="flex-1 min-w-0">
 
           {/* TOP HEADER */}
-          <header className="sticky top-0 z-30 bg-[#FFF7EB]/95 backdrop-blur-md border-b border-[#640018]/10">
+          <header className="sticky top-0 z-30 bg-[#FFF7EB]/95 backdrop-blur-md border-b border-[#4B0011]/10">
             <div className="px-5 sm:px-8 lg:px-10 py-5 flex items-center justify-between gap-4">
 
               <div className="flex items-center gap-4 min-w-0">
                 <button
                   type="button"
                   onClick={() => setSidebarOpen(true)}
-                  className="lg:hidden p-2.5 rounded-xl bg-[#F4E8D5] text-[#640018]"
+                  className="lg:hidden p-2.5 rounded-xl bg-[#F4E8D5] text-[#4B0011]"
                   aria-label="Open sidebar"
                 >
                   <Menu className="w-5 h-5" />
                 </button>
 
                 <div className="min-w-0">
-                  <p className="text-[10px] sm:text-xs text-[#8A8861] mb-1">
-                    {t.dashboard.kicker}
-                  </p>
+                  
 
-                  <h1 className="text-xl sm:text-2xl font-semibold text-[#640018] truncate">
+                  <h1 className="text-xl sm:text-2xl font-semibold text-[#4B0011] truncate">
                     {sectionTitle[activeTab]}
                   </h1>
                 </div>
               </div>
 
-              <div className="hidden sm:flex items-center gap-3">
-                <div className="text-end">
-                  <p className="text-xs font-semibold text-[#640018]">
-                    {currentAdmin.name}
-                  </p>
-                  <p className="text-[10px] text-[#8A8861]">
-                    {isArabic ? 'مسؤول النظام' : 'Administrator'}
-                  </p>
-                </div>
+              <div className="">
+                
 
-                <div className="w-10 h-10 rounded-full bg-[#640018] text-[#FFF7EB] flex items-center justify-center">
-                  <Shield className="w-5 h-5" />
-                </div>
+                
               </div>
             </div>
           </header>
@@ -463,7 +425,7 @@ export const AdminDashboardPage = () => {
                   <>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
-                        <h2 className="text-xl font-semibold text-[#640018]">
+                        <h2 className="text-xl font-semibold text-[#4B0011]">
                           {t.dashboard.tabs.products}
                         </h2>
                         <p className="text-xs text-[#8A8861] mt-1">
@@ -485,10 +447,10 @@ export const AdminDashboardPage = () => {
 
                     {/* Products Count */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      <div className="bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl p-5">
+                      <div className="bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl p-5">
                         <div className="flex items-center justify-between">
                           <Package className="w-6 h-6 text-[#8A8861]" />
-                          <span className="text-2xl font-semibold text-[#640018] tabular-nums">
+                          <span className="text-2xl font-semibold text-[#4B0011] tabular-nums">
                             {products.length}
                           </span>
                         </div>
@@ -497,10 +459,10 @@ export const AdminDashboardPage = () => {
                         </p>
                       </div>
 
-                      <div className="bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl p-5">
+                      <div className="bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl p-5">
                         <div className="flex items-center justify-between">
                           <Star className="w-6 h-6 text-[#DFAC6D]" />
-                          <span className="text-2xl font-semibold text-[#640018] tabular-nums">
+                          <span className="text-2xl font-semibold text-[#4B0011] tabular-nums">
                             {products.filter((p) => p.featured).length}
                           </span>
                         </div>
@@ -509,10 +471,10 @@ export const AdminDashboardPage = () => {
                         </p>
                       </div>
 
-                      <div className="bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl p-5">
+                      <div className="bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl p-5">
                         <div className="flex items-center justify-between">
                           <Package className="w-6 h-6 text-[#8A8861]" />
-                          <span className="text-2xl font-semibold text-[#640018] tabular-nums">
+                          <span className="text-2xl font-semibold text-[#4B0011] tabular-nums">
                             {products.filter((p) => p.category === 'bags').length}
                           </span>
                         </div>
@@ -527,7 +489,7 @@ export const AdminDashboardPage = () => {
                       {products.map((product) => (
                         <div
                           key={product.id}
-                          className="group rounded-2xl bg-[#FFF7EB] border border-[#640018]/10 overflow-hidden flex flex-col hover:shadow-xl hover:shadow-[#640018]/5 transition-all duration-300"
+                          className="group rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/10 overflow-hidden flex flex-col hover:shadow-xl hover:shadow-[#4B0011]/5 transition-all duration-300"
                         >
                           <div className="aspect-[4/3] bg-[#F4E8D5] overflow-hidden relative">
                             <HeritageImage
@@ -537,7 +499,7 @@ export const AdminDashboardPage = () => {
                             />
 
                             {product.featured && (
-                              <span className="absolute top-3 start-3 bg-[#640018] text-[#FFF7EB] text-[10px] px-3 py-1.5 rounded-full flex items-center gap-1">
+                              <span className="absolute top-3 start-3 bg-[#4B0011] text-[#FFF7EB] text-[10px] px-3 py-1.5 rounded-full flex items-center gap-1">
                                 <Star className="w-3 h-3 fill-[#DFAC6D] text-[#DFAC6D]" />
                                 {isArabic ? 'منتج مميز' : 'Featured'}
                               </span>
@@ -555,7 +517,7 @@ export const AdminDashboardPage = () => {
                                 </span>
                               </div>
 
-                              <h3 className="mt-2 text-lg font-semibold text-[#640018]">
+                              <h3 className="mt-2 text-lg font-semibold text-[#4B0011]">
                                 {product.name[language]}
                               </h3>
 
@@ -564,7 +526,7 @@ export const AdminDashboardPage = () => {
                               </p>
                             </div>
 
-                            <div className="pt-4 border-t border-[#640018]/10 flex items-center justify-between gap-2">
+                            <div className="pt-4 border-t border-[#4B0011]/10 flex items-center justify-between gap-2">
                               <button
                                 type="button"
                                 onClick={() =>
@@ -574,7 +536,7 @@ export const AdminDashboardPage = () => {
                                 }
                                 className={`inline-flex items-center gap-1.5 text-xs font-medium ${
                                   product.featured
-                                    ? 'text-[#640018]'
+                                    ? 'text-[#4B0011]'
                                     : 'text-[#8A8861]'
                                 }`}
                               >
@@ -595,7 +557,7 @@ export const AdminDashboardPage = () => {
                                   type="button"
                                   onClick={() => openEditProductForm(product)}
                                   aria-label="Edit"
-                                  className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#640018] hover:bg-[#640018] hover:text-white transition-colors"
+                                  className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#4B0011] hover:bg-[#4B0011] hover:text-white transition-colors"
                                 >
                                   <Edit3 className="w-4 h-4" />
                                 </button>
@@ -614,7 +576,7 @@ export const AdminDashboardPage = () => {
                                     }
                                   }}
                                   aria-label={t.dashboard.productsTab.deleteBtn}
-                                  className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#640018] hover:bg-[#640018] hover:text-white transition-colors"
+                                  className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#4B0011] hover:bg-[#4B0011] hover:text-white transition-colors"
                                 >
                                   <Trash2 className="w-4 h-4" />
                                 </button>
@@ -631,7 +593,7 @@ export const AdminDashboardPage = () => {
                     <button
                       type="button"
                       onClick={() => setShowProductForm(false)}
-                      className="flex items-center gap-2 text-sm text-[#8A8861] hover:text-[#640018] mb-6 transition-colors"
+                      className="flex items-center gap-2 text-sm text-[#8A8861] hover:text-[#4B0011] mb-6 transition-colors"
                     >
                       <ArrowRight className="w-4 h-4" />
                       {isArabic ? 'العودة إلى المنتجات' : 'Back to Products'}
@@ -639,10 +601,10 @@ export const AdminDashboardPage = () => {
 
                     <form
                       onSubmit={handleSaveProduct}
-                      className="rounded-2xl bg-[#FFF7EB] border border-[#640018]/10 p-5 sm:p-8 space-y-6 shadow-sm"
+                      className="rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/10 p-5 sm:p-8 space-y-6 shadow-sm"
                     >
-                      <div className="pb-5 border-b border-[#640018]/10">
-                        <h2 className="text-xl font-semibold text-[#640018]">
+                      <div className="pb-5 border-b border-[#4B0011]/10">
+                        <h2 className="text-xl font-semibold text-[#4B0011]">
                           {editingProductId
                             ? t.dashboard.productsTab.editTitle
                             : t.dashboard.productsTab.newTitle}
@@ -914,7 +876,7 @@ export const AdminDashboardPage = () => {
                         </div>
 
                         {productForm.image && (
-                          <div className="mt-4 w-32 h-32 rounded-xl overflow-hidden border border-[#640018]/15">
+                          <div className="mt-4 w-32 h-32 rounded-xl overflow-hidden border border-[#4B0011]/15">
                             <HeritageImage
                               src={productForm.image}
                               alt="Product preview"
@@ -924,7 +886,7 @@ export const AdminDashboardPage = () => {
                         )}
                       </div>
 
-                      <label className="inline-flex items-center gap-3 text-sm text-[#640018] cursor-pointer">
+                      <label className="inline-flex items-center gap-3 text-sm text-[#4B0011] cursor-pointer">
                         <input
                           type="checkbox"
                           checked={productForm.featured}
@@ -934,12 +896,12 @@ export const AdminDashboardPage = () => {
                               featured: e.target.checked,
                             })
                           }
-                          className="w-4 h-4 accent-[#640018]"
+                          className="w-4 h-4 accent-[#4B0011]"
                         />
                         {t.dashboard.productsTab.featuredLabel}
                       </label>
 
-                      <div className="flex flex-wrap items-center gap-3 pt-5 border-t border-[#640018]/10">
+                      <div className="flex flex-wrap items-center gap-3 pt-5 border-t border-[#4B0011]/10">
                         <LiquidButton type="submit" variant="burgundy">
                           <Check className="w-4 h-4" />
                           <span>{t.dashboard.productsTab.saveBtn}</span>
@@ -948,7 +910,7 @@ export const AdminDashboardPage = () => {
                         <button
                           type="button"
                           onClick={() => setShowProductForm(false)}
-                          className="px-6 py-3 rounded-full border border-[#640018]/20 text-sm text-[#640018] hover:bg-[#F4E8D5] transition-colors"
+                          className="px-6 py-3 rounded-full border border-[#4B0011]/20 text-sm text-[#4B0011] hover:bg-[#F4E8D5] transition-colors"
                         >
                           {t.dashboard.productsTab.cancelBtn}
                         </button>
@@ -963,10 +925,10 @@ export const AdminDashboardPage = () => {
             {activeTab === 'settings' && (
               <form
                 onSubmit={handleSaveSettings}
-                className="max-w-4xl bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl p-5 sm:p-8 space-y-6"
+                className="max-w-4xl bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl p-5 sm:p-8 space-y-6"
               >
                 <div>
-                  <h2 className="text-xl font-semibold text-[#640018]">
+                  <h2 className="text-xl font-semibold text-[#4B0011]">
                     {t.dashboard.settingsTab.title}
                   </h2>
                   <p className="text-xs text-[#8A8861] mt-1">
@@ -1122,7 +1084,7 @@ export const AdminDashboardPage = () => {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[#640018]/10">
+                <div className="pt-4 border-t border-[#4B0011]/10">
                   <LiquidButton type="submit" variant="burgundy">
                     <Check className="w-4 h-4" />
                     <span>{t.dashboard.settingsTab.saveBtn}</span>
@@ -1136,7 +1098,7 @@ export const AdminDashboardPage = () => {
               <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-xl font-semibold text-[#640018]">
+                    <h2 className="text-xl font-semibold text-[#4B0011]">
                       {t.dashboard.inquiriesTab.title}
                     </h2>
                     <p className="text-xs text-[#8A8861] mt-1">
@@ -1146,13 +1108,13 @@ export const AdminDashboardPage = () => {
                     </p>
                   </div>
 
-                  <span className="px-4 py-2 rounded-full bg-[#F4E8D5] text-[#640018] text-xs">
+                  <span className="px-4 py-2 rounded-full bg-[#F4E8D5] text-[#4B0011] text-xs">
                     {inquiries.length} {isArabic ? 'رسالة' : 'Messages'}
                   </span>
                 </div>
 
                 {inquiries.length === 0 ? (
-                  <div className="bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl py-20 text-center">
+                  <div className="bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl py-20 text-center">
                     <Mail className="w-10 h-10 text-[#DFAC6D] mx-auto mb-4" />
                     <p className="text-sm text-[#8A8861]">
                       {t.dashboard.inquiriesTab.empty}
@@ -1163,11 +1125,11 @@ export const AdminDashboardPage = () => {
                     {inquiries.map((item) => (
                       <div
                         key={item.id}
-                        className="rounded-2xl bg-[#FFF7EB] border border-[#640018]/10 p-5 sm:p-6 flex flex-col lg:flex-row lg:items-start justify-between gap-5 hover:shadow-md transition-shadow"
+                        className="rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/10 p-5 sm:p-6 flex flex-col lg:flex-row lg:items-start justify-between gap-5 hover:shadow-md transition-shadow"
                       >
                         <div className="space-y-3 flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-2 text-xs">
-                            <span className="font-semibold text-[#640018]">
+                            <span className="font-semibold text-[#4B0011]">
                               {item.name}
                             </span>
 
@@ -1181,7 +1143,7 @@ export const AdminDashboardPage = () => {
                               className={`px-3 py-1 rounded-full ${
                                 item.status === 'reviewed'
                                   ? 'bg-[#8A8861]/15 text-[#657047]'
-                                  : 'bg-[#DFAC6D]/20 text-[#640018]'
+                                  : 'bg-[#DFAC6D]/20 text-[#4B0011]'
                               }`}
                             >
                               {item.status === 'reviewed'
@@ -1190,7 +1152,7 @@ export const AdminDashboardPage = () => {
                             </span>
                           </div>
 
-                          <h3 className="text-base font-semibold text-[#640018]">
+                          <h3 className="text-base font-semibold text-[#4B0011]">
                             {item.subject}
                           </h3>
 
@@ -1224,7 +1186,7 @@ export const AdminDashboardPage = () => {
                                 deleteInquiry(item.id);
                               }
                             }}
-                            className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#640018] hover:bg-[#640018] hover:text-white transition-colors"
+                            className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#4B0011] hover:bg-[#4B0011] hover:text-white transition-colors"
                             aria-label={t.dashboard.inquiriesTab.delete}
                           >
                             <Trash2 className="w-4 h-4" />
@@ -1242,7 +1204,7 @@ export const AdminDashboardPage = () => {
               <div className="space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-xl font-semibold text-[#640018]">
+                    <h2 className="text-xl font-semibold text-[#4B0011]">
                       {isArabic ? 'طلبات التصميم الخاص' : 'Custom Design Requests'}
                     </h2>
                     <p className="text-xs text-[#8A8861] mt-1">
@@ -1251,13 +1213,13 @@ export const AdminDashboardPage = () => {
                         : 'Review bespoke piece requests from customers'}
                     </p>
                   </div>
-                  <span className="px-4 py-2 rounded-full bg-[#F4E8D5] text-[#640018] text-xs">
+                  <span className="px-4 py-2 rounded-full bg-[#F4E8D5] text-[#4B0011] text-xs">
                     {customRequests.length} {isArabic ? 'طلب' : 'Requests'}
                   </span>
                 </div>
 
                 {customRequests.length === 0 ? (
-                  <div className="bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl py-20 text-center">
+                  <div className="bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl py-20 text-center">
                     <Palette className="w-10 h-10 text-[#DFAC6D] mx-auto mb-4" />
                     <p className="text-sm text-[#8A8861]">
                       {isArabic ? 'لا توجد طلبات تصميم بعد.' : 'No custom design requests yet.'}
@@ -1268,11 +1230,11 @@ export const AdminDashboardPage = () => {
                     {customRequests.map((item) => (
                       <div
                         key={item.id}
-                        className="rounded-2xl bg-[#FFF7EB] border border-[#640018]/10 p-5 sm:p-6 flex flex-col lg:flex-row lg:items-start justify-between gap-5 hover:shadow-md transition-shadow"
+                        className="rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/10 p-5 sm:p-6 flex flex-col lg:flex-row lg:items-start justify-between gap-5 hover:shadow-md transition-shadow"
                       >
                         <div className="space-y-3 flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-2 text-xs">
-                            <span className="font-semibold text-[#640018]">{item.fullName}</span>
+                            <span className="font-semibold text-[#4B0011]">{item.fullName}</span>
                             <span className="text-[#8A8861]">•</span>
                             <span dir="ltr" className="text-[#8A8861]">{item.email}</span>
                             <span className="text-[#8A8861]">•</span>
@@ -1281,7 +1243,7 @@ export const AdminDashboardPage = () => {
                               className={`px-3 py-1 rounded-full ${
                                 item.status === 'reviewed'
                                   ? 'bg-[#8A8861]/15 text-[#657047]'
-                                  : 'bg-[#DFAC6D]/20 text-[#640018]'
+                                  : 'bg-[#DFAC6D]/20 text-[#4B0011]'
                               }`}
                             >
                               {item.status === 'reviewed' ? t.dashboard.inquiriesTab.reviewed : t.dashboard.inquiriesTab.newStatus}
@@ -1311,7 +1273,7 @@ export const AdminDashboardPage = () => {
                           {item.referenceImages.length > 0 && (
                             <ul className="flex flex-wrap gap-2">
                               {item.referenceImages.map((src, i) => (
-                                <li key={i} className="w-16 h-16 rounded-lg overflow-hidden border border-[#640018]/15">
+                                <li key={i} className="w-16 h-16 rounded-lg overflow-hidden border border-[#4B0011]/15">
                                   <img src={src} alt="" className="w-full h-full object-cover" />
                                 </li>
                               ))}
@@ -1337,7 +1299,7 @@ export const AdminDashboardPage = () => {
                                 deleteCustomRequest(item.id);
                               }
                             }}
-                            className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#640018] hover:bg-[#640018] hover:text-white transition-colors"
+                            className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#4B0011] hover:bg-[#4B0011] hover:text-white transition-colors"
                             aria-label={t.dashboard.inquiriesTab.delete}
                           >
                             <Trash2 className="w-4 h-4" />
@@ -1358,7 +1320,7 @@ export const AdminDashboardPage = () => {
                   <>
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
-                        <h2 className="text-xl font-semibold text-[#640018]">
+                        <h2 className="text-xl font-semibold text-[#4B0011]">
                           {t.dashboard.adminsTab.title}
                         </h2>
                         <p className="text-xs text-[#8A8861] mt-1">
@@ -1382,10 +1344,10 @@ export const AdminDashboardPage = () => {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl p-5">
+                      <div className="bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl p-5">
                         <div className="flex items-center justify-between">
                           <Shield className="w-6 h-6 text-[#8A8861]" />
-                          <span className="text-2xl font-semibold text-[#640018] tabular-nums">
+                          <span className="text-2xl font-semibold text-[#4B0011] tabular-nums">
                             {admins.length}
                           </span>
                         </div>
@@ -1394,10 +1356,10 @@ export const AdminDashboardPage = () => {
                         </p>
                       </div>
 
-                      <div className="bg-[#FFF7EB] border border-[#640018]/10 rounded-2xl p-5">
+                      <div className="bg-[#FFF7EB] border border-[#4B0011]/10 rounded-2xl p-5">
                         <div className="flex items-center justify-between">
                           <UserCheck className="w-6 h-6 text-[#8A8861]" />
-                          <span className="text-2xl font-semibold text-[#640018] tabular-nums">
+                          <span className="text-2xl font-semibold text-[#4B0011] tabular-nums">
                             {admins.filter((a) => a.active).length}
                           </span>
                         </div>
@@ -1415,15 +1377,15 @@ export const AdminDashboardPage = () => {
                       {admins.map((admin) => (
                         <div
                           key={admin.id}
-                          className="rounded-2xl bg-[#FFF7EB] border border-[#640018]/10 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-shadow"
+                          className="rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/10 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md transition-shadow"
                         >
                           <div className="flex items-center gap-4 min-w-0">
-                            <div className="w-12 h-12 shrink-0 rounded-full bg-[#F4E8D5] flex items-center justify-center text-[#640018]">
+                            <div className="w-12 h-12 shrink-0 rounded-full bg-[#F4E8D5] flex items-center justify-center text-[#4B0011]">
                               <Users className="w-5 h-5" />
                             </div>
 
                             <div className="min-w-0">
-                              <p className="text-base font-semibold text-[#640018]">
+                              <p className="text-base font-semibold text-[#4B0011]">
                                 {admin.name}
                               </p>
 
@@ -1432,7 +1394,7 @@ export const AdminDashboardPage = () => {
                               </p>
 
                               <div className="flex flex-wrap items-center gap-2 mt-2">
-                                <span className="text-[10px] px-2.5 py-1 rounded-full bg-[#F4E8D5] text-[#640018]">
+                                <span className="text-[10px] px-2.5 py-1 rounded-full bg-[#F4E8D5] text-[#4B0011]">
                                   {admin.role}
                                 </span>
 
@@ -1440,7 +1402,7 @@ export const AdminDashboardPage = () => {
                                   className={`text-[10px] px-2.5 py-1 rounded-full ${
                                     admin.active
                                       ? 'bg-[#8A8861]/15 text-[#657047]'
-                                      : 'bg-[#640018]/10 text-[#640018]'
+                                      : 'bg-[#4B0011]/10 text-[#4B0011]'
                                   }`}
                                 >
                                   {admin.active
@@ -1455,7 +1417,7 @@ export const AdminDashboardPage = () => {
                             <button
                               type="button"
                               onClick={() => toggleAdminActive(admin.id)}
-                              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full border border-[#640018]/20 hover:bg-[#F4E8D5] text-xs font-medium text-[#640018] transition-colors"
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full border border-[#4B0011]/20 hover:bg-[#F4E8D5] text-xs font-medium text-[#4B0011] transition-colors"
                             >
                               {admin.active ? (
                                 <>
@@ -1484,7 +1446,7 @@ export const AdminDashboardPage = () => {
                                 }
                               }}
                               aria-label={t.dashboard.adminsTab.delete}
-                              className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#640018] hover:bg-[#640018] hover:text-white transition-colors"
+                              className="p-2.5 rounded-xl bg-[#F4E8D5] text-[#4B0011] hover:bg-[#4B0011] hover:text-white transition-colors"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -1499,7 +1461,7 @@ export const AdminDashboardPage = () => {
                     <button
                       type="button"
                       onClick={() => setShowAdminForm(false)}
-                      className="flex items-center gap-2 text-sm text-[#8A8861] hover:text-[#640018] mb-6 transition-colors"
+                      className="flex items-center gap-2 text-sm text-[#8A8861] hover:text-[#4B0011] mb-6 transition-colors"
                     >
                       <ArrowRight className="w-4 h-4" />
                       {isArabic ? 'العودة إلى المسؤولين' : 'Back to Administrators'}
@@ -1507,10 +1469,10 @@ export const AdminDashboardPage = () => {
 
                     <form
                       onSubmit={handleCreateAdmin}
-                      className="rounded-2xl bg-[#FFF7EB] border border-[#640018]/10 p-6 sm:p-8 space-y-5 shadow-sm"
+                      className="rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/10 p-6 sm:p-8 space-y-5 shadow-sm"
                     >
-                      <div className="pb-5 border-b border-[#640018]/10">
-                        <h2 className="text-xl font-semibold text-[#640018]">
+                      <div className="pb-5 border-b border-[#4B0011]/10">
+                        <h2 className="text-xl font-semibold text-[#4B0011]">
                           {t.dashboard.adminsTab.addTitle}
                         </h2>
                         <p className="text-xs text-[#8A8861] mt-1">
@@ -1521,7 +1483,7 @@ export const AdminDashboardPage = () => {
                       </div>
 
                       {adminFeedback && (
-                        <p className="text-xs text-[#640018] bg-[#640018]/10 p-3 rounded-xl">
+                        <p className="text-xs text-[#4B0011] bg-[#4B0011]/10 p-3 rounded-xl">
                           {adminFeedback}
                         </p>
                       )}
@@ -1583,7 +1545,7 @@ export const AdminDashboardPage = () => {
                         </select>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-3 pt-5 border-t border-[#640018]/10">
+                      <div className="flex flex-wrap items-center gap-3 pt-5 border-t border-[#4B0011]/10">
                         <LiquidButton
                           type="submit"
                           variant="burgundy"
@@ -1596,7 +1558,7 @@ export const AdminDashboardPage = () => {
                         <button
                           type="button"
                           onClick={() => setShowAdminForm(false)}
-                          className="px-6 py-3 rounded-full border border-[#640018]/20 text-sm text-[#640018] hover:bg-[#F4E8D5] transition-colors"
+                          className="px-6 py-3 rounded-full border border-[#4B0011]/20 text-sm text-[#4B0011] hover:bg-[#F4E8D5] transition-colors"
                         >
                           {t.dashboard.productsTab.cancelBtn}
                         </button>
@@ -1609,12 +1571,6 @@ export const AdminDashboardPage = () => {
 
           </div>
 
-          {/* FOOTER */}
-          <footer className="px-5 sm:px-8 lg:px-10 py-6 border-t border-[#640018]/10">
-            <p className="text-[10px] text-[#8A8861] text-center">
-              © {new Date().getFullYear()} AL QERWIAH — Heritage Atelier
-            </p>
-          </footer>
         </main>
       </div>
     </div>

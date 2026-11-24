@@ -50,9 +50,24 @@ export const BrandProvider = ({ children }) => {
     readStorage(STORAGE_KEYS.products, INITIAL_PRODUCTS)
   );
 
-  const [settings, setSettings] = useState(() =>
-    readStorage(STORAGE_KEYS.settings, INITIAL_BRAND_SETTINGS)
-  );
+  const [settings, setSettings] = useState(() => {
+    const stored = readStorage(STORAGE_KEYS.settings, null);
+    if (!stored) return INITIAL_BRAND_SETTINGS;
+
+    const isPlaceholderNumber = !stored.whatsappNumber || stored.whatsappNumber === '+201000000000';
+    const isPlaceholderEmail = !stored.contactEmail || stored.contactEmail === 'atelier@alqerwiah.eg';
+    const isPlaceholderInsta = !stored.instagramUrl || stored.instagramUrl === 'https://instagram.com/alqerwiah.eg';
+    const isPlaceholderFb = !stored.facebookUrl || stored.facebookUrl === 'https://facebook.com/alqerwiah.eg';
+
+    return {
+      ...INITIAL_BRAND_SETTINGS,
+      ...stored,
+      whatsappNumber: isPlaceholderNumber ? INITIAL_BRAND_SETTINGS.whatsappNumber : stored.whatsappNumber,
+      contactEmail: isPlaceholderEmail ? INITIAL_BRAND_SETTINGS.contactEmail : stored.contactEmail,
+      instagramUrl: isPlaceholderInsta ? INITIAL_BRAND_SETTINGS.instagramUrl : stored.instagramUrl,
+      facebookUrl: isPlaceholderFb ? INITIAL_BRAND_SETTINGS.facebookUrl : stored.facebookUrl,
+    };
+  });
 
   const [admins, setAdmins] = useState(() =>
     readStorage(STORAGE_KEYS.admins, INITIAL_ADMINS)
@@ -292,13 +307,39 @@ export const BrandProvider = ({ children }) => {
   };
 
   const getWhatsAppLink = (customMessage) => {
-    const digits = settings.whatsappNumber.replace(/[^\d]/g, '') || '201000000000';
-    const defaultMsg =
-      language === 'ar'
-        ? 'مرحباً، أود الاستفسار عن قطع القروية.'
-        : 'Hello AL QERWIAH, I would like to inquire about your heritage pieces.';
-    const encoded = encodeURIComponent(customMessage || defaultMsg);
+    const raw = (settings?.whatsappNumber || '201013644721').replace(/[^\d]/g, '');
+    const digits = raw.startsWith('0') ? `2${raw}` : (raw || '201013644721');
+    if (!customMessage) {
+      return `https://wa.me/${digits}`;
+    }
+    const encoded = encodeURIComponent(customMessage);
     return `https://wa.me/${digits}?text=${encoded}`;
+  };
+
+  const getProductWhatsAppMessage = (product, lang = language) => {
+    if (!product) return '';
+    const productName =
+      typeof product.name === 'object'
+        ? product.name[lang] || product.name.ar || product.name.en || ''
+        : product.name || '';
+    const productId = product.id || '';
+
+    // Each field on its own line, blank line between every block.
+    // Label and value are on separate lines so nothing sits side-by-side.
+    return [
+      'السلام عليكم،',
+      'أود الاستفسار عن هذا المنتج:',
+      `اسم المنتج:\n${productName}`,
+      `رقم المنتج (ID):\n${productId}`,
+      'هل يمكن معرفة المزيد من التفاصيل عنه؟',
+      'وشكرًا لكم.',
+    ].join('\n\n');
+  };
+
+  const getProductWhatsAppLink = (product, lang = language) => {
+    if (!product) return getWhatsAppLink();
+    const message = getProductWhatsAppMessage(product, lang);
+    return getWhatsAppLink(message);
   };
 
   const submitInquiry = (input) => {
@@ -412,6 +453,8 @@ export const BrandProvider = ({ children }) => {
     settings,
     updateSettings,
     getWhatsAppLink,
+    getProductWhatsAppMessage,
+    getProductWhatsAppLink,
     inquiries,
     submitInquiry,
     markInquiryReviewed,

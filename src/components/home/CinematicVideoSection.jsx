@@ -114,7 +114,7 @@ export const CinematicVideoSection = () => {
               </svg>
 
               {/* 16:9 Landscape Video Viewport */}
-              <div className="relative w-full aspect-video rounded-[1.1rem] overflow-hidden bg-[#2A0E14]">
+              <div className="relative w-full aspect-video rounded-[1.1rem] overflow-hidden bg-[#4B0011]">
                 {!videoUnavailable ? (
                   <video
                     ref={videoRef}
@@ -155,7 +155,7 @@ export const CinematicVideoSection = () => {
                       />
                     </AnimatePresence>
                     {isPlaying && (
-                      <div className="absolute inset-x-0 top-0 p-5 bg-gradient-to-b from-[#2A0E14]/70 to-transparent">
+                      <div className="absolute inset-x-0 top-0 p-5 bg-gradient-to-b from-[#4B0011]/70 to-transparent">
                         <p className="text-xs text-[#FEDEA3] tracking-wide">
                           {activeChapter}
                         </p>
@@ -166,7 +166,7 @@ export const CinematicVideoSection = () => {
 
                 {/* Subtle Poster Gradient Scrim */}
                 <div
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2A0E14]/65 via-transparent to-[#2A0E14]/15"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#4B0011]/65 via-transparent to-[#4B0011]/15"
                   aria-hidden="true"
                 />
 
@@ -178,7 +178,7 @@ export const CinematicVideoSection = () => {
                     aria-label={t.videoSection.playLabel}
                     className="absolute inset-0 flex items-center justify-center group cursor-pointer focus-visible:outline-2 focus-visible:outline-[#FEDEA3]"
                   >
-                    <span className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-[#640018]/90 text-[#FEDEA3] border border-[#FEDEA3]/55 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105">
+                    <span className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-[#4B0011]/90 text-[#FEDEA3] border border-[#FEDEA3]/55 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-105">
                       <Play className="w-7 h-7 fill-current translate-x-0.5" aria-hidden="true" />
                     </span>
                   </button>
@@ -190,7 +190,7 @@ export const CinematicVideoSection = () => {
                     type="button"
                     onClick={togglePlay}
                     aria-label={isPlaying ? t.videoSection.pauseLabel : t.videoSection.playLabel}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#640018]/90 hover:bg-[#640018] text-[#FFF7EB] border border-[#FEDEA3]/35 text-xs font-medium transition-colors cursor-pointer whitespace-nowrap"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#4B0011]/90 hover:bg-[#4B0011] text-[#FFF7EB] border border-[#FEDEA3]/35 text-xs font-medium transition-colors cursor-pointer whitespace-nowrap"
                   >
                     {isPlaying ? (
                       <>
@@ -210,7 +210,7 @@ export const CinematicVideoSection = () => {
                       type="button"
                       onClick={toggleMute}
                       aria-label={isMuted ? t.videoSection.unmuteLabel : t.videoSection.muteLabel}
-                      className="w-9 h-9 rounded-full bg-[#2A0E14]/65 hover:bg-[#640018] text-[#FFF7EB] border border-[#FFF7EB]/25 flex items-center justify-center transition-colors cursor-pointer"
+                      className="w-9 h-9 rounded-full bg-[#4B0011]/65 hover:bg-[#4B0011] text-[#FFF7EB] border border-[#FFF7EB]/25 flex items-center justify-center transition-colors cursor-pointer"
                     >
                       {isMuted ? (
                         <VolumeX className="w-4 h-4 text-[#FEDEA3]" aria-hidden="true" />
@@ -232,12 +232,10 @@ export const CinematicVideoSection = () => {
             transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-4"
           >
-            <p className="text-xs sm:text-sm font-medium text-[#8A8861]">
-              {t.videoSection.kicker}
-            </p>
+            
             <h2
               id="heritage-video-heading"
-              className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#640018] leading-snug text-balance"
+              className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#4B0011] leading-snug text-balance"
             >
               {t.videoSection.title}
             </h2>
@@ -249,7 +247,7 @@ export const CinematicVideoSection = () => {
             </p>
 
             {/* Poetic Craft Chapters */}
-            <ol className="mt-8 space-y-3 text-sm text-[#2A0E14]/80 border-t border-[#640018]/10 pt-6 max-w-lg">
+            <ol className="mt-8 space-y-3 text-sm text-[#2A0E14]/80 border-t border-[#4B0011]/10 pt-6 max-w-lg">
               {t.videoSection.chapters.map((chapter, idx) => (
                 <li key={chapter} className="flex items-baseline gap-3">
                   <span className="text-xs font-semibold text-[#8A8861] tabular-nums">

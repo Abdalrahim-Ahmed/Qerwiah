@@ -8,7 +8,7 @@ import { LiquidButton } from './LiquidButton';
 import { FavoriteButton } from './FavoriteButton';
 
 export const ProductDetailModal = ({ product, onClose }) => {
-  const { language, t, getWhatsAppLink } = useBrand();
+  const { language, t, getProductWhatsAppLink } = useBrand();
 
   useEffect(() => {
     if (!product) return;
@@ -45,7 +45,7 @@ export const ProductDetailModal = ({ product, onClose }) => {
               type="button"
               onClick={onClose}
               aria-label={t.productsPage.close}
-              className="absolute top-4 end-4 z-20 w-9 h-9 rounded-full bg-[#FFF7EB]/90 text-[#640018] border border-[#640018]/20 flex items-center justify-center hover:bg-[#640018] hover:text-[#FFF7EB] transition-colors cursor-pointer"
+              className="absolute top-4 end-4 z-20 w-9 h-9 rounded-full bg-[#FFF7EB]/90 text-[#4B0011] border border-[#4B0011]/20 flex items-center justify-center hover:bg-[#4B0011] hover:text-[#FFF7EB] transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -60,32 +60,30 @@ export const ProductDetailModal = ({ product, onClose }) => {
 
             <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between gap-6">
               <div>
-                <p className="text-xs tracking-wider text-[#8A8861] font-medium">
-                  {product.edition[language]}
-                </p>
-                <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-[#640018] leading-snug">
+                
+                <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-[#4B0011] leading-snug">
                   {product.name[language]}
                 </h2>
                 <p className="mt-3 text-sm sm:text-base text-[#2A0E14]/85 leading-relaxed">
                   {product.shortDescription[language]}
                 </p>
 
-                <div className="my-5 h-px bg-[#640018]/12" />
+                <div className="my-5 h-px bg-[#4B0011]/12" />
 
                 <p className="text-sm text-[#2A0E14]/80 leading-relaxed">
                   {product.story[language]}
                 </p>
 
-                <dl className="mt-6 space-y-3 text-xs sm:text-sm border-t border-[#640018]/12 pt-4">
+                <dl className="mt-6 space-y-3 text-xs sm:text-sm border-t border-[#4B0011]/12 pt-4">
                   <div className="flex items-start gap-3">
-                    <dt className="flex items-center gap-1.5 text-[#640018] font-medium shrink-0">
+                    <dt className="flex items-center gap-1.5 text-[#4B0011] font-medium shrink-0">
                       <Layers className="w-4 h-4 text-[#8A8861]" aria-hidden="true" />
                       <span>{t.productsPage.materials}:</span>
                     </dt>
                     <dd className="text-[#2A0E14]/80">{product.materials[language]}</dd>
                   </div>
                   <div className="flex items-center gap-3">
-                    <dt className="flex items-center gap-1.5 text-[#640018] font-medium shrink-0">
+                    <dt className="flex items-center gap-1.5 text-[#4B0011] font-medium shrink-0">
                       <Ruler className="w-4 h-4 text-[#8A8861]" aria-hidden="true" />
                       <span>{t.productsPage.dimensions}:</span>
                     </dt>
@@ -94,7 +92,7 @@ export const ProductDetailModal = ({ product, onClose }) => {
                     </dd>
                   </div>
                   <div className="flex items-center gap-3">
-                    <dt className="flex items-center gap-1.5 text-[#640018] font-medium shrink-0">
+                    <dt className="flex items-center gap-1.5 text-[#4B0011] font-medium shrink-0">
                       <Clock className="w-4 h-4 text-[#8A8861]" aria-hidden="true" />
                       <span>{t.productsPage.craftTime}:</span>
                     </dt>
@@ -107,11 +105,7 @@ export const ProductDetailModal = ({ product, onClose }) => {
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <LiquidButton
-                  href={getWhatsAppLink(
-                    language === 'ar'
-                      ? `مرحباً القروية، أود الاستفسار عن قطعة: ${product.name.ar}`
-                      : `Hello AL QERWIAH, I would like to inquire about: ${product.name.en}`
-                  )}
+                  href={getProductWhatsAppLink(product)}
                   target="_blank"
                   rel="noopener noreferrer"
                   variant="burgundy"

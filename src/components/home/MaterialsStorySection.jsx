@@ -11,13 +11,11 @@ export const MaterialsStorySection = () => {
     <section className="relative z-10 py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <p className="text-xs sm:text-sm font-medium text-[#8A8861]">
-            {t.materials.kicker}
-          </p>
-          <h2 className="mt-2 text-2xl sm:text-4xl font-semibold text-[#640018] text-balance">
+          
+          <h2 className="mt-2 text-[clamp(1.85rem,4.5vw,60px)] lg:text-[60px] font-semibold text-[#4B0011] leading-[1.18] text-balance">
             {t.materials.title}
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-[#2A0E14]/80 leading-relaxed">
+          <p className="mt-4 text-[18px] text-[#2A0E14]/80 leading-[1.75]">
             {t.materials.description}
           </p>
         </div>
@@ -42,13 +40,11 @@ export const MaterialsStorySection = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="mt-3 text-center md:text-start">
-              <h3 className="text-base font-semibold text-[#640018]">
+            <figcaption className="mt-3 text-center">
+              <h3 className="text-base font-semibold text-[#4B0011]">
                 {t.materials.rightTitle}
               </h3>
-              <p className="mt-1 text-xs text-[#2A0E14]/75 leading-relaxed">
-                {t.materials.rightCaption}
-              </p>
+              
             </figcaption>
           </motion.figure>
 
@@ -68,12 +64,10 @@ export const MaterialsStorySection = () => {
               />
             </div>
             <figcaption className="mt-4 text-center max-w-md mx-auto">
-              <h3 className="text-lg sm:text-xl font-semibold text-[#640018]">
+              <h3 className="text-lg sm:text-xl font-semibold text-[#4B0011]">
                 {t.materials.centerTitle}
               </h3>
-              <p className="mt-1.5 text-xs sm:text-sm text-[#2A0E14]/80 leading-relaxed">
-                {t.materials.centerCaption}
-              </p>
+              
             </figcaption>
           </motion.figure>
 
@@ -92,13 +86,11 @@ export const MaterialsStorySection = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <figcaption className="mt-3 text-center md:text-start">
-              <h3 className="text-base font-semibold text-[#640018]">
+            <figcaption className="mt-3 text-center">
+              <h3 className="text-base font-semibold text-[#4B0011]">
                 {t.materials.leftTitle}
               </h3>
-              <p className="mt-1 text-xs text-[#2A0E14]/75 leading-relaxed">
-                {t.materials.leftCaption}
-              </p>
+              
             </figcaption>
           </motion.figure>
         </div>

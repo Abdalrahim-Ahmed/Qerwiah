@@ -11,7 +11,7 @@ export const HeritageImage = ({
   if (hasError || !src) {
     return (
       <div
-        className={`flex flex-col items-center justify-center bg-gradient-to-br from-[#F4E8D5] via-[#FFF7EB] to-[#DFAC6D]/30 text-[#640018] p-6 text-center ${containerClassName}`}
+        className={`flex flex-col items-center justify-center bg-gradient-to-br from-[#F4E8D5] via-[#FFF7EB] to-[#DFAC6D]/30 text-[#4B0011] p-6 text-center ${containerClassName}`}
         role="img"
         aria-label={alt}
       >
@@ -25,7 +25,7 @@ export const HeritageImage = ({
         >
           <path
             d="M8 28C14 20 26 20 32 12M8 14C16 22 24 22 32 28"
-            stroke="#640018"
+            stroke="#4B0011"
             strokeWidth="1.4"
             strokeLinecap="round"
           />

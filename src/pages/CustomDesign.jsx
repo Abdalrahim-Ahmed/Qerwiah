@@ -44,7 +44,7 @@ const INITIAL_FORM = {
 
 const fieldBase =
   'w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border text-sm text-[#2A0E14] placeholder:text-[#2A0E14]/40 focus:outline-none transition-colors';
-const fieldOk = 'border-[#640018]/20 focus:border-[#640018]';
+const fieldOk = 'border-[#4B0011]/20 focus:border-[#4B0011]';
 const fieldBad = 'border-[#B3261E] focus:border-[#B3261E]';
 
 /** Downscale an image to a small JPEG data URL so it fits comfortably in localStorage. */
@@ -199,7 +199,7 @@ export const CustomDesign = () => {
     text,
     required,
   }) => (
-    <label htmlFor={htmlFor} className="block text-xs font-medium text-[#640018] mb-2">
+    <label htmlFor={htmlFor} className="block text-xs font-medium text-[#4B0011] mb-2">
       {text}
       {required ? (
         <span className="text-[#B3261E]" aria-hidden="true"> *</span>
@@ -234,15 +234,15 @@ export const CustomDesign = () => {
                 initial={{ opacity: 0, y: prefersReduced ? 0 : 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="text-xs sm:text-sm font-medium text-[#8A8861] tracking-wide"
+                className=""
               >
-                {c.kicker}
+                
               </motion.p>
               <motion.h1
                 initial={{ opacity: 0, y: prefersReduced ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-4 text-4xl sm:text-5xl lg:text-[3.6rem] font-semibold text-[#640018] leading-[1.15] text-balance"
+                className="mt-4 text-[clamp(2rem,4.5vw,60px)] font-semibold text-[#4B0011] leading-[1.15] text-balance"
               >
                 {c.heroTitle}
               </motion.h1>
@@ -250,7 +250,7 @@ export const CustomDesign = () => {
                 initial={{ opacity: 0, y: prefersReduced ? 0 : 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-6 text-base sm:text-lg text-[#2A0E14]/82 leading-relaxed max-w-xl"
+                className="mt-6 text-[18px] text-[#2A0E14]/82 leading-[1.75] max-w-xl"
               >
                 {c.heroSubtitle}
               </motion.p>
@@ -280,38 +280,29 @@ export const CustomDesign = () => {
               initial={{ opacity: 0, scale: prefersReduced ? 1 : 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-6 relative w-full max-w-[20rem] sm:max-w-[30rem] justify-self-center"
+              className="lg:col-span-6 w-full"
             >
-              <div className="relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] rounded-3xl overflow-hidden border border-[#DFAC6D]/45 shadow-[0_24px_60px_-28px_rgba(100,0,24,0.55)]">
-                <HeritageImage
-                  src={BRAND_IMAGES.artisanHands}
-                  alt={language === 'ar' ? 'حرفية تنسج قطعة يدوية' : 'Artisan handweaving a custom piece'}
-                  containerClassName="w-full h-full"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#4A0011]/55 via-transparent to-transparent" />
-              </div>
-              {/* Small inset: finished piece */}
-              <div className="hidden sm:block absolute -bottom-6 ltr:-left-6 rtl:-right-6 w-28 lg:w-36 aspect-square rounded-2xl overflow-hidden border-4 border-[#FFF7EB] shadow-lg">
-                <HeritageImage
-                  src={BRAND_IMAGES.clutchOasis}
-                  alt={language === 'ar' ? 'كلتش من ألياف الموز' : 'Banana-fiber clutch'}
-                  containerClassName="w-full h-full"
-                />
-              </div>
-              <p className="absolute top-4 ltr:left-4 rtl:right-4 px-4 py-2 rounded-full bg-[#FFF7EB]/92 backdrop-blur text-[#640018] text-xs font-medium border border-[#DFAC6D]/50">
-                {c.heroBadge}
-              </p>
+              <figure>
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-[#DFAC6D]/50 bg-[#F4E8D5] shadow-md">
+                  <HeritageImage
+                    src={BRAND_IMAGES.artisanHands}
+                    alt={language === 'ar' ? 'حرفية تنسج قطعة يدوية' : 'Artisan handweaving a custom piece'}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                
+              </figure>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* B. How it works */}
-      <section id="cd-steps" className="py-16 sm:py-24 bg-[#F4E8D5]/70 border-y border-[#640018]/10 scroll-mt-24">
+      <section id="cd-steps" className="py-16 sm:py-24 bg-[#F4E8D5]/70 border-y border-[#4B0011]/10 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
           <motion.div {...fadeUp()} className="max-w-2xl">
-            <p className="text-xs sm:text-sm font-medium text-[#8A8861]">{c.stepsKicker}</p>
-            <h2 className="mt-2 text-2xl sm:text-4xl font-semibold text-[#640018] text-balance">
+          
+            <h2 className="mt-2 text-[clamp(1.85rem,4.2vw,60px)] font-semibold text-[#4B0011] leading-[1.18] text-balance">
               {c.stepsTitle}
             </h2>
           </motion.div>
@@ -323,18 +314,18 @@ export const CustomDesign = () => {
                 <motion.li
                   key={step.title}
                   {...fadeUp(i * 0.1)}
-                  className="group relative rounded-2xl bg-[#FFF7EB] border border-[#640018]/12 p-7 sm:p-8"
+                  className="group relative rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/12 p-7 sm:p-8"
                 >
                   <span
-                    className="absolute top-5 ltr:right-6 rtl:left-6 text-5xl font-semibold text-[#DFAC6D]/40 tabular-nums select-none transition-colors duration-500 ease-out group-hover:text-[#640018] group-focus-within:text-[#640018] motion-reduce:transition-none"
+                    className="absolute top-5 ltr:right-6 rtl:left-6 text-5xl font-semibold text-[#DFAC6D]/40 tabular-nums select-none transition-colors duration-500 ease-out group-hover:text-[#4B0011] group-focus-within:text-[#4B0011] motion-reduce:transition-none"
                     aria-hidden="true"
                   >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="w-12 h-12 rounded-full bg-[#640018] text-[#FEDEA3] flex items-center justify-center">
+                  <span className="w-12 h-12 rounded-full bg-[#4B0011] text-[#FEDEA3] flex items-center justify-center">
                     <Icon className="w-5 h-5" aria-hidden="true" />
                   </span>
-                  <h3 className="mt-6 text-lg sm:text-xl font-semibold text-[#640018]">
+                  <h3 className="mt-6 text-lg sm:text-xl font-semibold text-[#4B0011]">
                     {step.title}
                   </h3>
                   <p className="mt-3 text-sm text-[#2A0E14]/78 leading-relaxed">{step.body}</p>
@@ -351,7 +342,7 @@ export const CustomDesign = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             <motion.aside
               {...fadeUp()}
-              className="lg:col-span-4 lg:sticky lg:top-28 rounded-2xl bg-[#640018] text-[#FFF7EB] p-7 sm:p-9 border border-[#DFAC6D]/35 space-y-6"
+              className="lg:col-span-4 lg:sticky lg:top-28 rounded-2xl bg-[#4B0011] text-[#FFF7EB] p-7 sm:p-9 border border-[#DFAC6D]/35 space-y-6"
             >
               <p className="text-xs sm:text-sm font-medium text-[#DFAC6D]">{c.formKicker}</p>
               <h2 className="text-2xl sm:text-3xl font-semibold text-[#FEDEA3] text-balance">
@@ -369,18 +360,18 @@ export const CustomDesign = () => {
 
             <motion.div
               {...fadeUp(0.08)}
-              className="lg:col-span-8 rounded-2xl bg-[#FFF7EB] border border-[#640018]/15 p-6 sm:p-10"
+              className="lg:col-span-8 rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/15 p-6 sm:p-10"
             >
               {requestId ? (
                 <div className="py-10 text-center space-y-4" role="status">
                   <CheckCircle2 className="w-14 h-14 text-[#8A8861] mx-auto" aria-hidden="true" />
-                  <h3 className="text-2xl font-semibold text-[#640018]">{c.successTitle}</h3>
+                  <h3 className="text-2xl font-semibold text-[#4B0011]">{c.successTitle}</h3>
                   <p className="text-sm text-[#2A0E14]/80 max-w-md mx-auto leading-relaxed">
                     {c.successBody}
                   </p>
                   <p className="text-xs text-[#2A0E14]/70">
                     {c.successRef}:{' '}
-                    <span dir="ltr" className="font-semibold text-[#640018] tabular-nums">
+                    <span dir="ltr" className="font-semibold text-[#4B0011] tabular-nums">
                       {requestId}
                     </span>
                   </p>
@@ -412,7 +403,7 @@ export const CustomDesign = () => {
 
                   {/* Customer information */}
                   <fieldset className="space-y-5">
-                    <legend className="text-lg font-semibold text-[#640018] pb-3 mb-1 border-b border-[#640018]/10 w-full">
+                    <legend className="text-lg font-semibold text-[#4B0011] pb-3 mb-1 border-b border-[#4B0011]/10 w-full">
                       {c.sectionCustomer}
                     </legend>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -486,7 +477,7 @@ export const CustomDesign = () => {
 
                   {/* Product details */}
                   <fieldset className="space-y-5">
-                    <legend className="text-lg font-semibold text-[#640018] pb-3 mb-1 border-b border-[#640018]/10 w-full">
+                    <legend className="text-lg font-semibold text-[#4B0011] pb-3 mb-1 border-b border-[#4B0011]/10 w-full">
                       {c.sectionProduct}
                     </legend>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -552,7 +543,7 @@ export const CustomDesign = () => {
 
                   {/* Vision */}
                   <fieldset className="space-y-5">
-                    <legend className="text-lg font-semibold text-[#640018] pb-3 mb-1 border-b border-[#640018]/10 w-full">
+                    <legend className="text-lg font-semibold text-[#4B0011] pb-3 mb-1 border-b border-[#4B0011]/10 w-full">
                       {c.sectionVision}
                     </legend>
                     <div>
@@ -571,7 +562,7 @@ export const CustomDesign = () => {
                     </div>
 
                     <div>
-                      <p className="block text-xs font-medium text-[#640018] mb-2">
+                      <p className="block text-xs font-medium text-[#4B0011] mb-2">
                         {c.references}
                         <span className="text-[#2A0E14]/50 font-normal"> · {c.optional}</span>
                       </p>
@@ -589,7 +580,7 @@ export const CustomDesign = () => {
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
                         disabled={images.length >= MAX_IMAGES}
-                        className="w-full rounded-xl border-2 border-dashed border-[#640018]/25 hover:border-[#640018]/60 bg-[#F4E8D5]/40 px-4 py-7 flex flex-col items-center gap-2 text-[#640018] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#640018]"
+                        className="w-full rounded-xl border-2 border-dashed border-[#4B0011]/25 hover:border-[#4B0011]/60 bg-[#F4E8D5]/40 px-4 py-7 flex flex-col items-center gap-2 text-[#4B0011] transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4B0011]"
                       >
                         <ImagePlus className="w-6 h-6" aria-hidden="true" />
                         <span className="text-sm font-medium">{c.referencesButton}</span>
@@ -605,14 +596,14 @@ export const CustomDesign = () => {
                           {images.map((src, i) => (
                             <li
                               key={i}
-                              className="relative aspect-square rounded-lg overflow-hidden border border-[#640018]/15"
+                              className="relative aspect-square rounded-lg overflow-hidden border border-[#4B0011]/15"
                             >
                               <img src={src} alt="" className="w-full h-full object-cover" />
                               <button
                                 type="button"
                                 onClick={() => setImages((prev) => prev.filter((_, idx) => idx !== i))}
                                 aria-label={`${c.remove} ${i + 1}`}
-                                className="absolute top-1 ltr:right-1 rtl:left-1 w-6 h-6 rounded-full bg-[#640018] text-[#FFF7EB] flex items-center justify-center cursor-pointer hover:bg-[#4A0011]"
+                                className="absolute top-1 ltr:right-1 rtl:left-1 w-6 h-6 rounded-full bg-[#4B0011] text-[#FFF7EB] flex items-center justify-center cursor-pointer hover:bg-[#3A000D]"
                               >
                                 <X className="w-3.5 h-3.5" aria-hidden="true" />
                               </button>
@@ -625,7 +616,7 @@ export const CustomDesign = () => {
 
                   {/* Budget & contact */}
                   <fieldset className="space-y-5">
-                    <legend className="text-lg font-semibold text-[#640018] pb-3 mb-1 border-b border-[#640018]/10 w-full">
+                    <legend className="text-lg font-semibold text-[#4B0011] pb-3 mb-1 border-b border-[#4B0011]/10 w-full">
                       {c.sectionExtras}
                     </legend>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -661,7 +652,7 @@ export const CustomDesign = () => {
                     </div>
 
                     <div role="radiogroup" aria-labelledby="cd-contact-label">
-                      <p id="cd-contact-label" className="block text-xs font-medium text-[#640018] mb-2">
+                      <p id="cd-contact-label" className="block text-xs font-medium text-[#4B0011] mb-2">
                         {c.contactMethod}
                       </p>
                       <div className="flex flex-wrap gap-3">
@@ -670,10 +661,10 @@ export const CustomDesign = () => {
                           return (
                             <label
                               key={m.value}
-                              className={`cursor-pointer px-5 py-2.5 rounded-full text-sm border transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#640018] ${
+                              className={`cursor-pointer px-5 py-2.5 rounded-full text-sm border transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#4B0011] ${
                                 active
-                                  ? 'bg-[#640018] border-[#640018] text-[#FFF7EB]'
-                                  : 'bg-[#FFF7EB] border-[#640018]/25 text-[#640018] hover:border-[#640018]'
+                                  ? 'bg-[#4B0011] border-[#4B0011] text-[#FFF7EB]'
+                                  : 'bg-[#FFF7EB] border-[#4B0011]/25 text-[#4B0011] hover:border-[#4B0011]'
                               }`}
                             >
                               <input
@@ -700,7 +691,7 @@ export const CustomDesign = () => {
                           onChange={(e) => update('consent', e.target.checked)}
                           aria-invalid={!!errors.consent}
                           aria-describedby={errors.consent ? 'cd-consent-error' : undefined}
-                          className="mt-0.5 w-4 h-4 accent-[#640018] shrink-0"
+                          className="mt-0.5 w-4 h-4 accent-[#4B0011] shrink-0"
                         />
                         <span className="text-sm text-[#2A0E14]/82 leading-relaxed">{c.consent}</span>
                       </label>

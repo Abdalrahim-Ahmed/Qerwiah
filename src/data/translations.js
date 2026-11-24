@@ -23,7 +23,9 @@ export const COPY = {
     },
     hero: {
       kicker: 'حرفة مصرية أصيلة · ألياف موز وجلد طبيعي',
-      headline: 'من روح الريف... صُنعت حكاية جديدة',
+      headline: 'من روح الريف صنعت حكاية جديدة',
+      headlineLine1: 'من روح الريف',
+      headlineLine2: 'صنعت حكاية جديدة',
       subcopy:
         'تُحيي القروية الحرف اليدوية الريفية المصرية في حقائب ومحافظ معاصرة، تُنسج يدوياً من ألياف الموز الطبيعية وتُصاغ مع الجلد الطبيعي المصري.',
       ctaCollection: 'استكشفي المجموعة',
@@ -96,7 +98,7 @@ export const COPY = {
         'علامة تراثية مصرية تعيد إحياء الحرف الريفية عبر حقائب ومحافظ معاصرة من ألياف الموز الطبيعية والجلد الطبيعي.',
       navigationTitle: 'روابط الموقع',
       connectTitle: 'التواصل والورشة',
-      rights: '© 2026 القروية (AL QERWIAH). جميع الحقوق محفوظة.',
+      rights: '© 2026  قروية (QERWIAH) . جميع الحقوق محفوظة . ',
       heritageMark: 'صُنع بفخر في مصر',
     },
     aboutPage: {
@@ -151,7 +153,7 @@ export const COPY = {
         all: 'الكل',
         bags: 'الحقائب',
         wallets: 'المحافظ',
-        clutches: 'حقائب السهرة',
+        
       },
       empty: 'لا توجد قطع في هذا التصنيف حالياً.',
       dimensions: 'الأبعاد',
@@ -160,8 +162,7 @@ export const COPY = {
       hoursUnit: 'ساعة',
       viewDetails: 'تفاصيل القطعة',
       inquireWhatsapp: 'استفسار عبر واتساب',
-      close: 'إغلاق',
-      informationalNote: 'موقع تعريفي بالعلامة · للاستفسار عن القطع تواصلي مباشرة عبر واتساب',
+      close: 'إغلاق'
     },
     contactPage: {
       kicker: 'تواصل معنا',
@@ -406,6 +407,8 @@ export const COPY = {
     hero: {
       kicker: 'Egyptian Rural Heritage · Banana Fiber & Genuine Leather',
       headline: 'Rooted in Heritage. Crafted for Today.',
+      headlineLine1: 'Rooted in Heritage.',
+      headlineLine2: 'Crafted for Today.',
       subcopy:
         'AL QERWIAH revives traditional Egyptian rural craftsmanship through contemporary bags and wallets handwoven from natural banana fibers and vegetable-tanned genuine leather.',
       ctaCollection: 'Explore Our Collection',

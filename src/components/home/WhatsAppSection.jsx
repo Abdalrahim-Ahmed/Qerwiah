@@ -18,20 +18,25 @@ export const WhatsAppSection = () => {
           className="rounded-2xl bg-[#F4E8D5]/75 border border-[#DFAC6D]/50 px-6 py-10 sm:px-12 sm:py-14 flex flex-col md:flex-row md:items-center justify-between gap-8"
         >
           <div className="max-w-xl">
-            <p className="text-xs sm:text-sm font-medium text-[#8A8861]">
-              {t.whatsapp.kicker}
-            </p>
-            <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-[#640018] text-balance">
+            
+            <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-[#4B0011] text-balance">
               {t.whatsapp.title}
             </h2>
             <p className="mt-3 text-sm sm:text-base text-[#2A0E14]/82 leading-relaxed">
               {t.whatsapp.description}
             </p>
-            <p className="mt-4 text-xs text-[#640018]/80">
+            <p className="mt-4 text-xs text-[#4B0011]/80">
               {t.whatsapp.numberLabel}:{' '}
-              <span dir="ltr" className="font-semibold tabular-nums">
+              <a
+                href={getWhatsAppLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                dir="ltr"
+                className="font-semibold tabular-nums hover:underline hover:text-[#4B0011]"
+                aria-label="WhatsApp"
+              >
                 {settings.whatsappNumber}
-              </span>
+              </a>
             </p>
           </div>
 

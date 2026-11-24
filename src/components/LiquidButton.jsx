@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 
 const VARIANT_CLASSES = {
   burgundy:
-    'bg-[#640018] text-[#FFF7EB] border border-[#640018] hover:bg-[#4A0011] shadow-sm',
+    'bg-[#4B0011] text-[#FFF7EB] border border-[#4B0011] hover:bg-[#3A000D] shadow-sm',
   gold:
-    'bg-[#FEDEA3] text-[#4A0011] border border-[#DFAC6D] hover:bg-[#DFAC6D] shadow-sm',
+    'bg-[#FEDEA3] text-[#3A000D] border border-[#DFAC6D] hover:bg-[#DFAC6D] shadow-sm',
   outline:
-    'bg-transparent text-[#640018] border border-[#640018]/35 hover:border-[#640018] hover:bg-[#640018]/5',
+    'bg-transparent text-[#4B0011] border border-[#4B0011]/35 hover:border-[#4B0011] hover:bg-[#4B0011]/5',
 };
 
 export const LiquidButton = ({
@@ -20,7 +20,7 @@ export const LiquidButton = ({
   target,
   rel,
 }) => {
-  const base = `liquid-btn inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#640018] active:scale-[0.98] ${VARIANT_CLASSES[variant]} ${className}`;
+  const base = `liquid-btn inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4B0011] active:scale-[0.98] ${VARIANT_CLASSES[variant]} ${className}`;
 
   if (to) {
     return (

@@ -14,7 +14,7 @@ export const FinalCtaSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative overflow-hidden rounded-3xl bg-[#640018] text-[#FFF7EB] px-6 py-14 sm:px-14 sm:py-20 text-center border border-[#DFAC6D]/35 shadow-xl"
+          className="relative overflow-hidden rounded-3xl bg-[#4B0011] text-[#FFF7EB] px-6 py-14 sm:px-14 sm:py-20 text-center border border-[#DFAC6D]/35 shadow-xl"
         >
           {/* Subtle woven fiber arcs */}
           <svg
@@ -37,10 +37,10 @@ export const FinalCtaSection = () => {
           </svg>
 
           <div className="relative z-10 max-w-2xl mx-auto">
-            <h2 className="text-3xl sm:text-5xl font-semibold text-[#FFF7EB] leading-snug text-balance">
+            <h2 className="text-[clamp(1.85rem,4.5vw,60px)] lg:text-[60px] font-semibold text-[#FFF7EB] leading-[1.18] text-balance">
               {t.finalCta.title}
             </h2>
-            <p className="mt-4 text-sm sm:text-base text-[#FEDEA3]/90 leading-relaxed">
+            <p className="mt-4 text-[18px] text-[#FEDEA3]/90 leading-[1.75]">
               {t.finalCta.subtitle}
             </p>
             <div className="mt-8">

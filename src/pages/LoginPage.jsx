@@ -5,7 +5,7 @@ import { useBrand } from '../context/BrandContext';
 import { LiquidButton } from '../components/LiquidButton';
 
 const inputClass =
-  'w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#640018]/20 focus:border-[#640018] focus:outline-none text-sm text-[#2A0E14] ltr:text-left rtl:text-right';
+  'w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#4B0011]/20 focus:border-[#4B0011] focus:outline-none text-sm text-[#2A0E14] ltr:text-left rtl:text-right';
 
 const MODES = ['signin', 'register'];
 
@@ -74,10 +74,10 @@ export const LoginPage = () => {
     <div className="min-h-[82vh] flex items-center justify-center px-5 py-14">
       <div className="w-full max-w-md rounded-2xl bg-[#FFF7EB] border border-[#DFAC6D]/60 shadow-lg p-7 sm:p-10">
         <div className="text-center">
-          <div className="w-11 h-11 rounded-full bg-[#640018]/10 text-[#640018] flex items-center justify-center mx-auto mb-4">
+          <div className="w-11 h-11 rounded-full bg-[#4B0011]/10 text-[#4B0011] flex items-center justify-center mx-auto mb-4">
             <UserRound className="w-5 h-5" aria-hidden="true" />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-semibold text-[#640018]">{a.title}</h1>
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#4B0011]">{a.title}</h1>
           <p className="mt-2 text-xs sm:text-sm text-[#2A0E14]/75 leading-relaxed">{a.subtitle}</p>
         </div>
 
@@ -85,9 +85,9 @@ export const LoginPage = () => {
           <p
             data-testid="auth-favorite-message"
             role="status"
-            className="mt-5 flex items-start gap-2.5 p-3 rounded-lg bg-[#FEDEA3]/45 border border-[#DFAC6D]/60 text-xs sm:text-sm text-[#4A0011]"
+            className="mt-5 flex items-start gap-2.5 p-3 rounded-lg bg-[#FEDEA3]/45 border border-[#DFAC6D]/60 text-xs sm:text-sm text-[#3A000D]"
           >
-            <Heart className="w-4 h-4 mt-0.5 shrink-0 fill-[#640018] text-[#640018]" aria-hidden="true" />
+            <Heart className="w-4 h-4 mt-0.5 shrink-0 fill-[#4B0011] text-[#4B0011]" aria-hidden="true" />
             <span>{a.favoritesPrompt}</span>
           </p>
         )}
@@ -105,8 +105,8 @@ export const LoginPage = () => {
               onClick={() => switchMode(m)}
               className={`flex-1 px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer ${
                 mode === m
-                  ? 'bg-[#640018] text-[#FFF7EB] shadow-sm'
-                  : 'text-[#640018]/80 hover:text-[#640018]'
+                  ? 'bg-[#4B0011] text-[#FFF7EB] shadow-sm'
+                  : 'text-[#4B0011]/80 hover:text-[#4B0011]'
               }`}
             >
               {m === 'signin' ? a.signInTab : a.registerTab}
@@ -118,7 +118,7 @@ export const LoginPage = () => {
           {error && (
             <p
               role="alert"
-              className="p-3 rounded-lg bg-[#640018]/10 border border-[#640018]/30 text-xs sm:text-sm text-[#640018]"
+              className="p-3 rounded-lg bg-[#4B0011]/10 border border-[#4B0011]/30 text-xs sm:text-sm text-[#4B0011]"
             >
               {error}
             </p>
@@ -126,7 +126,7 @@ export const LoginPage = () => {
 
           {mode === 'register' && (
             <div>
-              <label htmlFor="auth-name" className="block text-xs font-medium text-[#640018] mb-2">
+              <label htmlFor="auth-name" className="block text-xs font-medium text-[#4B0011] mb-2">
                 {a.nameLabel}
               </label>
               <input
@@ -141,7 +141,7 @@ export const LoginPage = () => {
           )}
 
           <div>
-            <label htmlFor="auth-email" className="block text-xs font-medium text-[#640018] mb-2">
+            <label htmlFor="auth-email" className="block text-xs font-medium text-[#4B0011] mb-2">
               {a.emailLabel}
             </label>
             <input
@@ -157,7 +157,7 @@ export const LoginPage = () => {
           </div>
 
           <div>
-            <label htmlFor="auth-password" className="block text-xs font-medium text-[#640018] mb-2">
+            <label htmlFor="auth-password" className="block text-xs font-medium text-[#4B0011] mb-2">
               {a.passwordLabel}
             </label>
             <input
@@ -182,7 +182,7 @@ export const LoginPage = () => {
         <div className="mt-6 text-center">
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-xs text-[#640018]/80 hover:text-[#640018]"
+            className="inline-flex items-center gap-1.5 text-xs text-[#4B0011]/80 hover:text-[#4B0011]"
           >
             <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" aria-hidden="true" />
             <span>{a.backHome}</span>

@@ -28,9 +28,7 @@ export const AboutPreviewSection = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <figcaption className="mt-3 text-xs text-[#8A8861]">
-                {t.aboutPreview.caption}
-              </figcaption>
+              
             </figure>
           </motion.div>
 
@@ -42,14 +40,12 @@ export const AboutPreviewSection = () => {
             transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6"
           >
-            <p className="text-xs sm:text-sm font-medium text-[#8A8861]">
-              {t.aboutPreview.kicker}
-            </p>
-            <h2 className="mt-2 text-2xl sm:text-4xl font-semibold text-[#640018] leading-snug text-balance">
+            
+            <h2 className="mt-2 text-[clamp(1.85rem,4.5vw,60px)] lg:text-[60px] font-semibold text-[#4B0011] leading-[1.18] text-balance">
               {t.aboutPreview.title}
             </h2>
 
-            <div className="mt-6 space-y-4 text-sm sm:text-base text-[#2A0E14]/82 leading-relaxed max-w-xl">
+            <div className="mt-6 space-y-4 text-[18px] text-[#2A0E14]/82 leading-[1.75] max-w-xl">
               <p>{t.aboutPreview.paragraph1}</p>
               <p>{t.aboutPreview.paragraph2}</p>
             </div>

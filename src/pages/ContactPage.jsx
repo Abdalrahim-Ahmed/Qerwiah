@@ -39,13 +39,11 @@ export const ContactPage = () => {
     <div className="min-h-screen py-14 sm:py-20">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="max-w-2xl mb-12">
-          <p className="text-xs sm:text-sm font-medium text-[#8A8861]">
-            {t.contactPage.kicker}
-          </p>
-          <h1 className="mt-2 text-3xl sm:text-5xl font-semibold text-[#640018] text-balance">
+          
+          <h1 className="mt-2 text-[clamp(2rem,4.5vw,60px)] font-semibold text-[#4B0011] leading-[1.18] text-balance">
             {t.contactPage.title}
           </h1>
-          <p className="mt-4 text-sm sm:text-base text-[#2A0E14]/82 leading-relaxed">
+          <p className="mt-4 text-[18px] text-[#2A0E14]/82 leading-[1.75]">
             {t.contactPage.subtitle}
           </p>
         </div>
@@ -56,7 +54,7 @@ export const ContactPage = () => {
             initial={{ opacity: 0, y: prefersReduced ? 0 : 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 rounded-2xl bg-[#640018] text-[#FFF7EB] p-7 sm:p-10 border border-[#DFAC6D]/35 space-y-7"
+            className="lg:col-span-5 rounded-2xl bg-[#4B0011] text-[#FFF7EB] p-7 sm:p-10 border border-[#DFAC6D]/35 space-y-7"
           >
             <h2 className="text-xl sm:text-2xl font-semibold text-[#FEDEA3]">
               {t.contactPage.directTitle}
@@ -81,6 +79,7 @@ export const ContactPage = () => {
                     href={getWhatsAppLink()}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="WhatsApp"
                     dir="ltr"
                     className="mt-1 inline-block text-[#FFF7EB] font-medium hover:text-[#FEDEA3] underline underline-offset-4 tabular-nums"
                   >
@@ -95,6 +94,7 @@ export const ContactPage = () => {
                   <p className="text-xs text-[#FEDEA3]/80">{t.contactPage.emailLabel}</p>
                   <a
                     href={`mailto:${settings.contactEmail}`}
+                    aria-label="Email"
                     className="mt-1 inline-block text-[#FFF7EB] font-medium hover:text-[#FEDEA3] underline underline-offset-4"
                   >
                     {settings.contactEmail}
@@ -111,7 +111,7 @@ export const ContactPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="w-10 h-10 rounded-full border border-[#FEDEA3]/30 flex items-center justify-center text-[#FEDEA3] hover:bg-[#FEDEA3] hover:text-[#4A0011] transition-colors"
+                  className="w-10 h-10 rounded-full border border-[#FEDEA3]/30 flex items-center justify-center text-[#FEDEA3] hover:bg-[#FEDEA3] hover:text-[#3A000D] transition-colors"
                 >
                   <Instagram className="w-4 h-4" />
                 </a>
@@ -120,7 +120,7 @@ export const ContactPage = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"
-                  className="w-10 h-10 rounded-full border border-[#FEDEA3]/30 flex items-center justify-center text-[#FEDEA3] hover:bg-[#FEDEA3] hover:text-[#4A0011] transition-colors"
+                  className="w-10 h-10 rounded-full border border-[#FEDEA3]/30 flex items-center justify-center text-[#FEDEA3] hover:bg-[#FEDEA3] hover:text-[#3A000D] transition-colors"
                 >
                   <Facebook className="w-4 h-4" />
                 </a>
@@ -133,16 +133,16 @@ export const ContactPage = () => {
             initial={{ opacity: 0, y: prefersReduced ? 0 : 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.08 }}
-            className="lg:col-span-7 rounded-2xl bg-[#FFF7EB] border border-[#640018]/15 p-7 sm:p-10"
+            className="lg:col-span-7 rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/15 p-7 sm:p-10"
           >
-            <h2 className="text-xl sm:text-2xl font-semibold text-[#640018] mb-6">
+            <h2 className="text-xl sm:text-2xl font-semibold text-[#4B0011] mb-6">
               {t.contactPage.formTitle}
             </h2>
 
             {submitted ? (
               <div className="py-10 text-center space-y-4">
                 <CheckCircle2 className="w-12 h-12 text-[#8A8861] mx-auto" aria-hidden="true" />
-                <h3 className="text-xl font-semibold text-[#640018]">
+                <h3 className="text-xl font-semibold text-[#4B0011]">
                   {t.contactPage.successTitle}
                 </h3>
                 <p className="text-sm text-[#2A0E14]/80 max-w-md mx-auto leading-relaxed">
@@ -163,7 +163,7 @@ export const ContactPage = () => {
                 {error && (
                   <p
                     role="alert"
-                    className="p-3 rounded-lg bg-[#640018]/8 border border-[#640018]/25 text-xs sm:text-sm text-[#640018]"
+                    className="p-3 rounded-lg bg-[#4B0011]/8 border border-[#4B0011]/25 text-xs sm:text-sm text-[#4B0011]"
                   >
                     {error}
                   </p>
@@ -173,7 +173,7 @@ export const ContactPage = () => {
                   <div>
                     <label
                       htmlFor="contact-name"
-                      className="block text-xs font-medium text-[#640018] mb-2"
+                      className="block text-xs font-medium text-[#4B0011] mb-2"
                     >
                       {t.contactPage.nameLabel} *
                     </label>
@@ -183,14 +183,14 @@ export const ContactPage = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#640018]/20 focus:border-[#640018] focus:outline-none text-sm text-[#2A0E14]"
+                      className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#4B0011]/20 focus:border-[#4B0011] focus:outline-none text-sm text-[#2A0E14]"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="contact-channel"
-                      className="block text-xs font-medium text-[#640018] mb-2"
+                      className="block text-xs font-medium text-[#4B0011] mb-2"
                     >
                       {t.contactPage.contactLabel} *
                     </label>
@@ -200,7 +200,7 @@ export const ContactPage = () => {
                       value={phoneOrEmail}
                       onChange={(e) => setPhoneOrEmail(e.target.value)}
                       required
-                      className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#640018]/20 focus:border-[#640018] focus:outline-none text-sm text-[#2A0E14]"
+                      className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#4B0011]/20 focus:border-[#4B0011] focus:outline-none text-sm text-[#2A0E14]"
                     />
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export const ContactPage = () => {
                 <div>
                   <label
                     htmlFor="contact-subject"
-                    className="block text-xs font-medium text-[#640018] mb-2"
+                    className="block text-xs font-medium text-[#4B0011] mb-2"
                   >
                     {t.contactPage.subjectLabel}
                   </label>
@@ -217,14 +217,14 @@ export const ContactPage = () => {
                     type="text"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#640018]/20 focus:border-[#640018] focus:outline-none text-sm text-[#2A0E14]"
+                    className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#4B0011]/20 focus:border-[#4B0011] focus:outline-none text-sm text-[#2A0E14]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="block text-xs font-medium text-[#640018] mb-2"
+                    className="block text-xs font-medium text-[#4B0011] mb-2"
                   >
                     {t.contactPage.messageLabel} *
                   </label>
@@ -234,7 +234,7 @@ export const ContactPage = () => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#640018]/20 focus:border-[#640018] focus:outline-none text-sm text-[#2A0E14] resize-y"
+                    className="w-full px-4 py-3 rounded-xl bg-[#FFF7EB] border border-[#4B0011]/20 focus:border-[#4B0011] focus:outline-none text-sm text-[#2A0E14] resize-y"
                   />
                 </div>
 

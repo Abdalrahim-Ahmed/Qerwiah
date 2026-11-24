@@ -37,7 +37,7 @@ export const CinematicIntro = () => {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#640018] text-[#FFF7EB] px-6 overflow-hidden"
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#4B0011] text-[#FFF7EB] px-6 overflow-hidden"
           role="dialog"
           aria-modal="true"
           aria-label="AL QERWIAH Intro"
@@ -89,21 +89,21 @@ export const CinematicIntro = () => {
               animate={{ opacity: 0.85 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-xs sm:text-sm tracking-[0.28em] uppercase text-[#FEDEA3] mb-4"
-              style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+              style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
             >
               EGYPTIAN HERITAGE CRAFT
             </motion.p>
 
             <h1
               className="text-4xl sm:text-6xl font-semibold text-[#FFF7EB] tracking-tight"
-              style={{ fontFamily: '"Noto Kufi Arabic", "Playfair Display", serif' }}
+              style={{ fontFamily: '"Markazi Text", serif' }}
             >
               القروية
             </h1>
 
             <p
               className="mt-2 text-lg sm:text-2xl tracking-[0.22em] text-[#DFAC6D]"
-              style={{ fontFamily: '"Playfair Display", Georgia, serif' }}
+              style={{ fontFamily: '"Bricolage Grotesque", sans-serif' }}
             >
               AL QERWIAH
             </p>

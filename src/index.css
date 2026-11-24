@@ -1,8 +1,78 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   Brand Fonts Integration (Markazi Text & Bricolage Grotesque)
+   ========================================================================== */
+
+/* Markazi Text (Arabic) - Weights: 400, 500, 600, 700 */
+@font-face {
+  font-family: 'Markazi Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/markazi-text/MarkaziText-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Markazi Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/markazi-text/MarkaziText-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Markazi Text';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/markazi-text/MarkaziText-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Markazi Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/markazi-text/MarkaziText-Bold.ttf') format('truetype');
+}
+
+/* Bricolage Grotesque (English) - Weights: 400, 500, 600, 700 */
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/bricolage-grotesque/BricolageGrotesque-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/bricolage-grotesque/BricolageGrotesque-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('./assets/fonts/bricolage-grotesque/BricolageGrotesque-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/bricolage-grotesque/BricolageGrotesque-Bold.ttf') format('truetype');
+}
+
 @theme {
-  --color-burgundy: #640018;
-  --color-burgundy-deep: #4A0011;
+  --color-burgundy: #4B0011;
+  --color-burgundy-deep: #3A000D;
   --color-cream: #FFF7EB;
   --color-cream-dark: #F4E8D5;
   --color-olive: #8A8861;
@@ -10,41 +80,137 @@
   --color-gold-beige: #DFAC6D;
   --color-ink: #2A0E14;
 
-  --font-serif-en: "Playfair Display", Georgia, serif;
-  --font-sans-en: "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-ar: "Noto Kufi Arabic", "Tajawal", system-ui, sans-serif;
-  --font-ar-body: "Tajawal", "Noto Kufi Arabic", system-ui, sans-serif;
+  --font-serif-en: "Bricolage Grotesque", sans-serif;
+  --font-sans-en: "Bricolage Grotesque", sans-serif;
+  --font-ar: "Markazi Text", serif;
+  --font-ar-body: "Markazi Text", serif;
 }
 
 @layer base {
+  :root {
+    --header-height: 5rem;
+  }
+
+  @media (max-width: 639px) {
+    :root {
+      --header-height: 4rem;
+    }
+  }
+
   html {
-    scroll-behavior: smooth;
     background-color: #FFF7EB;
     color: #2A0E14;
   }
 
-  html[dir="rtl"] body {
-    font-family: "Tajawal", "Noto Kufi Arabic", system-ui, sans-serif;
+  /* Arabic Typography Scales & Adjustments (Balanced, natural proportions) */
+  html[dir="rtl"],
+  html[lang="ar"] {
+    --text-xs: 0.75rem;           /* 12px (Refined micro-labels, badges, hints) */
+    --text-xs--line-height: 1.25rem;
+    --text-sm: 0.875rem;          /* 14px (Secondary labels, buttons, metadata) */
+    --text-sm--line-height: 1.45rem;
+    --text-base: 1rem;            /* 16px (Natural, comfortable base body text) */
+    --text-base--line-height: 1.65rem;
+    --text-lg: 1.125rem;          /* 18px (Main paragraph text & descriptions: 18px) */
+    --text-lg--line-height: 1.85rem;
+    --text-xl: 1.25rem;           /* 20px */
+    --text-xl--line-height: 1.85rem;
+    --text-2xl: 1.5rem;           /* 24px */
+    --text-2xl--line-height: 2.1rem;
+    --text-3xl: 1.875rem;         /* 30px */
+    --text-3xl--line-height: 2.4rem;
+    --text-4xl: 2.375rem;         /* 38px */
+    --text-4xl--line-height: 2.85rem;
+    --text-5xl: 3.75rem;          /* 60px (Major section headings: 60px) */
+    --text-5xl--line-height: 1.18;
+    --text-6xl: 4.375rem;         /* 70px (Main Hero line 1: 70px) */
+    --text-6xl--line-height: 1.12;
+  }
+
+  /* English Typography Scales & Adjustments */
+  html[dir="ltr"],
+  html[lang="en"] {
+    --text-xs: 0.75rem;           /* 12px */
+    --text-xs--line-height: 1.25rem;
+    --text-sm: 0.875rem;          /* 14px */
+    --text-sm--line-height: 1.4rem;
+    --text-base: 1rem;            /* 16px */
+    --text-base--line-height: 1.6rem;
+    --text-lg: 1.125rem;          /* 18px */
+    --text-lg--line-height: 1.75rem;
+    --text-xl: 1.25rem;           /* 20px */
+    --text-xl--line-height: 1.75rem;
+    --text-2xl: 1.5rem;           /* 24px */
+    --text-2xl--line-height: 2rem;
+    --text-3xl: 1.875rem;         /* 30px */
+    --text-3xl--line-height: 2.35rem;
+    --text-4xl: 2.375rem;         /* 38px */
+    --text-4xl--line-height: 2.75rem;
+    --text-5xl: 3.75rem;          /* 60px */
+    --text-5xl--line-height: 1.15;
+    --text-6xl: 4.375rem;         /* 70px */
+    --text-6xl--line-height: 1.12;
+  }
+
+  /* Arabic Typography */
+  html[dir="rtl"],
+  html[lang="ar"],
+  html[dir="rtl"] body,
+  html[lang="ar"] body {
+    font-family: "Markazi Text", serif, system-ui, sans-serif;
+    font-size: 1rem; /* 16px comfortable base */
+    line-height: 1.65;
   }
 
   html[dir="rtl"] h1,
   html[dir="rtl"] h2,
   html[dir="rtl"] h3,
   html[dir="rtl"] h4,
-  html[dir="rtl"] .font-display {
-    font-family: "Noto Kufi Arabic", "Tajawal", system-ui, sans-serif;
+  html[dir="rtl"] .font-display,
+  html[lang="ar"] h1,
+  html[lang="ar"] h2,
+  html[lang="ar"] h3,
+  html[lang="ar"] h4,
+  html[lang="ar"] .font-display {
+    font-family: "Markazi Text", serif, system-ui, sans-serif;
+    letter-spacing: normal;
   }
 
-  html[dir="ltr"] body {
-    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  /* English Typography */
+  html[dir="ltr"],
+  html[lang="en"],
+  html[dir="ltr"] body,
+  html[lang="en"] body {
+    font-family: "Bricolage Grotesque", sans-serif, system-ui;
+    font-size: 1rem; /* 16px comfortable base */
+    line-height: 1.6;
   }
 
   html[dir="ltr"] h1,
   html[dir="ltr"] h2,
   html[dir="ltr"] h3,
   html[dir="ltr"] h4,
-  html[dir="ltr"] .font-display {
-    font-family: "Playfair Display", Georgia, serif;
+  html[dir="ltr"] .font-display,
+  html[lang="en"] h1,
+  html[lang="en"] h2,
+  html[lang="en"] h3,
+  html[lang="en"] h4,
+  html[lang="en"] .font-display {
+    font-family: "Bricolage Grotesque", sans-serif, system-ui;
+  }
+  html[lang="en"] h2,
+  html[lang="en"] h3,
+  html[lang="en"] h4,
+  html[lang="en"] .font-display {
+    font-family: "Bricolage Grotesque", sans-serif, system-ui;
+  }
+
+  /* Form controls inherit language font */
+  input,
+  button,
+  textarea,
+  select {
+    font-family: inherit;
   }
 
   body {
@@ -89,5 +255,14 @@
   .liquid-btn::before {
     transition: opacity 0.2s ease;
     transform: none;
+  }
+}
+
+/* Dashboard sidebar desktop sticky alignment below main header */
+@media (min-width: 1024px) {
+  .admin-sidebar-sticky {
+    top: var(--header-height, 5rem) !important;
+    height: calc(100vh - var(--header-height, 5rem)) !important;
+    height: calc(100dvh - var(--header-height, 5rem)) !important;
   }
 }

@@ -26,13 +26,11 @@ export const FeaturedProductsSection = ({
     <section className="relative z-10 py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         <div className="max-w-2xl mb-10 sm:mb-12">
-          <p className="text-xs sm:text-sm font-medium text-[#8A8861]">
-            {t.featured.kicker}
-          </p>
-          <h2 className="mt-2 text-2xl sm:text-4xl font-semibold text-[#640018] text-balance">
+          
+          <h2 className="mt-2 text-[clamp(1.85rem,4.5vw,60px)] lg:text-[60px] font-semibold text-[#4B0011] leading-[1.18] text-balance">
             {t.featured.title}
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-[#2A0E14]/80 leading-relaxed">
+          <p className="mt-3 text-[18px] text-[#2A0E14]/80 leading-[1.75]">
             {t.featured.subtitle}
           </p>
         </div>
@@ -52,7 +50,7 @@ export const FeaturedProductsSection = ({
                 className={`relative rounded-2xl overflow-hidden cursor-pointer border transition-colors ${
                   isExpanded
                     ? 'lg:flex-[2.4] min-h-[380px] lg:min-h-0 border-[#DFAC6D]/60 shadow-lg'
-                    : 'lg:flex-1 min-h-[160px] lg:min-h-0 border-[#640018]/15 hover:border-[#DFAC6D]'
+                    : 'lg:flex-1 min-h-[160px] lg:min-h-0 border-[#4B0011]/15 hover:border-[#DFAC6D]'
                 }`}
               >
                 <HeritageImage
@@ -71,20 +69,14 @@ export const FeaturedProductsSection = ({
                 <div
                   className={`absolute inset-0 transition-opacity duration-300 ${
                     isExpanded
-                      ? 'bg-gradient-to-t from-[#2A0E14]/88 via-[#2A0E14]/25 to-transparent'
-                      : 'bg-gradient-to-t from-[#2A0E14]/85 via-[#2A0E14]/45 to-[#2A0E14]/15'
+                      ? 'bg-gradient-to-t from-[#4B0011]/88 via-[#4B0011]/25 to-transparent'
+                      : 'bg-gradient-to-t from-[#4B0011]/85 via-[#4B0011]/45 to-[#4B0011]/15'
                   }`}
                   aria-hidden="true"
                 />
 
                 <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 text-[#FFF7EB] flex flex-col justify-end">
-                  <div className="flex items-center gap-2 text-xs text-[#FEDEA3]">
-                    <span>{product.edition[language]}</span>
-                    <span aria-hidden="true">·</span>
-                    <span className="tabular-nums">
-                      {product.craftHours} {t.featured.craftHoursLabel}
-                    </span>
-                  </div>
+                  
 
                   <h3
                     className={`mt-1.5 font-semibold text-[#FFF7EB] ${
@@ -111,7 +103,7 @@ export const FeaturedProductsSection = ({
                           e.stopPropagation();
                           onSelectProduct(product);
                         }}
-                        className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FEDEA3] text-[#4A0011] hover:bg-[#DFAC6D] text-xs sm:text-sm font-medium transition-colors cursor-pointer whitespace-nowrap"
+                        className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FEDEA3] text-[#3A000D] hover:bg-[#DFAC6D] text-xs sm:text-sm font-medium transition-colors cursor-pointer whitespace-nowrap"
                       >
                         <span>{t.featured.explorePiece}</span>
                         <ArrowUpRight className="w-4 h-4" aria-hidden="true" />

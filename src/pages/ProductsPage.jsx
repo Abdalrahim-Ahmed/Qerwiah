@@ -8,7 +8,7 @@ import { ProductDetailModal } from '../components/ProductDetailModal';
 import { FavoriteButton } from '../components/FavoriteButton';
 
 export const ProductsPage = () => {
-  const { t, language, products, getWhatsAppLink } = useBrand();
+  const { t, language, products, getProductWhatsAppLink } = useBrand();
   const prefersReduced = useReducedMotion();
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,50 +52,49 @@ export const ProductsPage = () => {
     { key: 'all', label: t.productsPage.filters.all },
     { key: 'bags', label: t.productsPage.filters.bags },
     { key: 'wallets', label: t.productsPage.filters.wallets },
-    { key: 'clutches', label: t.productsPage.filters.clutches },
   ];
 
   return (
     <div className="min-h-screen py-12 sm:py-18">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
         {/* Page Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#640018]/12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#4B0011]/12">
           <div className="max-w-2xl">
-            <p className="text-xs sm:text-sm font-medium text-[#8A8861]">
-              {t.productsPage.kicker}
-            </p>
-            <h1 className="mt-2 text-3xl sm:text-5xl font-semibold text-[#640018] text-balance">
+            
+            <h1 className="mt-2 text-[clamp(2rem,4.5vw,60px)] font-semibold text-[#4B0011] leading-[1.18] text-balance">
               {t.productsPage.title}
             </h1>
-            <p className="mt-3 text-sm sm:text-base text-[#2A0E14]/80 leading-relaxed">
+            <p className="mt-3 text-[18px] text-[#2A0E14]/80 leading-[1.75]">
               {t.productsPage.subtitle}
             </p>
           </div>
 
           {/* Search and Interactive Filter Controls */}
           <div
-            dir="ltr"
-            className="flex flex-col lg:flex-row items-stretch lg:items-center gap-3 self-start w-full md:w-auto mt-4 md:mt-14 lg:mt-16"
+            dir={language === 'ar' ? 'rtl' : 'ltr'}
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-1 self-start w-full md:w-auto mt-4 md:mt-14 lg:mt-16 p-1.5 rounded-3xl sm:rounded-full bg-[#F4E8D5] border border-[#DFAC6D]/45 shadow-sm"
           >
-            <label dir="rtl" className="relative block order-2 w-full sm:w-72 lg:w-80">
+            <label className="relative block w-full sm:w-56 lg:w-64 shrink-0">
               <Search
-                className="pointer-events-none absolute top-1/2 -translate-y-1/2 start-4 w-4 h-4 text-[#640018]/55"
+                className="pointer-events-none absolute top-1/2 -translate-y-1/2 start-3.5 w-4 h-4 text-[#4B0011]/55"
                 aria-hidden="true"
               />
               <input
-                type="search"
+                type="text"
+                role="searchbox"
+                inputMode="search"
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
                 placeholder={language === 'ar' ? 'ابحثي عن قطعة...' : 'Search the collection...'}
                 aria-label={language === 'ar' ? 'البحث في المجموعة' : 'Search the collection'}
-                className="w-full h-11 rounded-full border border-[#DFAC6D]/55 bg-[#FFF7EB] px-11 text-sm text-[#2A0E14] placeholder:text-[#2A0E14]/45 outline-none transition-colors focus:border-[#640018]/55 focus:ring-2 focus:ring-[#640018]/10"
+                className="w-full h-10 rounded-full bg-transparent ps-10 pe-9 text-sm text-[#2A0E14] placeholder:text-[#2A0E14]/55 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#4B0011]/20"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
                   aria-label={language === 'ar' ? 'مسح البحث' : 'Clear search'}
-                  className="absolute top-1/2 -translate-y-1/2 end-3 w-7 h-7 rounded-full flex items-center justify-center text-[#640018]/65 hover:bg-[#640018]/8 hover:text-[#640018] cursor-pointer"
+                  className="absolute top-1/2 -translate-y-1/2 end-2 w-7 h-7 rounded-full flex items-center justify-center text-[#4B0011]/65 hover:bg-[#4B0011]/10 hover:text-[#4B0011] cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" aria-hidden="true" />
                 </button>
@@ -103,7 +102,7 @@ export const ProductsPage = () => {
             </label>
 
             <div
-              className="order-1 flex w-full sm:w-auto items-center gap-0.5 p-1.5 rounded-full bg-[#F4E8D5] border border-[#DFAC6D]/45 whitespace-nowrap"
+              className="flex w-full sm:w-auto items-center gap-1 p-1 rounded-full bg-[#FFF7EB]/55 whitespace-nowrap"
               role="tablist"
               aria-label="Product Categories"
             >
@@ -116,10 +115,10 @@ export const ProductsPage = () => {
                     role="tab"
                     aria-selected={active}
                     onClick={() => setFilter(tab.key)}
-                    className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                    className={`flex-1 px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium text-center rounded-full transition-all duration-200 cursor-pointer whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4B0011] ${
                       active
-                        ? 'bg-[#640018] text-[#FFF7EB] shadow-sm'
-                        : 'text-[#640018]/80 hover:text-[#640018]'
+                        ? 'bg-[#4B0011] text-[#FFF7EB] shadow-md shadow-[#4B0011]/15'
+                        : 'text-[#4B0011]/80 hover:bg-[#FFF7EB]/70 hover:text-[#4B0011]'
                     }`}
                   >
                     {tab.label}
@@ -147,7 +146,7 @@ export const ProductsPage = () => {
                   delay: Math.min(idx * 0.05, 0.25),
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group flex flex-col rounded-2xl bg-[#FFF7EB] border border-[#640018]/12 hover:border-[#DFAC6D] overflow-hidden transition-colors"
+                className="group flex flex-col rounded-2xl bg-[#FFF7EB] border border-[#4B0011]/12 hover:border-[#DFAC6D] overflow-hidden transition-colors"
               >
                 <div className="relative">
                   <button
@@ -170,15 +169,8 @@ export const ProductsPage = () => {
 
                 <div className="p-6 flex-1 flex flex-col justify-between gap-5">
                   <div>
-                    <div className="flex items-center gap-2 text-xs text-[#8A8861]">
-                      <span>{product.edition[language]}</span>
-                      <span aria-hidden="true">·</span>
-                      <span className="tabular-nums">
-                        {product.craftHours} {t.productsPage.hoursUnit}
-                      </span>
-                    </div>
 
-                    <h2 className="mt-2 text-xl font-semibold text-[#640018]">
+                    <h2 className="mt-2 text-xl font-semibold text-[#4B0011]">
                       {product.name[language]}
                     </h2>
 
@@ -187,24 +179,20 @@ export const ProductsPage = () => {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#640018]/10 flex items-center justify-between gap-3">
+                  <div className="pt-4 border-t border-[#4B0011]/10 flex items-center justify-between gap-3">
                     <button
                       type="button"
                       onClick={() => setSelectedProduct(product)}
-                      className="text-xs sm:text-sm font-semibold text-[#640018] hover:text-[#4A0011] underline underline-offset-4 cursor-pointer whitespace-nowrap"
+                      className="text-xs sm:text-sm font-semibold text-[#4B0011] hover:text-[#3A000D] underline underline-offset-4 cursor-pointer whitespace-nowrap"
                     >
                       {t.productsPage.viewDetails}
                     </button>
 
                     <a
-                      href={getWhatsAppLink(
-                        language === 'ar'
-                          ? `مرحباً القروية، أود الاستفسار عن قطعة: ${product.name.ar}`
-                          : `Hello AL QERWIAH, I would like to inquire about: ${product.name.en}`
-                      )}
+                      href={getProductWhatsAppLink(product)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#640018] text-[#FFF7EB] hover:bg-[#4A0011] text-xs font-medium transition-colors whitespace-nowrap"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#4B0011] text-[#FFF7EB] hover:bg-[#3A000D] text-xs font-medium transition-colors whitespace-nowrap"
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-[#FEDEA3]" aria-hidden="true" />
                       <span>{t.productsPage.inquireWhatsapp}</span>
