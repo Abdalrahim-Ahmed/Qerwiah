@@ -102,6 +102,32 @@
     color: #2A0E14;
   }
 
+  @supports (-moz-appearance: none) {
+    html {
+      scrollbar-color: var(--color-olive) var(--color-cream-dark);
+      scrollbar-width: thin;
+    }
+  }
+
+  html::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background-color: var(--color-cream-dark);
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background-color: var(--color-olive);
+    border-radius: 9999px;
+    transition: background-color 0.2s ease;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-burgundy);
+  }
+
   /* Arabic Typography Scales & Adjustments (Balanced, natural proportions) */
   html[dir="rtl"],
   html[lang="ar"] {

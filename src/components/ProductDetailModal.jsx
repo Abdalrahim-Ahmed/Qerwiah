@@ -1,14 +1,48 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'motion/react';
-import { MessageCircle, X, Clock, Ruler, Layers } from 'lucide-react';
+import { MessageCircle, X, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { useBrand } from '../context/BrandContext';
 import { HeritageImage } from './HeritageImage';
 import { LiquidButton } from './LiquidButton';
 import { FavoriteButton } from './FavoriteButton';
 
+const getDisplayPrice = (product, language) => {
+  const rawPrice = product?.price;
+  let value = rawPrice;
+  let currency = product?.currency;
+
+  if (rawPrice && typeof rawPrice === 'object') {
+    value = rawPrice[language] ?? rawPrice.amount ?? rawPrice.value;
+    currency = rawPrice.currency ?? currency;
+  }
+
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    value = new Intl.NumberFormat(language === 'ar' ? 'ar-EG' : 'en-EG', {
+      maximumFractionDigits: 2,
+    }).format(value);
+  }
+
+  if (typeof value !== 'string' || !value.trim()) return null;
+
+  const localizedCurrency =
+    currency && typeof currency === 'object'
+      ? currency[language] ?? currency.ar ?? currency.en
+      : currency;
+
+  return localizedCurrency ? `${value.trim()} ${localizedCurrency}` : value.trim();
+};
+
 export const ProductDetailModal = ({ product, onClose }) => {
   const { language, t, getProductWhatsAppLink } = useBrand();
+  const displayPrice = getDisplayPrice(product, language);
+  const galleryImages = product?.detailImages?.filter(Boolean)
+    ?? (product?.image ? [product.image] : []);
+  const galleryKey = JSON.stringify([product?.id, galleryImages]);
+  const [slide, setSlide] = useState({ galleryKey: '', index: 0 });
+  const activeImageIndex = slide.galleryKey === galleryKey ? slide.index : 0;
+  const activeImage = galleryImages[activeImageIndex] || galleryImages[0];
 
   useEffect(() => {
     if (!product) return;
@@ -19,7 +53,35 @@ export const ProductDetailModal = ({ product, onClose }) => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [product, onClose]);
 
-  return (
+  useEffect(() => {
+    setSlide({ galleryKey, index: 0 });
+
+    const preloadedImages = galleryImages.map((src) => {
+      const image = new window.Image();
+      image.src = src;
+      return image;
+    });
+
+    const interval = galleryImages.length > 1
+      ? window.setInterval(() => {
+          setSlide((current) => ({
+            galleryKey,
+            index: ((current.galleryKey === galleryKey ? current.index : 0) + 1)
+              % galleryImages.length,
+          }));
+        }, 4000)
+      : null;
+
+    return () => {
+      if (interval !== null) window.clearInterval(interval);
+      preloadedImages.forEach((image) => {
+        image.onload = null;
+        image.onerror = null;
+      });
+    };
+  }, [galleryKey, galleryImages.length]);
+
+  return createPortal(
     <AnimatePresence>
       {product && (
         <motion.div
@@ -50,57 +112,116 @@ export const ProductDetailModal = ({ product, onClose }) => {
               <X className="w-4 h-4" />
             </button>
 
-            <div className="md:col-span-6 bg-[#F4E8D5] min-h-[300px] md:min-h-[460px]">
-              <HeritageImage
-                src={product.image}
-                alt={product.name[language]}
-                className="w-full h-full object-cover"
-              />
+            <div className="md:col-span-6 relative overflow-hidden bg-[#F4E8D5] min-h-[300px] md:min-h-[460px]">
+              {galleryImages[0] && (
+                <HeritageImage
+                  src={galleryImages[0]}
+                  alt=""
+                  className="w-full h-full object-cover opacity-0"
+                />
+              )}
+              <AnimatePresence initial={false} mode="sync">
+                {activeImage && (
+                  <motion.img
+                    key={`${product.id}-${activeImage}`}
+                    src={activeImage}
+                    alt={product.name[language]}
+                    loading="eager"
+                    draggable="false"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.65, ease: 'easeInOut' }}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                )}
+              </AnimatePresence>
+              {galleryImages.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label={language === 'ar' ? 'الصورة السابقة' : 'Previous image'}
+                    onClick={() => setSlide({
+                      galleryKey,
+                      index: (activeImageIndex - 1 + galleryImages.length) % galleryImages.length,
+                    })}
+                    className="absolute start-3 top-1/2 z-10 h-10 w-10 -translate-y-1/2 rounded-full bg-[#FFF7EB]/90 text-[#4B0011] border border-[#4B0011]/15 flex items-center justify-center shadow-sm hover:bg-[#FFF7EB] transition-colors"
+                  >
+                    <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={language === 'ar' ? 'الصورة التالية' : 'Next image'}
+                    onClick={() => setSlide({
+                      galleryKey,
+                      index: (activeImageIndex + 1) % galleryImages.length,
+                    })}
+                    className="absolute end-3 top-1/2 z-10 h-10 w-10 -translate-y-1/2 rounded-full bg-[#FFF7EB]/90 text-[#4B0011] border border-[#4B0011]/15 flex items-center justify-center shadow-sm hover:bg-[#FFF7EB] transition-colors"
+                  >
+                    <ChevronRight className="h-5 w-5" aria-hidden="true" />
+                  </button>
+                  <div className="absolute inset-x-0 bottom-4 z-10 flex justify-center gap-2">
+                    {galleryImages.map((image, index) => (
+                      <button
+                        key={image}
+                        type="button"
+                        aria-label={`${t.productsPage.showImage} ${index + 1}`}
+                        aria-pressed={activeImageIndex === index}
+                        onClick={() => setSlide({ galleryKey, index })}
+                        className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FFF7EB]/85 shadow-sm backdrop-blur transition-colors hover:bg-[#FFF7EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4B0011]"
+                      >
+                        <span
+                          className={`h-2.5 rounded-full transition-all ${
+                            activeImageIndex === index
+                              ? 'w-5 bg-[#4B0011]'
+                              : 'w-2.5 bg-[#8A8861]/65'
+                          }`}
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between gap-6">
-              <div>
-                
-                <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-[#4B0011] leading-snug">
-                  {product.name[language]}
-                </h2>
-                <p className="mt-3 text-sm sm:text-base text-[#2A0E14]/85 leading-relaxed">
-                  {product.shortDescription[language]}
-                </p>
+              <div dir={language === 'ar' ? 'rtl' : 'ltr'}>
+                <header>
+                  <h2 className="text-3xl sm:text-4xl font-semibold text-[#4B0011] leading-tight">
+                    {product.name[language]}
+                  </h2>
+                  <p className="mt-2 text-base font-medium text-[#8A8861] tabular-nums">
+                    {displayPrice ? (
+                      <>
+                        <span className="text-sm text-[#2A0E14]/65">
+                          {t.productsPage.priceLabel}:
+                        </span>
+                        {' '}{displayPrice}
+                      </>
+                    ) : (
+                      t.productsPage.priceInquiry
+                    )}
+                  </p>
+                </header>
 
-                <div className="my-5 h-px bg-[#4B0011]/12" />
+                <section className="mt-8">
+                  <h3 className="text-lg font-semibold text-[#8A8861]">
+                    {t.productsPage.storyTitle}
+                  </h3>
+                  <p className="mt-3 font-display text-base sm:text-lg text-[#2A0E14]/90 leading-[1.75]">
+                    {product.detailStory?.[language] || t.productsPage.storyComingSoon}
+                  </p>
+                </section>
 
-                <p className="text-sm text-[#2A0E14]/80 leading-relaxed">
-                  {product.story[language]}
-                </p>
-
-                <dl className="mt-6 space-y-3 text-xs sm:text-sm border-t border-[#4B0011]/12 pt-4">
-                  <div className="flex items-start gap-3">
-                    <dt className="flex items-center gap-1.5 text-[#4B0011] font-medium shrink-0">
-                      <Layers className="w-4 h-4 text-[#8A8861]" aria-hidden="true" />
-                      <span>{t.productsPage.materials}:</span>
-                    </dt>
-                    <dd className="text-[#2A0E14]/80">{product.materials[language]}</dd>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <dt className="flex items-center gap-1.5 text-[#4B0011] font-medium shrink-0">
-                      <Ruler className="w-4 h-4 text-[#8A8861]" aria-hidden="true" />
-                      <span>{t.productsPage.dimensions}:</span>
-                    </dt>
-                    <dd dir="ltr" className="text-[#2A0E14]/80 tabular-nums">
-                      {product.dimensions}
-                    </dd>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <dt className="flex items-center gap-1.5 text-[#4B0011] font-medium shrink-0">
-                      <Clock className="w-4 h-4 text-[#8A8861]" aria-hidden="true" />
-                      <span>{t.productsPage.craftTime}:</span>
-                    </dt>
-                    <dd className="text-[#2A0E14]/80 tabular-nums">
-                      {product.craftHours} {t.productsPage.hoursUnit}
-                    </dd>
-                  </div>
-                </dl>
+                <div className="mt-7 flex items-center justify-between gap-4 border-t border-[#DFAC6D]/45 pt-4">
+                  <span className="flex items-center gap-2 text-sm text-[#2A0E14]/70">
+                    <Clock className="h-5 w-5" aria-hidden="true" />
+                    {t.productsPage.craftHoursLabel}
+                  </span>
+                  <p className="text-base font-semibold text-[#4B0011] tabular-nums">
+                    {product.craftHours} {t.productsPage.hoursUnit}
+                  </p>
+                </div>
               </div>
 
               <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -125,6 +246,7 @@ export const ProductDetailModal = ({ product, onClose }) => {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };

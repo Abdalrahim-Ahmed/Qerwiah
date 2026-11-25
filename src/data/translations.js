@@ -2,8 +2,8 @@
 
 export const COPY = {
   ar: {
-    brandTitle: 'AL QERWIAH – القروية',
-    brandEn: 'AL QERWIAH',
+    brandTitle: 'Qerwiah – القروية',
+    brandEn: 'Qerwiah',
     brandAr: 'القروية',
     nav: {
       home: 'الرئيسية',
@@ -23,9 +23,9 @@ export const COPY = {
     },
     hero: {
       kicker: 'حرفة مصرية أصيلة · ألياف موز وجلد طبيعي',
-      headline: 'من روح الريف صنعت حكاية جديدة',
+      headline: 'من روح الريف نصنع حكاية جديدة',
       headlineLine1: 'من روح الريف',
-      headlineLine2: 'صنعت حكاية جديدة',
+      headlineLine2: 'نصنع حكاية جديدة',
       subcopy:
         'تُحيي القروية الحرف اليدوية الريفية المصرية في حقائب ومحافظ معاصرة، تُنسج يدوياً من ألياف الموز الطبيعية وتُصاغ مع الجلد الطبيعي المصري.',
       ctaCollection: 'استكشفي المجموعة',
@@ -156,6 +156,12 @@ export const COPY = {
         
       },
       empty: 'لا توجد قطع في هذا التصنيف حالياً.',
+      priceLabel: 'السعر',
+      priceInquiry: 'استفسري عن السعر',
+      storyTitle: 'قصة القطعة',
+      storyComingSoon: 'تُكتب حكاية هذه القطعة قريباً.',
+      craftHoursLabel: 'ساعات العمل اليدوي',
+      showImage: 'عرض الصورة',
       dimensions: 'الأبعاد',
       materials: 'الخامات',
       craftTime: 'زمن الصنعة',
@@ -250,6 +256,10 @@ export const COPY = {
       ],
       deadline: 'الموعد المطلوب',
       deadlineHint: 'اختياري · القطع اليدوية تحتاج غالباً من ٣ إلى ٦ أسابيع',
+      datePlaceholder: 'اختاري تاريخاً',
+      clearDate: 'مسح التاريخ',
+      previousMonth: 'الشهر السابق',
+      nextMonth: 'الشهر التالي',
       contactMethod: 'وسيلة التواصل المفضلة',
       contactMethods: [
         { value: 'whatsapp', label: 'واتساب' },
@@ -277,7 +287,7 @@ export const COPY = {
       noteBody: 'إرسال الطلب لا يعني الالتزام بالشراء. نناقش معك كل التفاصيل والسعر أولاً.',
     },
     auth: {
-      title: 'حسابك',
+      title: 'حسابْ',
       subtitle: 'سجّلي الدخول لحفظ قطعك المفضلة والعودة إليها في أي وقت.',
       favoritesPrompt: 'يرجى تسجيل الدخول لإضافة المنتجات إلى المفضلة.',
       signInTab: 'تسجيل الدخول',
@@ -385,8 +395,8 @@ export const COPY = {
     },
   },
   en: {
-    brandTitle: 'AL QERWIAH – القروية',
-    brandEn: 'AL QERWIAH',
+    brandTitle: 'Qerwiah – القروية',
+    brandEn: 'Qerwiah',
     brandAr: 'القروية',
     nav: {
       home: 'Home',
@@ -410,7 +420,7 @@ export const COPY = {
       headlineLine1: 'Rooted in Heritage.',
       headlineLine2: 'Crafted for Today.',
       subcopy:
-        'AL QERWIAH revives traditional Egyptian rural craftsmanship through contemporary bags and wallets handwoven from natural banana fibers and vegetable-tanned genuine leather.',
+        'Qerwiah revives traditional Egyptian rural craftsmanship through contemporary bags and wallets handwoven from natural banana fibers and vegetable-tanned genuine leather.',
       ctaCollection: 'Explore Our Collection',
       ctaStory: 'Discover Our Story',
       prevSlide: 'Previous piece',
@@ -431,7 +441,7 @@ export const COPY = {
       paragraph1:
         'Across Egypt’s villages, botanical fibers were never discarded—they were braided into vessels of daily life, patience, and quiet dignity.',
       paragraph2:
-        'AL QERWIAH restores these inherited techniques in curing and weaving banana-tree fibers, uniting them with genuine Egyptian leather to create enduring heirloom pieces.',
+        'Qerwiah restores these inherited techniques in curing and weaving banana-tree fibers, uniting them with genuine Egyptian leather to create enduring heirloom pieces.',
       cta: 'Discover Our Story',
       caption: 'Hand-looming banana fibers and saddle-stitching leather in our Fayoum workshop',
     },
@@ -455,7 +465,7 @@ export const COPY = {
       kicker: 'Material Dialogue',
       title: 'Where Botanical Fiber Meets Supple Leather',
       description:
-        'Every AL QERWIAH silhouette is born from a deliberate balance between sun-dried banana fibers and vegetable-tanned hides, crafted to age gracefully.',
+        'Every Qerwiah silhouette is born from a deliberate balance between sun-dried banana fibers and vegetable-tanned hides, crafted to age gracefully.',
       leftTitle: 'Natural Banana Fibers',
       leftCaption: 'Extracted from Egyptian banana trunks and cured in sunlight for luminous strength.',
       centerTitle: 'The Finished Piece',
@@ -481,13 +491,13 @@ export const COPY = {
         'An Egyptian heritage brand bringing traditional rural craftsmanship back to life through contemporary bags and wallets crafted from natural banana fibers and genuine leather.',
       navigationTitle: 'Explore',
       connectTitle: 'Atelier & Connect',
-      rights: '© 2026 AL QERWIAH – القروية. All rights reserved.',
+      rights: '© 2026 Qerwiah – القروية. All rights reserved.',
       heritageMark: 'Handcrafted in Egypt',
     },
     aboutPage: {
       kicker: 'Brand Monograph',
       title: 'From Rural Memory to Contemporary Craft',
-      lead: 'AL QERWIAH is more than an accessories house; it is the living restoration of fibers and techniques once woven along Egypt’s Nile Delta and oases.',
+      lead: 'Qerwiah is more than an accessories house; it is the living restoration of fibers and techniques once woven along Egypt’s Nile Delta and oases.',
       stages: [
         {
           number: '01',
@@ -514,9 +524,9 @@ export const COPY = {
         {
           number: '03',
           title: 'The Revival',
-          subtitle: 'AL QERWIAH: Heritage reimagined for today',
+          subtitle: 'Qerwiah: Heritage reimagined for today',
           body1:
-            'AL QERWIAH began with a commitment to restore dignity and contemporary relevance to Egypt’s rural weaving traditions.',
+            'Qerwiah began with a commitment to restore dignity and contemporary relevance to Egypt’s rural weaving traditions.',
           body2:
             'Working closely with local artisans, we pair hand-loomed banana fibers with genuine vegetable-tanned leather to create refined bags and wallets built for modern life.',
           quote: '“We do not imitate the past; we carry its finest hands into the present.”',
@@ -531,14 +541,19 @@ export const COPY = {
       kicker: 'Collection Archive',
       title: 'Handcrafted Bags & Wallets',
       subtitle:
-        'An informational showcase of AL QERWIAH creations crafted in Egypt using natural banana fibers and genuine leather.',
+        'An informational showcase of Qerwiah creations crafted in Egypt using natural banana fibers and genuine leather.',
       filters: {
         all: 'All Pieces',
         bags: 'Bags',
         wallets: 'Wallets',
-        clutches: 'Clutches',
       },
       empty: 'No pieces are currently listed in this category.',
+      priceLabel: 'Price',
+      priceInquiry: 'Inquire for price',
+      storyTitle: 'The Story Behind It',
+      storyComingSoon: 'The story of this piece is coming soon.',
+      craftHoursLabel: 'Hours of handcraft',
+      showImage: 'Show image',
       dimensions: 'Dimensions',
       materials: 'Materials',
       craftTime: 'Craftsmanship',
@@ -565,7 +580,7 @@ export const COPY = {
       messageLabel: 'Your Message',
       submitBtn: 'Send Message',
       successTitle: 'Message Received',
-      successBody: 'Thank you for writing to AL QERWIAH. Our atelier team will review your note shortly.',
+      successBody: 'Thank you for writing to Qerwiah. Our atelier team will review your note shortly.',
       sendAnother: 'Send Another Message',
       validationError: 'Please complete all required fields before submitting.',
     },
@@ -617,7 +632,7 @@ export const COPY = {
       colors: 'Preferred Colors',
       colorsPlaceholder: 'e.g. Burgundy with gold accents',
       description: 'Design Description',
-      descriptionPlaceholder: 'Describe the piece you imagine: how you will use it, its shape, special details, or any engraving you would like…',
+      descriptionPlaceholder: 'Describe the piece you imagine: how you will use it, its shape, special details, or any engraving you would like⬦',
       references: 'Reference Images',
       referencesHint: 'Optional · Up to 5 images · 5 MB each',
       referencesButton: 'Add images',
@@ -634,15 +649,19 @@ export const COPY = {
       ],
       deadline: 'Needed By',
       deadlineHint: 'Optional · Handmade pieces usually take 3 to 6 weeks',
+      datePlaceholder: 'Select a date',
+      clearDate: 'Clear date',
+      previousMonth: 'Previous month',
+      nextMonth: 'Next month',
       contactMethod: 'Preferred Contact Method',
       contactMethods: [
         { value: 'whatsapp', label: 'WhatsApp' },
         { value: 'email', label: 'Email' },
         { value: 'phone', label: 'Phone call' },
       ],
-      consent: 'I agree that the AL QERWIAH team may contact me about this request.',
+      consent: 'I agree that the Qerwiah team may contact me about this request.',
       submit: 'Submit Design Request',
-      submitting: 'Sending…',
+      submitting: 'Sending⬦',
       required: 'Required',
       optional: 'Optional',
       errorRequired: 'This field is required.',
@@ -656,7 +675,7 @@ export const COPY = {
       successRef: 'Request ID',
       successAnother: 'Submit Another Request',
       successWhatsapp: 'Follow up on WhatsApp',
-      whatsappMessage: 'Hello AL QERWIAH, I submitted a custom design request, ID:',
+      whatsappMessage: 'Hello Qerwiah, I submitted a custom design request, ID:',
       noteTitle: 'No commitment',
       noteBody: 'Sending a request does not commit you to a purchase. We discuss every detail and the price with you first.',
     },
@@ -699,7 +718,7 @@ export const COPY = {
       viewDetails: 'View Details',
     },
     dashboard: {
-      kicker: 'AL QERWIAH Management',
+      kicker: 'Qerwiah Management',
       title: 'Admin Dashboard',
       welcome: 'Welcome',
       logoutBtn: 'Sign Out',

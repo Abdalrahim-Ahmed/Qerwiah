@@ -5,6 +5,7 @@ import {
   Check,
   Edit3,
   LogOut,
+  Minus,
   Mail,
   Palette,
   Package,
@@ -43,7 +44,7 @@ const EMPTY_PRODUCT_FORM = {
   materialsAr: 'ألياف موز طبيعية · جلد مصري مدبوغ نباتياً',
   materialsEn: 'Natural banana fibers · Vegetable-tanned Egyptian leather',
   editionAr: 'إصدار القروية',
-  editionEn: 'AL QERWIAH Heritage Edition',
+  editionEn: 'Qerwiah Heritage Edition',
 };
 
 export const AdminDashboardPage = () => {
@@ -656,31 +657,39 @@ export const AdminDashboardPage = () => {
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                        <div>
-                          <label className={labelClass}>
+                        <fieldset className="min-w-0 border-0 p-0 m-0">
+                          <legend className={labelClass}>
                             {t.dashboard.productsTab.categoryLabel}
-                          </label>
-                          <select
-                            value={productForm.category}
-                            onChange={(e) =>
-                              setProductForm({
-                                ...productForm,
-                                category: e.target.value,
-                              })
-                            }
-                            className={inputClass}
-                          >
-                            <option value="bags">
-                              {t.productsPage.filters.bags}
-                            </option>
-                            <option value="wallets">
-                              {t.productsPage.filters.wallets}
-                            </option>
-                            <option value="clutches">
-                              {t.productsPage.filters.clutches}
-                            </option>
-                          </select>
-                        </div>
+                          </legend>
+                          <div className="flex gap-1 rounded-xl border border-[#4B0011]/10 bg-[#F4E8D5]/65 p-1">
+                            {[
+                              { value: 'bags', label: t.productsPage.filters.bags },
+                              { value: 'wallets', label: t.productsPage.filters.wallets },
+                            ].map((category) => (
+                              <label
+                                key={category.value}
+                                className="flex-1 cursor-pointer"
+                              >
+                                <input
+                                  type="radio"
+                                  name="product-category"
+                                  value={category.value}
+                                  checked={productForm.category === category.value}
+                                  onChange={(e) =>
+                                    setProductForm({
+                                      ...productForm,
+                                      category: e.target.value,
+                                    })
+                                  }
+                                  className="peer sr-only"
+                                />
+                                <span className="flex min-h-11 items-center justify-center rounded-lg bg-[#FFF7EB] px-3 text-center text-sm font-medium text-[#4B0011] transition-colors duration-200 peer-checked:bg-[#4B0011] peer-checked:text-[#FFF7EB] peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[#4B0011]">
+                                  {category.label}
+                                </span>
+                              </label>
+                            ))}
+                          </div>
+                        </fieldset>
 
                         <div>
                           <label className={labelClass}>
@@ -701,22 +710,53 @@ export const AdminDashboardPage = () => {
                         </div>
 
                         <div>
-                          <label className={labelClass}>
+                          <label htmlFor="craft-hours" className={labelClass}>
                             {t.dashboard.productsTab.craftHours}
                           </label>
-                          <input
-                            type="number"
-                            min={1}
-                            dir="ltr"
-                            value={productForm.craftHours}
-                            onChange={(e) =>
-                              setProductForm({
-                                ...productForm,
-                                craftHours: Number(e.target.value),
-                              })
-                            }
-                            className={inputClass}
-                          />
+                          <div className="flex items-center rounded-xl border border-[#4B0011]/20 bg-[#FFF7EB] transition-all focus-within:border-[#4B0011] focus-within:ring-2 focus-within:ring-[#4B0011]/10">
+                            <button
+                              type="button"
+                              aria-label={isArabic ? 'تقليل ساعات الصنعة' : 'Decrease production hours'}
+                              disabled={productForm.craftHours <= 1}
+                              onClick={() =>
+                                setProductForm({
+                                  ...productForm,
+                                  craftHours: Math.max(1, Number(productForm.craftHours) - 1),
+                                })
+                              }
+                              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-s-xl text-[#4B0011] transition-colors hover:bg-[#4B0011]/10 disabled:cursor-not-allowed disabled:opacity-40"
+                            >
+                              <Minus className="h-4 w-4" aria-hidden="true" />
+                            </button>
+                            <input
+                              id="craft-hours"
+                              type="number"
+                              min={1}
+                              step={1}
+                              dir="ltr"
+                              value={productForm.craftHours}
+                              onChange={(e) =>
+                                setProductForm({
+                                  ...productForm,
+                                  craftHours: Number(e.target.value),
+                                })
+                              }
+                              className="min-w-0 flex-1 bg-transparent px-2 py-3 text-center text-sm font-medium text-[#4B0011] outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                            />
+                            <button
+                              type="button"
+                              aria-label={isArabic ? 'زيادة ساعات الصنعة' : 'Increase production hours'}
+                              onClick={() =>
+                                setProductForm({
+                                  ...productForm,
+                                  craftHours: Number(productForm.craftHours) + 1,
+                                })
+                              }
+                              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-e-xl text-[#4B0011] transition-colors hover:bg-[#4B0011]/10"
+                            >
+                              <Plus className="h-4 w-4" aria-hidden="true" />
+                            </button>
+                          </div>
                         </div>
                       </div>
 
@@ -1133,7 +1173,7 @@ export const AdminDashboardPage = () => {
                               {item.name}
                             </span>
 
-                            <span className="text-[#8A8861]">•</span>
+                            <span className="text-[#8A8861]">⬢</span>
 
                             <span dir="ltr" className="text-[#8A8861]">
                               {item.phoneOrEmail}
@@ -1235,9 +1275,9 @@ export const AdminDashboardPage = () => {
                         <div className="space-y-3 flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-2 text-xs">
                             <span className="font-semibold text-[#4B0011]">{item.fullName}</span>
-                            <span className="text-[#8A8861]">•</span>
+                            <span className="text-[#8A8861]">⬢</span>
                             <span dir="ltr" className="text-[#8A8861]">{item.email}</span>
-                            <span className="text-[#8A8861]">•</span>
+                            <span className="text-[#8A8861]">⬢</span>
                             <span dir="ltr" className="text-[#8A8861]">{item.phone}</span>
                             <span
                               className={`px-3 py-1 rounded-full ${

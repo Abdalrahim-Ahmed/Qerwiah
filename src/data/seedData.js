@@ -12,6 +12,47 @@ export const BRAND_IMAGES = {
   genuineLeather: '/src/assets/images/materials_genuine_leather_1795087243756.jpg',
 };
 
+const PRODUCT_DETAIL_GALLERIES = [
+  [
+    new URL('../assets/images/products/product-1/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-1/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-2/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-2/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-3/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-3/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-4/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-4/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-5/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-5/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-6/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-6/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-7/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-7/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-8/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-8/image-2.jpg', import.meta.url).href,
+  ],
+  [
+    new URL('../assets/images/products/product-9/image-1.jpg', import.meta.url).href,
+    new URL('../assets/images/products/product-9/image-2.jpg', import.meta.url).href,
+  ],
+];
+
+const PRODUCT_CURRENCY = { ar: 'جنيه', en: 'EGP' };
+
 // Replaceable local video asset path: drop an MP4/WebM file at public/assets/videos/alqerwiah-heritage.mp4
 // or update the source directly from the Admin Dashboard.
 export const DEFAULT_BRAND_VIDEO_SRC = '/assets/videos/alqerwiah-heritage.mp4';
@@ -22,8 +63,8 @@ export const INITIAL_BRAND_SETTINGS = {
   instagramUrl: 'https://www.instagram.com/qerwiah.26977717?obrf=MXhhZDNrZzg3ZWFpNQ==',
   facebookUrl: 'https://www.facebook.com/profile.php?id=61575589427524&rdid=1fgY7xFiLefuNw3O&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18aCTPZjzr%2F#',
   atelierLocation: {
-    ar: 'الفيوم والقاهرة، مصر',
-    en: 'Fayoum & Cairo, Egypt',
+    ar: 'دندرة، قنا، مصر',
+    en: 'Dendera, Qena, Egypt',
   },
   videoSrc: DEFAULT_BRAND_VIDEO_SRC,
   videoPoster: BRAND_IMAGES.videoPoster,
@@ -35,8 +76,11 @@ export const INITIAL_PRODUCTS = [
     slug: 'deira-heritage-tote',
     category: 'bags',
     featured: true,
-    image: BRAND_IMAGES.toteSignature,
+    image: PRODUCT_DETAIL_GALLERIES[0][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[0],
     craftHours: 28,
+    price: 3850,
+    currency: PRODUCT_CURRENCY,
     dimensions: '36 × 28 × 14 cm',
     name: {
       ar: 'حقيبة الديرة التراثية',
@@ -49,6 +93,10 @@ export const INITIAL_PRODUCTS = [
     story: {
       ar: 'تستلهم حقيبة الديرة خطوطها من سلال الحصاد المصرية القديمة في قرى الدلتا والفيوم، معاد صياغتها بهيكل معاصر متين يحفظ أناقتها اليومية.',
       en: 'Inspired by historic harvest baskets from Egypt’s Delta and Fayoum villages, Al-Deira reshapes rural weaving into an architectural everyday tote.',
+    },
+    detailStory: {
+      ar: 'في مواسم الحصاد، كانت الأيدي تجمع ما تركته الأرض وتعيد نسجه ليرافق يومًا جديدًا. من تلك الذاكرة تولد الديرة؛ قطعة تحمل هدوء الحقول وأناقة الطريق.',
+      en: 'At harvest time, patient hands gathered what the land left behind and gave it a new life. Al-Deira carries that quiet memory of open fields into the rhythm of today.',
     },
     materials: {
       ar: 'ألياف موز مصرية مجففة يدوياً · جلد بقري مدبوغ نباتياً · نحاس مصقول',
@@ -64,8 +112,11 @@ export const INITIAL_PRODUCTS = [
     slug: 'nile-saddle-crossbody',
     category: 'bags',
     featured: true,
-    image: BRAND_IMAGES.crossbodyNile,
+    image: PRODUCT_DETAIL_GALLERIES[1][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[1],
     craftHours: 22,
+    price: 3200,
+    currency: PRODUCT_CURRENCY,
     dimensions: '24 × 19 × 8 cm',
     name: {
       ar: 'حقيبة كتف ضفاف النيل',
@@ -78,6 +129,10 @@ export const INITIAL_PRODUCTS = [
     story: {
       ar: 'صُممت لترافق المسافرات اليوميات بخفة وأصالة، حيث تُخاط الغرز اليدوية بخيوط الكتان المشمع حول قفل نحاسي مستوحى من الأختام الريفية.',
       en: 'Crafted for effortless daily movement, stitched with waxed linen thread around a minimal brass clasp echoing rural heirloom seals.',
+    },
+    detailStory: {
+      ar: 'تسير هذه القطعة على إيقاع النهر؛ هادئة في حضورها، قريبة من صاحبها، وتحمل في خطوطها ذكرى الرحلات الصغيرة بين ضفتي المدينة.',
+      en: 'This piece follows the river’s unhurried rhythm: quiet in presence, close at hand, and filled with the feeling of small journeys between the city’s two banks.',
     },
     materials: {
       ar: 'ألياف موز مضفرة بدقة · جلد طبيعي عنّابي · إكسسوارات نحاس معتق',
@@ -93,8 +148,11 @@ export const INITIAL_PRODUCTS = [
     slug: 'fayoum-bifold-wallet',
     category: 'wallets',
     featured: true,
-    image: BRAND_IMAGES.walletHeritage,
+    image: PRODUCT_DETAIL_GALLERIES[2][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[2],
     craftHours: 14,
+    price: 1450,
+    currency: PRODUCT_CURRENCY,
     dimensions: '11.5 × 9.5 × 1.8 cm',
     name: {
       ar: 'محفظة الفيوم المنسوجة',
@@ -107,6 +165,10 @@ export const INITIAL_PRODUCTS = [
     story: {
       ar: 'تجمع محفظة الفيوم بين دقة التطعيم الخشبي والنسجي في الريف المصري وبين براعة تشطيب الحواف الجلدية الراقية.',
       en: 'Uniting delicate rural marquetry traditions with precision-burnished leather edges, designed to age with a rich warm patina.',
+    },
+    detailStory: {
+      ar: 'من ضفاف الفيوم وبساتينها جاءت فكرة هذه المحفظة: تفاصيل صغيرة تحفظ أثر المكان، وترافق صاحبها في يومه كذكرى حميمة لا تحتاج إلى كلمات.',
+      en: 'Inspired by Fayoum’s lakeside gardens, this small keepsake carries a trace of place into everyday life—a familiar memory held close without a word.',
     },
     materials: {
       ar: 'جلد طبيعي كامل الحبيبات · حشوة ألياف موز منسوجة · خياطة سروجية يدوية',
@@ -122,8 +184,11 @@ export const INITIAL_PRODUCTS = [
     slug: 'oasis-braided-clutch',
     category: 'clutches',
     featured: true,
-    image: BRAND_IMAGES.clutchOasis,
+    image: PRODUCT_DETAIL_GALLERIES[3][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[3],
     craftHours: 19,
+    price: 2750,
+    currency: PRODUCT_CURRENCY,
     dimensions: '26 × 16 × 6 cm',
     name: {
       ar: 'كلتش الواحة المضفّر',
@@ -136,6 +201,10 @@ export const INITIAL_PRODUCTS = [
     story: {
       ar: 'تستعرض تقنية الضفيرة الثلاثية المتوارثة، حيث تلتقي درجة الزيتون المستوحاة من بساتين الواحات بعمق العنّابي الكلاسيكي.',
       en: 'Showcasing an heirloom three-strand braid technique, pairing oasis-olive leather piping with signature burgundy lining.',
+    },
+    detailStory: {
+      ar: 'تستعير هذه القطعة إشاراتها من حكايات مصر القديمة، حيث يصبح الرمز حارسًا للذاكرة. حضورها مساءي واثق، لكنه يحتفظ بدفء الأشياء المصنوعة بمحبة.',
+      en: 'Drawing on the symbols of ancient Egypt, this piece treats an emblem as a keeper of memory. Its evening presence is assured, yet warmly personal.',
     },
     materials: {
       ar: 'جدائل ألياف الموز الذهبية · جلد زيتوني وعنّابي · قفل نحاسي مصبوب',
@@ -151,8 +220,11 @@ export const INITIAL_PRODUCTS = [
     slug: 'senoures-courtyard-satchel',
     category: 'bags',
     featured: false,
-    image: BRAND_IMAGES.videoPoster,
+    image: PRODUCT_DETAIL_GALLERIES[4][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[4],
     craftHours: 32,
+    price: 4200,
+    currency: PRODUCT_CURRENCY,
     dimensions: '29 × 22 × 11 cm',
     name: {
       ar: 'حقيبة سنورس الكلاسيكية',
@@ -165,6 +237,10 @@ export const INITIAL_PRODUCTS = [
     story: {
       ar: 'قطعة تحفظ روح البيوت الريفية الدافئة؛ تُجمع يدوياً على مدار أربعة أيام في ورشتنا بالفيوم.',
       en: 'An heirloom satchel assembled over four days in our Fayoum atelier, celebrating warm mudbrick tones and quiet architectural balance.',
+    },
+    detailStory: {
+      ar: 'تبدأ حكاية سنورس من فناء بيت ريفي تتعاقب عليه شمس الصباح وظلال النخيل. تستعيد القطعة ذلك السكون، لتجعل من الطريق اليومي امتدادًا لدفء المكان.',
+      en: 'Senoures begins in a village courtyard where morning light meets the shade of palms. It carries that stillness forward, making an everyday journey feel rooted in place.',
     },
     materials: {
       ar: 'لوح ألياف موز مجدول · جلد عنّابي سميك · بطانة كتان مصري خالص',
@@ -180,8 +256,11 @@ export const INITIAL_PRODUCTS = [
     slug: 'karmah-slim-cardholder',
     category: 'wallets',
     featured: false,
-    image: BRAND_IMAGES.materialsDuo,
+    image: PRODUCT_DETAIL_GALLERIES[5][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[5],
     craftHours: 10,
+    price: 950,
+    currency: PRODUCT_CURRENCY,
     dimensions: '10.5 × 7.5 × 0.8 cm',
     name: {
       ar: 'حافظة بطاقات الكرمة',
@@ -195,6 +274,10 @@ export const INITIAL_PRODUCTS = [
       ar: 'تحية للحياكة الدقيقة التي كانت تزين الأدوات الشخصية في القرى المصرية، برؤية مبسطة تناسب إيقاع اليوم.',
       en: 'A tribute to fine pocket craft in Egyptian villages, distilled into clean minimalist lines for everyday carry.',
     },
+    detailStory: {
+      ar: 'استُلهمت الكرمة من زينة كانت تُحمل كعلامة شخصية، ومن رغبة في أن تبقى الأشياء اليومية قريبة من جذورها. حكايتها بسيطة: تفصيل صغير، وذكرى تدوم.',
+      en: 'Al-Karmah recalls the personal keepsakes once carried as quiet emblems. Its story is simple: a small detail, a sense of belonging, and a memory made to last.',
+    },
     materials: {
       ar: 'ألياف موز خام معالجة طبيعياً · جلد عنّابي فاخر · خيط كتان طبيعي',
       en: 'Conditioned natural banana fibers · Supple burgundy leather · Natural linen thread',
@@ -203,6 +286,96 @@ export const INITIAL_PRODUCTS = [
       ar: 'القطع الدقيقة',
       en: 'Small Leather & Fiber Goods',
     },
+  },
+  {
+    id: 'prod-horus-clutch',
+    slug: 'horus-evening-clutch',
+    category: 'clutches',
+    featured: false,
+    image: PRODUCT_DETAIL_GALLERIES[6][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[6],
+    craftHours: 18,
+    price: 2600,
+    currency: PRODUCT_CURRENCY,
+    dimensions: '',
+    name: {
+      ar: 'كلتش عين حورس',
+      en: 'Eye of Horus Clutch',
+    },
+    shortDescription: {
+      ar: 'كلتش مسائي يستحضر رموز مصر القديمة في قطعة ذات حضور هادئ.',
+      en: 'An evening clutch carrying an echo of ancient Egyptian symbols.',
+    },
+    story: {
+      ar: 'قطعة للمساء تستلهم حكايتها من رموز مصر القديمة.',
+      en: 'An evening piece inspired by the symbols of ancient Egypt.',
+    },
+    detailStory: {
+      ar: 'في هذا التصميم، يتحول الرمز القديم إلى رفيق معاصر. حكاية عن عينٍ تحفظ الطريق، وعن قطعة تختار أن ترافق لحظات المساء بهدوء.',
+      en: 'Here, an ancient emblem becomes a contemporary companion: a story of a watchful eye and a piece made for the quiet confidence of evening.',
+    },
+    materials: { ar: '', en: '' },
+    edition: { ar: 'قطع القروية', en: 'Qerwiah Pieces' },
+  },
+  {
+    id: 'prod-nile-banner-cardholder',
+    slug: 'nile-banner-cardholder',
+    category: 'wallets',
+    featured: false,
+    image: PRODUCT_DETAIL_GALLERIES[7][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[7],
+    craftHours: 9,
+    price: 850,
+    currency: PRODUCT_CURRENCY,
+    dimensions: '',
+    name: {
+      ar: 'حافظة بطاقات راية النيل',
+      en: 'Nile Banner Cardholder',
+    },
+    shortDescription: {
+      ar: 'حافظة بطاقات تحمل ألوان النهر وتفاصيل مستوحاة من ذاكرة المكان.',
+      en: 'A cardholder with river colors and details drawn from a sense of place.',
+    },
+    story: {
+      ar: 'تفصيل يومي صغير يستعيد ألوان النيل ودفء الحكايات المصرية.',
+      en: 'A small everyday piece recalling the colors of the Nile and Egyptian stories.',
+    },
+    detailStory: {
+      ar: 'تحكي ألوان هذه القطعة عن نهرٍ جمع ضفافه حكايات كثيرة. صُممت لتكون تذكارًا شخصيًا من مصر، يرافق صاحبه في تنقلاته اليومية.',
+      en: 'Its colors recall a river that has gathered countless stories along its banks. This small keepsake carries a personal trace of Egypt into everyday journeys.',
+    },
+    materials: { ar: '', en: '' },
+    edition: { ar: 'قطع القروية', en: 'Qerwiah Pieces' },
+  },
+  {
+    id: 'prod-fayoum-palm-wallet',
+    slug: 'fayoum-palm-wallet',
+    category: 'wallets',
+    featured: false,
+    image: PRODUCT_DETAIL_GALLERIES[8][0],
+    detailImages: PRODUCT_DETAIL_GALLERIES[8],
+    craftHours: 13,
+    price: 1400,
+    currency: PRODUCT_CURRENCY,
+    dimensions: '',
+    name: {
+      ar: 'محفظة نخيل الفيوم',
+      en: 'Fayoum Palm Wallet',
+    },
+    shortDescription: {
+      ar: 'محفظة صغيرة تحتفي بظلال النخيل وواحات الفيوم.',
+      en: 'A small wallet celebrating the palms and oases of Fayoum.',
+    },
+    story: {
+      ar: 'تستحضر نقوش النخيل مشهدًا مألوفًا من واحات الفيوم.',
+      en: 'Palm motifs recall a familiar scene from Fayoum’s oases.',
+    },
+    detailStory: {
+      ar: 'تحت ظلال النخيل، تهدأ الحكايات ولا تنتهي. تستلهم هذه المحفظة مشهد الواحة لتحتفظ بلمحة من فيومٍ خضراء، قريبة مهما ابتعد الطريق.',
+      en: 'Stories slow beneath the palms, but never end. Inspired by an oasis in Fayoum, this wallet keeps a glimpse of green close, wherever the road leads.',
+    },
+    materials: { ar: '', en: '' },
+    edition: { ar: 'قطع القروية', en: 'Qerwiah Pieces' },
   },
 ];
 

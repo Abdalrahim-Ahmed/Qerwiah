@@ -13,6 +13,8 @@ import {
 import { useBrand } from '../context/BrandContext';
 import { LiquidButton } from '../components/LiquidButton';
 import { HeritageImage } from '../components/HeritageImage';
+import { BrandedDropdown } from '../components/BrandedDropdown';
+import { CalendarDatePicker } from '../components/CalendarDatePicker';
 import { BRAND_IMAGES } from '../data/seedData';
 
 const MAX_IMAGES = 5;
@@ -454,22 +456,19 @@ export const CustomDesign = () => {
                       </div>
                       <div>
                         <Label htmlFor="cd-country" text={c.country} required />
-                        <select
+                        <BrandedDropdown
                           id="cd-country"
-                          autoComplete="country"
+                          label={c.country}
                           value={form.country}
-                          onChange={(e) => update('country', e.target.value)}
-                          aria-invalid={!!errors.country}
-                          aria-describedby={errors.country ? 'cd-country-error' : undefined}
+                          onChange={(value) => update('country', value)}
+                          options={[
+                            { value: '', label: c.countryPlaceholder },
+                            ...countries,
+                          ]}
+                          invalid={!!errors.country}
+                          describedBy={errors.country ? 'cd-country-error' : undefined}
                           className={fieldClass('country')}
-                        >
-                          <option value="">{c.countryPlaceholder}</option>
-                          {countries.map((country) => (
-                            <option key={country.code} value={country.code}>
-                              {country.label}
-                            </option>
-                          ))}
-                        </select>
+                        />
                         <FieldError id="cd-country" msg={errors.country} />
                       </div>
                     </div>
@@ -483,21 +482,19 @@ export const CustomDesign = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
                         <Label htmlFor="cd-productType" text={c.productType} required />
-                        <select
+                        <BrandedDropdown
                           id="cd-productType"
+                          label={c.productType}
                           value={form.productType}
-                          onChange={(e) => update('productType', e.target.value)}
-                          aria-invalid={!!errors.productType}
-                          aria-describedby={errors.productType ? 'cd-productType-error' : undefined}
+                          onChange={(value) => update('productType', value)}
+                          options={[
+                            { value: '', label: c.productTypePlaceholder },
+                            ...c.productTypes,
+                          ]}
+                          invalid={!!errors.productType}
+                          describedBy={errors.productType ? 'cd-productType-error' : undefined}
                           className={fieldClass('productType')}
-                        >
-                          <option value="">{c.productTypePlaceholder}</option>
-                          {c.productTypes.map((o) => (
-                            <option key={o.value} value={o.value}>
-                              {o.label}
-                            </option>
-                          ))}
-                        </select>
+                        />
                         <FieldError id="cd-productType" msg={errors.productType} />
                       </div>
                       <div>
@@ -513,19 +510,17 @@ export const CustomDesign = () => {
                       </div>
                       <div>
                         <Label htmlFor="cd-material" text={c.materials} />
-                        <select
+                        <BrandedDropdown
                           id="cd-material"
+                          label={c.materials}
                           value={form.material}
-                          onChange={(e) => update('material', e.target.value)}
+                          onChange={(value) => update('material', value)}
+                          options={[
+                            { value: '', label: '—' },
+                            ...c.materialOptions,
+                          ]}
                           className={fieldClass('material')}
-                        >
-                          <option value="">—</option>
-                          {c.materialOptions.map((o) => (
-                            <option key={o.value} value={o.value}>
-                              {o.label}
-                            </option>
-                          ))}
-                        </select>
+                        />
                       </div>
                       <div>
                         <Label htmlFor="cd-colors" text={c.colors} />
@@ -622,30 +617,31 @@ export const CustomDesign = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <div>
                         <Label htmlFor="cd-budget" text={c.budget} />
-                        <select
+                        <BrandedDropdown
                           id="cd-budget"
+                          label={c.budget}
                           value={form.budget}
-                          onChange={(e) => update('budget', e.target.value)}
+                          onChange={(value) => update('budget', value)}
+                          options={[
+                            { value: '', label: c.budgetPlaceholder },
+                            ...c.budgetOptions,
+                          ]}
                           className={fieldClass('budget')}
-                        >
-                          <option value="">{c.budgetPlaceholder}</option>
-                          {c.budgetOptions.map((o) => (
-                            <option key={o.value} value={o.value}>
-                              {o.label}
-                            </option>
-                          ))}
-                        </select>
+                        />
                       </div>
                       <div>
                         <Label htmlFor="cd-deadline" text={c.deadline} />
-                        <input
+                        <CalendarDatePicker
                           id="cd-deadline"
-                          type="date"
-                          dir="ltr"
                           min={new Date().toISOString().slice(0, 10)}
                           value={form.deadline}
-                          onChange={(e) => update('deadline', e.target.value)}
-                          className={`${fieldClass('deadline')} ltr:text-left rtl:text-right`}
+                          language={language}
+                          onChange={(value) => update('deadline', value)}
+                          className={fieldClass('deadline')}
+                          placeholder={c.datePlaceholder}
+                          clearLabel={c.clearDate}
+                          previousLabel={c.previousMonth}
+                          nextLabel={c.nextMonth}
                         />
                         <p className="mt-1.5 text-xs text-[#2A0E14]/55">{c.deadlineHint}</p>
                       </div>

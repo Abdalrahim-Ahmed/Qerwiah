@@ -7,6 +7,30 @@ import { HeritageImage } from '../components/HeritageImage';
 import { ProductDetailModal } from '../components/ProductDetailModal';
 import { FavoriteButton } from '../components/FavoriteButton';
 
+const getDisplayPrice = (product, language) => {
+  const rawPrice = product?.price;
+  let value = rawPrice;
+  let currency = product?.currency;
+
+  if (rawPrice && typeof rawPrice === 'object') {
+    value = rawPrice[language] ?? rawPrice.amount ?? rawPrice.value;
+    currency = rawPrice.currency ?? currency;
+  }
+
+  if (typeof value === 'number' && Number.isFinite(value)) {
+    value = new Intl.NumberFormat(language === 'ar' ? 'ar-EG' : 'en-EG', {
+      maximumFractionDigits: 2,
+    }).format(value);
+  }
+
+  if (typeof value !== 'string' || !value.trim()) return null;
+  const localizedCurrency =
+    currency && typeof currency === 'object'
+      ? currency[language] ?? currency.ar ?? currency.en
+      : currency;
+  return localizedCurrency ? `${value.trim()} ${localizedCurrency}` : value.trim();
+};
+
 export const ProductsPage = () => {
   const { t, language, products, getProductWhatsAppLink } = useBrand();
   const prefersReduced = useReducedMotion();
@@ -154,11 +178,22 @@ export const ProductsPage = () => {
                     onClick={() => setSelectedProduct(product)}
                     className="aspect-[4/4.4] w-full bg-[#F4E8D5] overflow-hidden cursor-pointer block text-start"
                   >
-                    <HeritageImage
-                      src={product.image}
-                      alt={product.name[language]}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    />
+                    <div className="relative h-full w-full">
+                      {product.detailImages?.[0] || product.image ? (
+                        <HeritageImage
+                          src={product.detailImages?.[0] || product.image}
+                          alt={product.name[language]}
+                          className="absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-in-out group-hover:scale-[1.03] group-hover:opacity-0"
+                        />
+                      ) : null}
+                      {product.detailImages?.[1] ? (
+                        <HeritageImage
+                          src={product.detailImages[1]}
+                          alt=""
+                          className="absolute inset-0 h-full w-full object-cover opacity-0 scale-[1.02] transition-all duration-700 ease-in-out group-hover:opacity-100 group-hover:scale-[1.03]"
+                        />
+                      ) : null}
+                    </div>
                   </button>
                   <FavoriteButton
                     productId={product.id}
@@ -173,9 +208,8 @@ export const ProductsPage = () => {
                     <h2 className="mt-2 text-xl font-semibold text-[#4B0011]">
                       {product.name[language]}
                     </h2>
-
-                    <p className="mt-2 text-sm text-[#2A0E14]/80 leading-relaxed">
-                      {product.shortDescription[language]}
+                    <p className="mt-1 text-base font-medium text-[#8A8861] tabular-nums">
+                      {getDisplayPrice(product, language) || t.productsPage.priceInquiry}
                     </p>
                   </div>
 

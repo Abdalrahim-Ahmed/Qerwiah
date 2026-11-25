@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, MessageCircle, Mail } from 'lucide-react';
 import { useBrand } from '../context/BrandContext';
-import logoArBeige from '../assets/logo/logo-ar-beige.png';
+import logoArBeige from '../assets/logo/logo-arabic-beige.svg';
 import logoEnBeige from '../assets/logo/logo-en-beige.svg';
 
 export const Footer = () => {
@@ -16,21 +16,21 @@ export const Footer = () => {
             <Link
               to="/"
               className="inline-block shrink-0 transition-opacity hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FEDEA3] rounded"
-              aria-label={language === 'ar' ? 'القروية - الصفحة الرئيسية' : 'AL QERWIAH - Home'}
+              aria-label={language === 'ar' ? 'قروية - الصفحة الرئيسية' : 'Qerwiah - Home'}
             >
               {language === 'ar' ? (
                 <img
                   src={logoArBeige}
-                  alt="القروية"
-                  width={601}
-                  height={220}
+                  alt="قروية"
+                  width={410}
+                  height={157}
                   className="h-9 sm:h-11 w-auto max-h-full object-contain select-none"
                   draggable={false}
                 />
               ) : (
                 <img
                   src={logoEnBeige}
-                  alt="AL QERWIAH"
+                  alt="Qerwiah"
                   width={468}
                   height={135}
                   className="h-9 sm:h-11 w-auto max-h-full object-contain select-none"

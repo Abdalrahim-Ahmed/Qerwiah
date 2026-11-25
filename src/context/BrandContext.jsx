@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
+  BRAND_IMAGES,
   INITIAL_ADMINS,
   INITIAL_BRAND_SETTINGS,
   INITIAL_INQUIRIES,
@@ -32,6 +33,63 @@ function readStorage(key, fallback) {
   }
 }
 
+function loadProducts() {
+  const storedProducts = readStorage(STORAGE_KEYS.products, null);
+  if (!Array.isArray(storedProducts)) return INITIAL_PRODUCTS;
+
+  const legacyProductImages = new Map([
+    ['prod-deira-tote', BRAND_IMAGES.toteSignature],
+    ['prod-nile-crossbody', BRAND_IMAGES.crossbodyNile],
+    ['prod-fayoum-wallet', BRAND_IMAGES.walletHeritage],
+    ['prod-oasis-clutch', BRAND_IMAGES.clutchOasis],
+    ['prod-senoures-satchel', BRAND_IMAGES.videoPoster],
+    ['prod-karmah-cardholder', BRAND_IMAGES.materialsDuo],
+  ]);
+  const initialProductsById = new Map(INITIAL_PRODUCTS.map((product) => [product.id, product]));
+  const storedIds = new Set(storedProducts.map((product) => product?.id));
+
+  const mergedProducts = storedProducts.map((product) => {
+    const initialProduct = initialProductsById.get(product?.id);
+    if (!initialProduct) return product;
+    const legacyImage = legacyProductImages.get(product.id);
+    const shouldReplaceLegacyImage = !product.image || product.image === legacyImage;
+
+    return {
+      ...initialProduct,
+      ...product,
+      image: shouldReplaceLegacyImage
+        ? initialProduct.detailImages?.[0] || initialProduct.image
+        : product.image,
+      detailImages: initialProduct.detailImages,
+      detailStory: initialProduct.detailStory,
+    };
+  });
+
+  return [
+    ...mergedProducts,
+    ...INITIAL_PRODUCTS.filter((product) => !storedIds.has(product.id)),
+  ];
+}
+
+function normalizeBrandSettings(stored) {
+  if (!stored) return INITIAL_BRAND_SETTINGS;
+
+  const location = stored.atelierLocation && typeof stored.atelierLocation === 'object'
+    ? stored.atelierLocation
+    : {};
+  const isLegacyArabicLocation = /الفيوم|القاهرة/.test(location.ar || '');
+  const isLegacyEnglishLocation = /Fayoum|Cairo/i.test(location.en || '');
+
+  return {
+    ...INITIAL_BRAND_SETTINGS,
+    ...stored,
+    atelierLocation: {
+      ar: isLegacyArabicLocation ? INITIAL_BRAND_SETTINGS.atelierLocation.ar : (location.ar || INITIAL_BRAND_SETTINGS.atelierLocation.ar),
+      en: isLegacyEnglishLocation ? INITIAL_BRAND_SETTINGS.atelierLocation.en : (location.en || INITIAL_BRAND_SETTINGS.atelierLocation.en),
+    },
+  };
+}
+
 const BrandContext = createContext(null);
 
 export const BrandProvider = ({ children }) => {
@@ -46,26 +104,22 @@ export const BrandProvider = ({ children }) => {
     }
   });
 
-  const [products, setProducts] = useState(() =>
-    readStorage(STORAGE_KEYS.products, INITIAL_PRODUCTS)
-  );
+  const [products, setProducts] = useState(loadProducts);
 
   const [settings, setSettings] = useState(() => {
     const stored = readStorage(STORAGE_KEYS.settings, null);
-    if (!stored) return INITIAL_BRAND_SETTINGS;
-
-    const isPlaceholderNumber = !stored.whatsappNumber || stored.whatsappNumber === '+201000000000';
-    const isPlaceholderEmail = !stored.contactEmail || stored.contactEmail === 'atelier@alqerwiah.eg';
-    const isPlaceholderInsta = !stored.instagramUrl || stored.instagramUrl === 'https://instagram.com/alqerwiah.eg';
-    const isPlaceholderFb = !stored.facebookUrl || stored.facebookUrl === 'https://facebook.com/alqerwiah.eg';
+    const normalized = normalizeBrandSettings(stored);
+    const isPlaceholderNumber = !normalized.whatsappNumber || normalized.whatsappNumber === '+201000000000';
+    const isPlaceholderEmail = !normalized.contactEmail || normalized.contactEmail === 'atelier@alqerwiah.eg';
+    const isPlaceholderInsta = !normalized.instagramUrl || normalized.instagramUrl === 'https://instagram.com/alqerwiah.eg';
+    const isPlaceholderFb = !normalized.facebookUrl || normalized.facebookUrl === 'https://facebook.com/alqerwiah.eg';
 
     return {
-      ...INITIAL_BRAND_SETTINGS,
-      ...stored,
-      whatsappNumber: isPlaceholderNumber ? INITIAL_BRAND_SETTINGS.whatsappNumber : stored.whatsappNumber,
-      contactEmail: isPlaceholderEmail ? INITIAL_BRAND_SETTINGS.contactEmail : stored.contactEmail,
-      instagramUrl: isPlaceholderInsta ? INITIAL_BRAND_SETTINGS.instagramUrl : stored.instagramUrl,
-      facebookUrl: isPlaceholderFb ? INITIAL_BRAND_SETTINGS.facebookUrl : stored.facebookUrl,
+      ...normalized,
+      whatsappNumber: isPlaceholderNumber ? INITIAL_BRAND_SETTINGS.whatsappNumber : normalized.whatsappNumber,
+      contactEmail: isPlaceholderEmail ? INITIAL_BRAND_SETTINGS.contactEmail : normalized.contactEmail,
+      instagramUrl: isPlaceholderInsta ? INITIAL_BRAND_SETTINGS.instagramUrl : normalized.instagramUrl,
+      facebookUrl: isPlaceholderFb ? INITIAL_BRAND_SETTINGS.facebookUrl : normalized.facebookUrl,
     };
   });
 

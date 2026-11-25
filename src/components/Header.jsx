@@ -3,8 +3,8 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Globe, Heart, LayoutDashboard, LogIn, LogOut, Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useBrand } from '../context/BrandContext';
-import logoArBurgundy from '../assets/logo/logo-ar-burgundy.png';
-import logoArBeige from '../assets/logo/logo-ar-beige.png';
+import logoArBurgundy from '../assets/logo/logo-arabic-burgundy.svg';
+import logoArBeige from '../assets/logo/logo-arabic-beige.svg';
 import logoEnBurgundy from '../assets/logo/logo-en-burgundy.svg';
 import logoEnBeige from '../assets/logo/logo-en-beige.svg';
 
@@ -104,15 +104,15 @@ export const Header = () => {
             handleNavClick('/');
           }}
           className="shrink-0 flex items-center transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FEDEA3] rounded"
-          aria-label={language === 'ar' ? 'القروية - الصفحة الرئيسية' : 'AL QERWIAH - Home'}
+          aria-label={language === 'ar' ? 'قروية - الصفحة الرئيسية' : 'Qerwiah - Home'}
         >
           {language === 'ar' ? (
             <div className="relative h-9 sm:h-11 flex items-center">
               <img
                 src={logoArBurgundy}
-                alt="القروية"
-                width={601}
-                height={220}
+                alt="قروية"
+                width={410}
+                height={157}
                 className={`h-9 sm:h-11 w-auto max-h-full object-contain transition-opacity duration-500 ease-in-out select-none ${
                   isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
@@ -120,9 +120,9 @@ export const Header = () => {
               />
               <img
                 src={logoArBeige}
-                alt="القروية"
-                width={601}
-                height={220}
+                alt="قروية"
+                width={410}
+                height={157}
                 className={`h-9 sm:h-11 w-auto max-h-full object-contain absolute inset-0 transition-opacity duration-500 ease-in-out select-none ${
                   isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
@@ -134,7 +134,7 @@ export const Header = () => {
             <div className="relative h-9 sm:h-11 flex items-center">
               <img
                 src={logoEnBurgundy}
-                alt="AL QERWIAH"
+                alt="Qerwiah"
                 width={468}
                 height={135}
                 className={`h-9 sm:h-11 w-auto max-h-full object-contain transition-opacity duration-500 ease-in-out select-none ${
@@ -144,7 +144,7 @@ export const Header = () => {
               />
               <img
                 src={logoEnBeige}
-                alt="AL QERWIAH"
+                alt="Qerwiah"
                 width={468}
                 height={135}
                 className={`h-9 sm:h-11 w-auto max-h-full object-contain absolute inset-0 transition-opacity duration-500 ease-in-out select-none ${
