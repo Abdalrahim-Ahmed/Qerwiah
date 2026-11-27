@@ -15,7 +15,7 @@ import { LiquidButton } from '../components/LiquidButton';
 import { HeritageImage } from '../components/HeritageImage';
 import { BrandedDropdown } from '../components/BrandedDropdown';
 import { CalendarDatePicker } from '../components/CalendarDatePicker';
-import { BRAND_IMAGES } from '../data/seedData';
+import customDesignHero from '../assets/images/custom_design_hero.jpeg';
 
 const MAX_IMAGES = 5;
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
@@ -287,7 +287,7 @@ export const CustomDesign = () => {
               <figure>
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-[#DFAC6D]/50 bg-[#F4E8D5] shadow-md">
                   <HeritageImage
-                    src={BRAND_IMAGES.artisanHands}
+                    src={customDesignHero}
                     alt={language === 'ar' ? 'حرفية تنسج قطعة يدوية' : 'Artisan handweaving a custom piece'}
                     className="w-full h-full object-cover"
                   />

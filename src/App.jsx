@@ -13,6 +13,7 @@ import { CustomDesign } from './pages/CustomDesign';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { LoginPage } from './pages/LoginPage';
 import { AdminDashboardPage } from './pages/AdminDashboardPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export default function App() {
   // BrandProvider lives inside the router because the shared login flow navigates.
@@ -37,7 +38,7 @@ export default function App() {
               {/* The old admin login URL now leads to the single shared login page. */}
               <Route path="/admin/login" element={<Navigate to="/login" replace />} />
               <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-              <Route path="*" element={<HomePage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
           <Footer />

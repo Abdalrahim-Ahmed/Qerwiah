@@ -1,13 +1,15 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { useBrand } from '../context/BrandContext';
-import { BRAND_IMAGES } from '../data/seedData';
 import { HeritageImage } from '../components/HeritageImage';
 import { LiquidButton } from '../components/LiquidButton';
+import aboutImageOne from '../assets/images/about_image_one.jpeg';
+import aboutImageTwo from '../assets/images/about_image_two.jpeg';
+import aboutImageThree from '../assets/images/about_image_three.jpeg';
 
 const STAGE_IMAGES = [
-  BRAND_IMAGES.artisanHands,
-  BRAND_IMAGES.bananaFibers,
-  BRAND_IMAGES.crossbodyNile,
+  aboutImageOne,
+  aboutImageTwo,
+  aboutImageThree,
 ];
 
 export const AboutPage = () => {
@@ -35,14 +37,6 @@ export const AboutPage = () => {
           >
             {t.aboutPage.title}
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: prefersReduced ? 0 : 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.14 }}
-            className="mt-5 text-[18px] text-[#2A0E14]/82 leading-[1.75] max-w-2xl mx-auto"
-          >
-            {t.aboutPage.lead}
-          </motion.p>
         </div>
       </section>
 
@@ -63,7 +57,7 @@ export const AboutPage = () => {
                 <figure>
                   <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-[#DFAC6D]/50 bg-[#F4E8D5] shadow-md">
                     <HeritageImage
-                      src={STAGE_IMAGES[idx] || BRAND_IMAGES.artisanHands}
+                      src={STAGE_IMAGES[idx]}
                       alt={stage.caption}
                       className="w-full h-full object-cover"
                     />
@@ -73,9 +67,6 @@ export const AboutPage = () => {
               </div>
 
               <div className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : ''}`}>
-                <p className="text-xs sm:text-sm font-semibold text-[#8A8861] tabular-nums">
-                  {stage.number}. {stage.title}
-                </p>
                 <h2 className="mt-2 text-[clamp(1.75rem,3.8vw,52px)] font-semibold text-[#4B0011] leading-[1.2] text-balance">
                   {stage.subtitle}
                 </h2>
@@ -85,10 +76,6 @@ export const AboutPage = () => {
                   <p>{stage.body2}</p>
                 </div>
 
-                {/* Editorial Pull Quote with hairline top/bottom dividers */}
-                <blockquote className="mt-7 py-4 border-y border-[#DFAC6D]/50 text-base sm:text-lg italic text-[#4B0011]">
-                  {stage.quote}
-                </blockquote>
               </div>
             </motion.article>
           );

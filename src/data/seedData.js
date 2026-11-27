@@ -1,4 +1,4 @@
-
+﻿
 
 export const BRAND_IMAGES = {
   toteSignature: '/src/assets/images/pasted-product-bag.png',
@@ -51,6 +51,11 @@ const PRODUCT_DETAIL_GALLERIES = [
   ],
 ];
 
+const DEIRA_TOTE_IMAGE = new URL(
+  '../assets/images/bag_tote_signature_1795087225085.jpg',
+  import.meta.url,
+).href;
+
 const PRODUCT_CURRENCY = { ar: 'جنيه', en: 'EGP' };
 
 // Replaceable local video asset path: drop an MP4/WebM file at public/assets/videos/alqerwiah-heritage.mp4
@@ -79,11 +84,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[0][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[0],
     craftHours: 28,
-    price: 3850,
+    price: 1500,
     currency: PRODUCT_CURRENCY,
     dimensions: '36 × 28 × 14 cm',
     name: {
-      ar: 'حقيبة الديرة التراثية',
+      ar: 'نفحة من القداسة وروح التراث',
       en: 'Al-Deira Heritage Tote',
     },
     shortDescription: {
@@ -91,7 +96,7 @@ export const INITIAL_PRODUCTS = [
       en: 'Handwoven natural banana-fiber body framed with deep burgundy full-grain leather handles.',
     },
     story: {
-      ar: 'تستلهم حقيبة الديرة خطوطها من سلال الحصاد المصرية القديمة في قرى الدلتا والفيوم، معاد صياغتها بهيكل معاصر متين يحفظ أناقتها اليومية.',
+      ar: 'في قلب هذا التصميم تتوسط النجمة عشرة عناصر تحيط بها، في قراءة رمزية مستوحاة من الفن الإسلامي، تستحضر النبي ﷺ والعشرة المبشرين بالجنة، في تكوين يحمل معاني الطهر والبركة والصحبة المباركة.\n\nاستلهمنا من هذه الرمزية جمالها الروحي وعمقها التاريخي، وأعدنا صياغتها في تصميم معاصر يجمع بين قدسية المعنى وأصالة التراث وأناقة الحاضر.\n\nفي الجروية، لكل قطعة روح، ولكل تفصيلة حكاية، ولكل حكاية أثر يبقى.',
       en: 'Inspired by historic harvest baskets from Egypt’s Delta and Fayoum villages, Al-Deira reshapes rural weaving into an architectural everyday tote.',
     },
     detailStory: {
@@ -115,11 +120,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[1][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[1],
     craftHours: 22,
-    price: 3200,
+    price: 1300,
     currency: PRODUCT_CURRENCY,
     dimensions: '24 × 19 × 8 cm',
     name: {
-      ar: 'حقيبة كتف ضفاف النيل',
+      ar: 'روح الصحراء',
       en: 'Nile Bank Crossbody',
     },
     shortDescription: {
@@ -127,7 +132,7 @@ export const INITIAL_PRODUCTS = [
       en: 'Soft saddle silhouette pairing a supple burgundy leather flap with woven banana-fiber textile.',
     },
     story: {
-      ar: 'صُممت لترافق المسافرات اليوميات بخفة وأصالة، حيث تُخاط الغرز اليدوية بخيوط الكتان المشمع حول قفل نحاسي مستوحى من الأختام الريفية.',
+      ar: 'استوحينا التصميم من الجعران المجنّح في الحضارة المصرية القديمة، أحد الرموز التي ارتبطت بالتجدد والبعث والحماية.\n\nجاء الجناحان في التصميم ليمنحاه إحساسًا بالانطلاق والحرية، بينما يستحضر شكل الجعران أسرار الحضارة المصرية وعظمتها.\n\nقطعة تحمل رمزًا من رموز مصر الخالدة، بروح تراثية ولمسة عصرية تجمع بين الأصالة والفخامة. ❤️',
       en: 'Crafted for effortless daily movement, stitched with waxed linen thread around a minimal brass clasp echoing rural heirloom seals.',
     },
     detailStory: {
@@ -151,11 +156,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[2][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[2],
     craftHours: 14,
-    price: 1450,
+    price: 1300,
     currency: PRODUCT_CURRENCY,
     dimensions: '11.5 × 9.5 × 1.8 cm',
     name: {
-      ar: 'محفظة الفيوم المنسوجة',
+      ar: 'أنوبيس',
       en: 'Fayoum Woven Bifold Wallet',
     },
     shortDescription: {
@@ -163,7 +168,7 @@ export const INITIAL_PRODUCTS = [
       en: 'Refined leather bifold and slim cardholder inlaid with golden woven banana-fiber panels.',
     },
     story: {
-      ar: 'تجمع محفظة الفيوم بين دقة التطعيم الخشبي والنسجي في الريف المصري وبين براعة تشطيب الحواف الجلدية الراقية.',
+      ar: 'من قلب الحضارة المصرية القديمة، استوحينا التصميم من أنوبيس، حارس العالم الآخر ورمز الحماية في المعتقد المصري القديم.\n\nشخصية ارتبطت بالأسرار والهيبة، وحضرت بقوة في النقوش والمعابد المصرية، فحوّلنا ملامحها إلى تصميم يجمع بين سحر التاريخ وروح الحرفة اليدوية.\n\nقطعة تجمع فخامة الجلد الطبيعي مع تفاصيل النسيج المستوحاة من تراثنا.\n\nمش مجرد محفظة… دي حكاية من أسرار مصر القديمة، تحملها معاك أينما ذهبت.',
       en: 'Uniting delicate rural marquetry traditions with precision-burnished leather edges, designed to age with a rich warm patina.',
     },
     detailStory: {
@@ -187,11 +192,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[3][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[3],
     craftHours: 19,
-    price: 2750,
+    price: 1950,
     currency: PRODUCT_CURRENCY,
     dimensions: '26 × 16 × 6 cm',
     name: {
-      ar: 'كلتش الواحة المضفّر',
+      ar: 'سفيفة',
       en: 'Oasis Braided Clutch',
     },
     shortDescription: {
@@ -199,7 +204,7 @@ export const INITIAL_PRODUCTS = [
       en: 'Braided golden banana-fiber evening silhouette accented with olive and burgundy leather trim.',
     },
     story: {
-      ar: 'تستعرض تقنية الضفيرة الثلاثية المتوارثة، حيث تلتقي درجة الزيتون المستوحاة من بساتين الواحات بعمق العنّابي الكلاسيكي.',
+      ar: 'من جمال الحرفة اليدوية وتداخل الخيوط، استوحينا تصميم هذه الحقيبة، حيث يلتقي النسيج الطبيعي بتفاصيل الجلد الأنيق في تناغم يجمع بين دفء الخامات وفخامة التصميم.\n\nيعكس الجزء المنسوج روح الصناعات اليدوية التي توارثتها الأجيال، بينما تضيف لمسات الجلد واللون العنابي حضورًا عصريًا مميزًا.\n\nقطعة تحتفي بجمال التفاصيل البسيطة، وتجمع بين أصالة الحرفة وأناقة الحاضر.\n\n**سفيفة… حين تتحول الخيوط إلى فن، والتفاصيل إلى حكاية.**',
       en: 'Showcasing an heirloom three-strand braid technique, pairing oasis-olive leather piping with signature burgundy lining.',
     },
     detailStory: {
@@ -223,11 +228,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[4][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[4],
     craftHours: 32,
-    price: 4200,
+    price: 750,
     currency: PRODUCT_CURRENCY,
     dimensions: '29 × 22 × 11 cm',
     name: {
-      ar: 'حقيبة سنورس الكلاسيكية',
+      ar: 'جعران',
       en: 'Senoures Courtyard Satchel',
     },
     shortDescription: {
@@ -235,7 +240,7 @@ export const INITIAL_PRODUCTS = [
       en: 'Structured top-handle satchel with whipped leather lacing framing a handwoven fiber center.',
     },
     story: {
-      ar: 'قطعة تحفظ روح البيوت الريفية الدافئة؛ تُجمع يدوياً على مدار أربعة أيام في ورشتنا بالفيوم.',
+      ar: 'استوحينا التصميم من الجعران المجنّح في الحضارة المصرية القديمة، أحد الرموز التي ارتبطت بالتجدد والبعث والحماية.\n\nجاء الجناحان في التصميم ليمنحاه إحساسًا بالانطلاق والحرية، بينما يستحضر شكل الجعران أسرار الحضارة المصرية وعظمتها.\n\nقطعة تحمل رمزًا من رموز مصر الخالدة، بروح تراثية ولمسة عصرية تجمع بين الأصالة والفخامة. ❤️',
       en: 'An heirloom satchel assembled over four days in our Fayoum atelier, celebrating warm mudbrick tones and quiet architectural balance.',
     },
     detailStory: {
@@ -259,11 +264,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[5][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[5],
     craftHours: 10,
-    price: 950,
+    price: 600,
     currency: PRODUCT_CURRENCY,
     dimensions: '10.5 × 7.5 × 0.8 cm',
     name: {
-      ar: 'حافظة بطاقات الكرمة',
+      ar: 'اللوتس',
       en: 'Al-Karmah Slim Cardholder',
     },
     shortDescription: {
@@ -271,7 +276,7 @@ export const INITIAL_PRODUCTS = [
       en: 'Ultra-slim pocket companion pairing silk-sheen banana fibers with burnished burgundy hide.',
     },
     story: {
-      ar: 'تحية للحياكة الدقيقة التي كانت تزين الأدوات الشخصية في القرى المصرية، برؤية مبسطة تناسب إيقاع اليوم.',
+      ar: 'استوحينا التصميم من زهرة اللوتس المصرية، اللي ارتبطت عند المصريين القدماء بالشروق والبعث وبداية الحياة من جديد؛ فكانت رمزًا للنقاء والتجدد والجمال.\nجسدنا بتلاتها المتفتحة في طبقات من الجلد الطبيعي بألوان متناغمة، تتوسطها لمسة من النسيج اليدوي، في مزج يجمع بين رمزية الحضارة المصرية وجمال الحرفة المعاصرة.\nزهرة من ذاكرة الحضارة… تتحول إلى قطعة فنية تحمل حكاية الجمال والتجدد عبر الزمن. ❤️',
       en: 'A tribute to fine pocket craft in Egyptian villages, distilled into clean minimalist lines for everyday carry.',
     },
     detailStory: {
@@ -295,11 +300,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[6][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[6],
     craftHours: 18,
-    price: 2600,
+    price: 700,
     currency: PRODUCT_CURRENCY,
     dimensions: '',
     name: {
-      ar: 'كلتش عين حورس',
+      ar: 'بنت الصعيد',
       en: 'Eye of Horus Clutch',
     },
     shortDescription: {
@@ -307,7 +312,7 @@ export const INITIAL_PRODUCTS = [
       en: 'An evening clutch carrying an echo of ancient Egyptian symbols.',
     },
     story: {
-      ar: 'قطعة للمساء تستلهم حكايتها من رموز مصر القديمة.',
+      ar: 'حياء بنت الصعيد… حين تطل من خلف الباب.\n\nمن وراء الباب، تطل بعينين تملؤهما الحكايات، في خجلٍ رقيق وحياءٍ أصيل، كأنها تخشى أن يراها العالم قبل أن تراه.\n\nاستلهمنا التصميم من تلك اللحظة البسيطة التي تختصر جمال المرأة الصعيدية؛ عزةٌ ووقار، وخجلٌ له سحره الخاص.\n\nحكاية أنوثة مصرية نسجها التراث. 🤎',
       en: 'An evening piece inspired by the symbols of ancient Egypt.',
     },
     detailStory: {
@@ -325,11 +330,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[7][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[7],
     craftHours: 9,
-    price: 850,
+    price: 700,
     currency: PRODUCT_CURRENCY,
     dimensions: '',
     name: {
-      ar: 'حافظة بطاقات راية النيل',
+      ar: 'ابن الأرض',
       en: 'Nile Banner Cardholder',
     },
     shortDescription: {
@@ -337,7 +342,7 @@ export const INITIAL_PRODUCTS = [
       en: 'A cardholder with river colors and details drawn from a sense of place.',
     },
     story: {
-      ar: 'تفصيل يومي صغير يستعيد ألوان النيل ودفء الحكايات المصرية.',
+      ar: 'في قلب الصعيد، يعبر الرجل بين أشجار الموز، بخطوات تحمل هيبة الأرض وأصالة أهلها. مشهد يستلهم روح الجنوب، حيث الخضرة تحكي عن الخير، والرجل يحكي عن جذور وهوية لا تتغير.\nقطعة تحمل حكاية من قلب الصعيد… حيث لكل تفصيلة أصل، ولكل خيط حكاية.',
       en: 'A small everyday piece recalling the colors of the Nile and Egyptian stories.',
     },
     detailStory: {
@@ -355,11 +360,11 @@ export const INITIAL_PRODUCTS = [
     image: PRODUCT_DETAIL_GALLERIES[8][0],
     detailImages: PRODUCT_DETAIL_GALLERIES[8],
     craftHours: 13,
-    price: 1400,
+    price: 400,
     currency: PRODUCT_CURRENCY,
     dimensions: '',
     name: {
-      ar: 'محفظة نخيل الفيوم',
+      ar: 'عين حورس',
       en: 'Fayoum Palm Wallet',
     },
     shortDescription: {
@@ -367,7 +372,7 @@ export const INITIAL_PRODUCTS = [
       en: 'A small wallet celebrating the palms and oases of Fayoum.',
     },
     story: {
-      ar: 'تستحضر نقوش النخيل مشهدًا مألوفًا من واحات الفيوم.',
+      ar: 'ستوحينا التصميم من عين حورس (عين الوجات)، أحد أشهر الرموز في الحضارة المصرية القديمة، واللي ارتبط بالحماية والقوة والشفاء واستعادة التوازن.\n\nكان المصري القديم بيشوف فيها رمزًا للحفظ من الشر وتجدد الحياة، فخلّدها على جدران المعابد والتمائم، لتصبح واحدة من العلامات الخالدة في تراثنا.\n\nأعدنا تقديم الرمز بلمسة من الجلد الطبيعي والنسيج اليدوي، لنمزج بين سحر الحضارة المصرية وأناقة التصميم المعاصر.\n\nعين من قلب التاريخ… تحمل حكاية الحماية والقوة، وتعيش من جديد في قطعة فنية. ❤️',
       en: 'Palm motifs recall a familiar scene from Fayoum’s oases.',
     },
     detailStory: {
@@ -383,8 +388,8 @@ export const INITIAL_ADMINS = [
   {
     id: 'admin-founder-1',
     name: 'نور الهدى المنصوري',
-    email: 'admin@alqerwiah.eg',
-    password: 'heritage2026',
+    email: 'hager.tayea1810@gmail.com',
+    passwordHash: null,
     role: 'owner',
     active: true,
     createdAt: '2026-01-15T09:00:00.000Z',

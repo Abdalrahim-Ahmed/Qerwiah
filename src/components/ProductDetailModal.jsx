@@ -7,36 +7,11 @@ import { useBrand } from '../context/BrandContext';
 import { HeritageImage } from './HeritageImage';
 import { LiquidButton } from './LiquidButton';
 import { FavoriteButton } from './FavoriteButton';
-
-const getDisplayPrice = (product, language) => {
-  const rawPrice = product?.price;
-  let value = rawPrice;
-  let currency = product?.currency;
-
-  if (rawPrice && typeof rawPrice === 'object') {
-    value = rawPrice[language] ?? rawPrice.amount ?? rawPrice.value;
-    currency = rawPrice.currency ?? currency;
-  }
-
-  if (typeof value === 'number' && Number.isFinite(value)) {
-    value = new Intl.NumberFormat(language === 'ar' ? 'ar-EG' : 'en-EG', {
-      maximumFractionDigits: 2,
-    }).format(value);
-  }
-
-  if (typeof value !== 'string' || !value.trim()) return null;
-
-  const localizedCurrency =
-    currency && typeof currency === 'object'
-      ? currency[language] ?? currency.ar ?? currency.en
-      : currency;
-
-  return localizedCurrency ? `${value.trim()} ${localizedCurrency}` : value.trim();
-};
+import { formatProductPrice } from '../utils/productFormatters';
 
 export const ProductDetailModal = ({ product, onClose }) => {
   const { language, t, getProductWhatsAppLink } = useBrand();
-  const displayPrice = getDisplayPrice(product, language);
+  const displayPrice = formatProductPrice(product?.price);
   const galleryImages = product?.detailImages?.filter(Boolean)
     ?? (product?.image ? [product.image] : []);
   const galleryKey = JSON.stringify([product?.id, galleryImages]);
@@ -53,6 +28,7 @@ export const ProductDetailModal = ({ product, onClose }) => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [product, onClose]);
 
+  // Reset to first image whenever product changes; no automatic interval timer
   useEffect(() => {
     setSlide({ galleryKey, index: 0 });
 
@@ -62,24 +38,13 @@ export const ProductDetailModal = ({ product, onClose }) => {
       return image;
     });
 
-    const interval = galleryImages.length > 1
-      ? window.setInterval(() => {
-          setSlide((current) => ({
-            galleryKey,
-            index: ((current.galleryKey === galleryKey ? current.index : 0) + 1)
-              % galleryImages.length,
-          }));
-        }, 4000)
-      : null;
-
     return () => {
-      if (interval !== null) window.clearInterval(interval);
       preloadedImages.forEach((image) => {
         image.onload = null;
         image.onerror = null;
       });
     };
-  }, [galleryKey, galleryImages.length]);
+  }, [galleryKey]);
 
   return createPortal(
     <AnimatePresence>
@@ -196,7 +161,10 @@ export const ProductDetailModal = ({ product, onClose }) => {
                         <span className="text-sm text-[#2A0E14]/65">
                           {t.productsPage.priceLabel}:
                         </span>
-                        {' '}{displayPrice}
+                        {' '}
+                        <span dir="ltr" className="inline-block tabular-nums">
+                          {displayPrice}
+                        </span>
                       </>
                     ) : (
                       t.productsPage.priceInquiry
@@ -208,8 +176,11 @@ export const ProductDetailModal = ({ product, onClose }) => {
                   <h3 className="text-lg font-semibold text-[#8A8861]">
                     {t.productsPage.storyTitle}
                   </h3>
-                  <p className="mt-3 font-display text-base sm:text-lg text-[#2A0E14]/90 leading-[1.75]">
-                    {product.detailStory?.[language] || t.productsPage.storyComingSoon}
+                  <p className="mt-3 font-display text-base sm:text-lg text-[#2A0E14]/90 leading-[1.75] whitespace-pre-line">
+                    {(language === 'ar'
+                      ? product.story?.ar || product.detailStory?.ar
+                      : product.detailStory?.[language] || product.story?.[language]) ||
+                      t.productsPage.storyComingSoon}
                   </p>
                 </section>
 

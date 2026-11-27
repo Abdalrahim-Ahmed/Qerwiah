@@ -25,6 +25,7 @@ import {
 
 import { useBrand } from '../context/BrandContext';
 import { BRAND_IMAGES } from '../data/seedData';
+import { formatProductPrice } from '../utils/productFormatters';
 
 import { HeritageImage } from '../components/HeritageImage';
 import { LiquidButton } from '../components/LiquidButton';
@@ -34,6 +35,7 @@ const EMPTY_PRODUCT_FORM = {
   featured: true,
   image: BRAND_IMAGES.toteSignature,
   craftHours: 20,
+  price: '',
   dimensions: '30 × 24 × 10 cm',
   nameAr: '',
   nameEn: '',
@@ -111,6 +113,7 @@ export const AdminDashboardPage = () => {
       featured: product.featured,
       image: product.image,
       craftHours: product.craftHours,
+      price: product.price ?? '',
       dimensions: product.dimensions,
       nameAr: product.name.ar,
       nameEn: product.name.en,
@@ -137,6 +140,9 @@ export const AdminDashboardPage = () => {
       featured: productForm.featured,
       image: productForm.image || BRAND_IMAGES.toteSignature,
       craftHours: Number(productForm.craftHours) || 16,
+      ...(productForm.price !== '' && productForm.price !== null && productForm.price !== undefined
+        ? { price: Number(productForm.price) }
+        : {}),
       dimensions: productForm.dimensions || '28 × 20 × 10 cm',
       name: {
         ar: productForm.nameAr.trim(),
@@ -522,8 +528,16 @@ export const AdminDashboardPage = () => {
                                 {product.name[language]}
                               </h3>
 
+                              {formatProductPrice(product?.price) && (
+                                <p className="mt-1 text-sm font-medium text-[#8A8861] tabular-nums" dir="ltr">
+                                  {formatProductPrice(product.price)}
+                                </p>
+                              )}
+
                               <p className="mt-2 text-xs text-[#2A0E14]/70 line-clamp-2 leading-relaxed">
-                                {product.shortDescription[language]}
+                                {language === 'ar'
+                                  ? product.story?.ar || product.shortDescription?.ar
+                                  : product.shortDescription?.[language] || product.story?.[language]}
                               </p>
                             </div>
 
@@ -656,7 +670,7 @@ export const AdminDashboardPage = () => {
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         <fieldset className="min-w-0 border-0 p-0 m-0">
                           <legend className={labelClass}>
                             {t.dashboard.productsTab.categoryLabel}
@@ -703,6 +717,27 @@ export const AdminDashboardPage = () => {
                               setProductForm({
                                 ...productForm,
                                 dimensions: e.target.value,
+                              })
+                            }
+                            className={inputClass}
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="product-price" className={labelClass}>
+                            {isArabic ? 'السعر (جنيه)' : 'Price (EGP)'}
+                          </label>
+                          <input
+                            id="product-price"
+                            type="number"
+                            min={0}
+                            step={1}
+                            dir="ltr"
+                            value={productForm.price}
+                            onChange={(e) =>
+                              setProductForm({
+                                ...productForm,
+                                price: e.target.value,
                               })
                             }
                             className={inputClass}

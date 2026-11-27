@@ -7,12 +7,14 @@ import './CinematicIntro.css';
 
 const INTRO_SESSION_KEY = 'alqerwiah_intro_seen';
 
-const hasSeenIntro = () => {
+const shouldShowIntro = () => {
   try {
-    return sessionStorage.getItem(INTRO_SESSION_KEY) === '1';
+    const hasSeen = sessionStorage.getItem(INTRO_SESSION_KEY) === '1';
+    if (!hasSeen) sessionStorage.setItem(INTRO_SESSION_KEY, '1');
+    return !hasSeen;
   } catch (error) {
-    console.warn('Unable to read the Qerwiah intro session state.', error);
-    return false;
+    console.warn('Unable to access the Qerwiah intro session state.', error);
+    return true;
   }
 };
 
@@ -20,7 +22,7 @@ export const CinematicIntro = () => {
   const { t } = useBrand();
   const prefersReduced = useReducedMotion();
   const dismissedRef = useRef(false);
-  const [visible, setVisible] = useState(() => !hasSeenIntro());
+  const [visible, setVisible] = useState(shouldShowIntro);
   const tagline = introConfig.showTagline && introConfig.tagline.trim()
     ? introConfig.tagline
     : null;
@@ -29,11 +31,6 @@ export const CinematicIntro = () => {
     if (dismissedRef.current) return;
 
     dismissedRef.current = true;
-    try {
-      sessionStorage.setItem(INTRO_SESSION_KEY, '1');
-    } catch (error) {
-      console.warn('Unable to save the Qerwiah intro session state.', error);
-    }
     setVisible(false);
   }, []);
 

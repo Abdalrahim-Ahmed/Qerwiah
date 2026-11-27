@@ -214,8 +214,8 @@
   - Existing localStorage images for the six products with known legacy seed images are migrated to that product's own `detailImages[0]`.
   - The migration only replaces missing or known legacy default image paths; other saved/admin-selected image paths are preserved.
   - The Admin Dashboard continues to display and edit `product.image`. The public page uses the corresponding `detailImages[0]`; the current seed mapping ties both references to the same primary product image.
-  - Existing seed mappings, shared through `src/data/seedData.js`, remain unchanged:
-    - `prod-deira-tote` → `product-1/image-1.jpg`
+  - Product images are resolved from each stable product ID. Correction: `prod-deira-tote` uses `src/assets/images/bag_tote_signature_1795087225085.jpg`; its previous positional `product-1/image-1.jpg` mapping showed an olive satchel rather than the described burgundy-trimmed tote.
+  - Other seed mappings, shared through `src/data/seedData.js`, remain unchanged:
     - `prod-nile-crossbody` → `product-2/image-1.jpg`
     - `prod-fayoum-wallet` → `product-3/image-1.jpg`
     - `prod-oasis-clutch` → `product-4/image-1.jpg`
@@ -226,7 +226,7 @@
     - `prod-fayoum-palm-wallet` → `product-9/image-1.jpg`
 - Verification:
   - Confirmed all nine product folders contain exactly two image files.
-  - Confirmed the nine existing product records each resolve to the first image in their existing detail gallery, matching the public card's source.
+  - Confirmed the Deira tote's dashboard image, public card image, and detail gallery resolve to the same verified tote asset. The remaining product mappings are unchanged.
   - Verified the legacy replacement list covers only the six prior default image sources; manual/custom image values are retained.
   - `npm run build` completed successfully.
 - Issues:
@@ -265,3 +265,79 @@
   - `npm run build` passed. Vite reported its existing `__dirname` config-loader warning and a bundle-size advisory; neither prevented the build.
 - Remaining issues:
   - Browser automation is not installed/available in this workspace, so the opening animation, skip click, and viewport layouts were verified by implementation and production compilation rather than a live browser/device pass.
+
+## TASK 14 — Owner Account Email Replacement
+- Status: Completed for the existing local demo authentication only
+- Account record:
+  - Updated the seeded Owner account `admin-founder-1` to `hager.tayea1810@gmail.com`; non-Owner accounts are unchanged.
+  - On startup, migrate only the stored record with ID `admin-founder-1` to the new email and active Owner role. If that record is missing from stored admin data, restore only the seeded Owner record without replacing other accounts.
+  - Existing admin sessions are accepted only when their stored email matches the current account email, which expires a session still carrying the old Owner email.
+- Password setup:
+  - The seeded Owner no longer contains a plaintext password.
+  - The login page exposes a one-time Owner password setup form while the Owner record has no supported password hash. It does not ask for the previous password; the new masked password must be entered twice and must contain at least 12 characters.
+  - The setup stores a per-password random 16-byte salt and PBKDF2-HMAC-SHA-256 hash (310,000 iterations) in the Owner record, deletes the Owner record's legacy plaintext `password` property, signs the Owner in, and then redirects to the dashboard. Admin passwords for other accounts are not modified.
+- Authentication limitations:
+  - Admin accounts, password hashes, and sessions are managed client-side in browser `localStorage`; there is no authentication provider, backend, database, or server-side authorization in this project.
+  - Password hashing protects against direct plaintext disclosure of this Owner password in localStorage, but cannot make a frontend-only system secure: users can alter local storage or client code, and the Owner setup link is not identity-verified. Existing non-Owner passwords remain in their prior local/demo format. Do not reuse a sensitive password; use server-side authentication before production.
+- Verification:
+  - `npm run build` passed. The existing login form accepts the new Owner account after setup; no password is supplied in source code or chat.
+
+## TASK 15 — Product One Images, English Price Formatting & Crafting Time
+- Status: Completed
+- Files modified:
+  - `src/data/seedData.js`
+  - `src/context/BrandContext.jsx`
+  - `src/pages/ProductsPage.jsx`
+  - `src/components/ProductDetailModal.jsx`
+  - `src/components/home/FeaturedProductsSection.jsx`
+  - `src/utils/productFormatters.js`
+  - `WEBSITE_CHANGELOG.md`
+- Assets used:
+  - Uploaded archive `Product_1.zip` inspected and extracted to `src/assets/images/products/product-1/`:
+    - First Image: `Artboard 2.jpg` (248,405 bytes, SHA256 matches existing `image-1.jpg`).
+    - Second Image: `Artboard 17.jpg` (206,132 bytes, SHA256 matches existing `image-2.jpg`).
+- Product One Image Integration:
+  - Connected `prod-deira-tote` directly to `PRODUCT_DETAIL_GALLERIES[0]`, with First Image as primary thumbnail and Second Image as hover/gallery image.
+  - Removed the `isOriginalSingleImageCard` override in `ProductsPage.jsx`. Card #1 now uses the exact same styling, dimensions, aspect ratio, and 700ms cross-fade transition as reference Cards #2 and #3.
+  - In `ProductDetailModal.jsx`, removed the automatic 4-second interval timer. The gallery operates completely manually with previous/next buttons and active dot indicators, and resets to First Image upon opening another product.
+  - In Admin Dashboard, primary thumbnail resolves from the shared `product.image` (First Image).
+  - The other eight products retain their original assets and mappings.
+- English Price Formatting:
+  - Created reusable formatting utility `formatProductPrice` in `src/utils/productFormatters.js`.
+  - Displays numerical digits in English with comma separators and `EGP` currency (e.g. `3,850 EGP`, `850 EGP`, `2,000 EGP`).
+  - Applied across Products Page cards, Home Page featured cards, and Product Details modal.
+  - Wrapped with `dir="ltr"` and `tabular-nums` to ensure stable bidirectional rendering in Arabic RTL layouts.
+  - Stored numeric values and inquiry states are preserved.
+- Crafting Time Indicator:
+  - Added crafting duration indicator with small `<Clock />` icon beside product names across Home Page and Products Page cards.
+  - Styled with brand muted gold accents (`#DFAC6D` on light cards, `#FEDEA3` on dark cards) without overwhelming the product name.
+  - Displays duration according to site language conventions (`28 ساعة` in Arabic, `28 hrs` in English).
+  - Verified all nine products have existing crafting duration data in `seedData.js`. If missing or invalid, indicator is hidden.
+- Verification:
+  - `npm run build` completed successfully.
+
+## TASK 16 — Loading Screen Tagline Text Update
+- Status: Completed
+- Files modified:
+  - `src/config/introConfig.js`
+  - `WEBSITE_CHANGELOG.md`
+- Changes made:
+  - Updated the Loading Screen tagline text in `src/config/introConfig.js` from `من روح الريف نصنع حكاية جديدة` to `حكاية أصلها الطبيعة`.
+  - All existing logo visuals, typography style, size, color, alignment, position, animation timing, and intro transitions remain untouched.
+- Verification:
+  - `npm run build` completed successfully.
+
+## TASK 17 — Home Page Product Card Content-Only Update
+- Status: Completed
+- Files modified:
+  - `src/components/home/FeaturedProductsSection.jsx`
+  - `WEBSITE_CHANGELOG.md`
+- Changes made:
+  - Removed product price and product description from the Home Page product cards.
+  - Placed the product name and crafting time in the same row below the image.
+  - Kept crafting time indicator visible only when verified data exists, retaining the clock icon and muted gold accent.
+  - Preserved the existing favorite button and product exploration navigation button.
+  - Preserved all card dimensions, hover-to-expand interactions, transitions, and animations.
+- Verification:
+  - `npm run build` completed successfully.
+

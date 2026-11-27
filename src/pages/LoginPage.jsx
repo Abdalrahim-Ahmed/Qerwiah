@@ -16,7 +16,15 @@ const MODES = ['signin', 'register'];
  * The "Create account" tab only ever creates regular customer accounts.
  */
 export const LoginPage = () => {
-  const { t, login, registerCustomer, currentAdmin, currentCustomer } = useBrand();
+  const {
+    t,
+    login,
+    registerCustomer,
+    currentAdmin,
+    currentCustomer,
+    ownerPasswordSetupRequired,
+    setOwnerPassword,
+  } = useBrand();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,7 +40,9 @@ export const LoginPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Already signed in: go where the session belongs.
   if (currentAdmin && !reason) return <Navigate to="/admin/dashboard" replace />;
@@ -45,7 +55,7 @@ export const LoginPage = () => {
     setError('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email.trim() || !password || (mode === 'register' && !name.trim())) {
@@ -61,13 +71,53 @@ export const LoginPage = () => {
       return; // the signed-in customer is redirected by the check above
     }
 
-    const res = login(email, password, pendingProductId);
-    if (!res.ok) {
-      setError(res.reason === 'inactive' ? a.inactiveError : a.invalidError);
+    setIsSubmitting(true);
+    try {
+      const res = await login(email, password, pendingProductId);
+      if (!res.ok) {
+        setError(res.reason === 'inactive' ? a.inactiveError : a.invalidError);
+        return;
+      }
+      if (res.role === 'admin') navigate('/admin/dashboard', { replace: true });
+    } catch {
+      setError(a.passwordOperationError);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleOwnerPasswordSetup = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (password.length < 12) {
+      setError(a.ownerPasswordLengthError);
       return;
     }
-    if (res.role === 'admin') navigate('/admin/dashboard', { replace: true });
-    // customers are redirected by the check above once their session is set
+    if (password !== confirmPassword) {
+      setError(a.ownerPasswordMismatchError);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const result = await setOwnerPassword(password);
+      if (!result.ok) {
+        setError(
+          result.reason === 'alreadyConfigured'
+            ? a.ownerPasswordAlreadySetError
+            : a.passwordOperationError,
+        );
+        return;
+      }
+      setPassword('');
+      setConfirmPassword('');
+      navigate('/admin/dashboard', { replace: true });
+    } catch {
+      setError(a.passwordOperationError);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -92,29 +142,98 @@ export const LoginPage = () => {
           </p>
         )}
 
-        <div
-          role="tablist"
-          className="mt-6 flex items-center gap-0.5 p-1.5 rounded-full bg-[#F4E8D5] border border-[#DFAC6D]/45"
-        >
-          {MODES.map((m) => (
-            <button
-              key={m}
-              type="button"
-              role="tab"
-              aria-selected={mode === m}
-              onClick={() => switchMode(m)}
-              className={`flex-1 px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer ${
-                mode === m
-                  ? 'bg-[#4B0011] text-[#FFF7EB] shadow-sm'
-                  : 'text-[#4B0011]/80 hover:text-[#4B0011]'
-              }`}
-            >
-              {m === 'signin' ? a.signInTab : a.registerTab}
-            </button>
-          ))}
-        </div>
+        {mode === 'owner-setup' ? (
+          <form onSubmit={handleOwnerPasswordSetup} noValidate className="mt-6 space-y-4">
+            <div className="p-4 rounded-xl bg-[#F4E8D5] border border-[#DFAC6D]/50">
+              <h2 className="text-sm font-semibold text-[#4B0011]">{a.ownerPasswordSetupTitle}</h2>
+              <p className="mt-2 text-xs text-[#2A0E14]/75 leading-relaxed">
+                {a.ownerPasswordSetupDescription}
+              </p>
+              <p className="mt-2 text-xs font-medium text-[#4B0011]" dir="ltr">
+                hager.tayea1810@gmail.com
+              </p>
+            </div>
 
-        <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
+            {error && (
+              <p role="alert" className="p-3 rounded-lg bg-[#4B0011]/10 border border-[#4B0011]/30 text-xs sm:text-sm text-[#4B0011]">
+                {error}
+              </p>
+            )}
+
+            <div>
+              <label htmlFor="owner-password" className="block text-xs font-medium text-[#4B0011] mb-2">
+                {a.newPasswordLabel}
+              </label>
+              <input
+                id="owner-password"
+                type="password"
+                dir="ltr"
+                autoComplete="new-password"
+                minLength={12}
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={inputClass}
+              />
+              <p className="mt-1.5 text-xs text-[#2A0E14]/55">{a.ownerPasswordLengthError}</p>
+            </div>
+
+            <div>
+              <label htmlFor="owner-password-confirm" className="block text-xs font-medium text-[#4B0011] mb-2">
+                {a.confirmPasswordLabel}
+              </label>
+              <input
+                id="owner-password-confirm"
+                type="password"
+                dir="ltr"
+                autoComplete="new-password"
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className={inputClass}
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full px-6 py-3 rounded-full bg-[#4B0011] text-[#FFF7EB] border border-[#4B0011] hover:bg-[#3A000D] shadow-sm text-sm font-medium cursor-pointer disabled:opacity-60 disabled:cursor-wait"
+            >
+              {isSubmitting ? a.working : a.setOwnerPasswordBtn}
+            </button>
+            <button
+              type="button"
+              onClick={() => switchMode('signin')}
+              className="w-full text-xs text-[#4B0011]/80 hover:text-[#4B0011] cursor-pointer"
+            >
+              {a.backToSignIn}
+            </button>
+          </form>
+        ) : (
+          <>
+            <div
+              role="tablist"
+              className="mt-6 flex items-center gap-0.5 p-1.5 rounded-full bg-[#F4E8D5] border border-[#DFAC6D]/45"
+            >
+              {MODES.map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  role="tab"
+                  aria-selected={mode === m}
+                  onClick={() => switchMode(m)}
+                  className={`flex-1 px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors cursor-pointer ${
+                    mode === m
+                      ? 'bg-[#4B0011] text-[#FFF7EB] shadow-sm'
+                      : 'text-[#4B0011]/80 hover:text-[#4B0011]'
+                  }`}
+                >
+                  {m === 'signin' ? a.signInTab : a.registerTab}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
           {error && (
             <p
               role="alert"
@@ -177,7 +296,18 @@ export const LoginPage = () => {
           <LiquidButton type="submit" variant="burgundy" className="w-full">
             <span>{mode === 'signin' ? a.signInBtn : a.registerBtn}</span>
           </LiquidButton>
-        </form>
+              {ownerPasswordSetupRequired && mode === 'signin' && (
+                <button
+                  type="button"
+                  onClick={() => switchMode('owner-setup')}
+                  className="w-full text-xs text-[#4B0011] underline underline-offset-4 cursor-pointer"
+                >
+                  {a.setOwnerPasswordLink}
+                </button>
+              )}
+            </form>
+          </>
+        )}
 
         <div className="mt-6 text-center">
           <Link

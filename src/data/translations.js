@@ -23,55 +23,44 @@ export const COPY = {
     },
     hero: {
       kicker: 'حرفة مصرية أصيلة · ألياف موز وجلد طبيعي',
-      headline: 'حكاية زمان، بروح النهاردة...',
-      headlineLine1: 'حكاية زمان،',
-      headlineLine2: 'بروح النهاردة...',
-      subcopy: 'خاماتها طبيعية كل قطعة ليها تفاصيلها وشخصيتها',
-      ctaCollection: 'استكشفي المجموعة',
-      ctaStory: 'اكتشفي قصتنا',
+      headline: 'حكاية أصلها الطبيعة',
+      subcopy: 'قطعة جلد طبيعي وألياف موز، كل قطعة منها مصنوعة بإيد حرفيين، وبتحكي رمز من التراث المصري.',
+      ctaCollection: 'تصفحي المجموعة',
+      ctaStory: 'اعرفي حكايتنا',
       prevSlide: 'القطعة السابقة',
       nextSlide: 'القطعة التالية',
       slideOf: 'من',
     },
     featured: {
       kicker: 'مختارات الدار',
-      title: 'قطع تحمل ذاكرة المكان',
-      subtitle:
-        'اختاري أي قطعة من المعرض لتتأملي تفاصيل النسيج الطبيعي وصياغة الجلد اليدوية.',
+      title: 'منتجاتنا المميزة',
+      subtitle: 'كل قطعة ليها تفاصيلها وشخصيتها.',
       explorePiece: 'تصفح القطعة',
       craftHoursLabel: 'ساعة عمل يدوي',
     },
     aboutPreview: {
       kicker: 'جذور الحرفة',
       title: 'إرث القرى المصرية في ثوب معاصر',
-      paragraph1:
-        'في قرى مصر، لم تكن الخامات النباتية يوماً مجرد مواد عابرة، بل كانت امتداداً لحياة متناغمة مع الأرض واليد الصانعة.',
+      paragraph1: 'في قرى مصر، كانت الخامات النباتية جزء من الحياة اليومية.',
       paragraph2:
-        'تستعيد القروية هذه المهارات المتوارثة في معالجة ألياف أشجار الموز، وتجمعها مع دباغة الجلود الطبيعية لتقديم قطع تعيش طويلاً وتروي حكاية أصالة.',
-      cta: 'اكتشفي قصتنا',
-      caption: 'حياكة ألياف الموز وخياطة الجلد يدوياً في ورشة القروية',
+        'بنستعيد المهارات دي في معالجة ألياف الموز وتجميعها مع الجلد الطبيعي، حتى نقدّم قطع تعيش طويلاً وتحكي حكاية أصلها الطبيعة.',
+      cta: 'اعرفي حكايتنا',
+      caption: 'حقيبة منسوجة من الخامات الطبيعية على خلفية عنابية',
     },
     videoSection: {
       kicker: 'الفيلم الوثائقي للعلامة',
-      title: 'حكاية من قلب التراث',
-      description:
-        'من خامات طبيعية وحرفة أصيلة، تبدأ حكاية تجمع بين جمال الماضي وروح التصميم المعاصر.',
+      title: 'قروية بين الماضي والحاضر..',
+      description: 'من الخامة الطبيعية للحرفة اليدوية، كل قطعة بتجمع جمال الماضي وروح التصميم المعاصر.',
       playLabel: 'تشغيل الفيلم',
       pauseLabel: 'إيقاف مؤقت',
       muteLabel: 'كتم الصوت',
       unmuteLabel: 'تشغيل الصوت',
       fallbackNote: 'عرض مصور للحرفة · جاهز لاستبدال ملف الفيديو من الأصول',
-      chapters: [
-        'تجفيف ألياف الموز تحت شمس الريف المصري',
-        'جدل الخيوط الذهبية بأيدي الحرفيين',
-        'تلاقي النسيج النباتي مع الجلد الطبيعي العنّابي',
-      ],
     },
     materials: {
       kicker: 'ثلاثية الصنعة',
-      title: 'من جذع الموز والجلد إلى قطعة خالدة',
-      description:
-        'تولد كل قطعة في القروية من حوار متوازن بين خفة الألياف النباتية وقوة الجلد الطبيعي المدبوغ، لتصمد أمام الزمن وتزداد جمالاً.',
+      title: 'من ألياف الموز والجلد، إلى قطعة خالدة',
+      description: 'كل قطعة بتتعمل من دمج خامات الجلد الطبيعي مع ألياف الموز لتصمد أمام الزمن وتزاد جمالاً',
       leftTitle: 'ألياف الموز الطبيعية',
       leftCaption: 'خامات نباتية تُستخلص وتُجفف طبيعياً في قرى مصر لتمنح ملمساً حريرياً متيناً.',
       centerTitle: 'الحقيبة المكتملة',
@@ -81,16 +70,15 @@ export const COPY = {
     },
     whatsapp: {
       kicker: 'تواصل مباشر مع الورشة',
-      title: 'هل تبحثين عن قطعة خاصة أو تفاصيل أعمق؟',
-      description:
-        'يسعد فريق القروية بالإجابة عن استفساراتك حول الخامات والمقاسات وتوافر القطع الحرفية مباشرة عبر واتساب.',
-      button: 'تواصلي معنا عبر واتساب',
+      title: 'بتحبي التميز؟ صممي قطعة مخصوص ليكي؟',
+      description: 'احكيلنا تحبي إيه، ونصمم لك قطعة بحكايتك.',
+      button: 'كلمينا على واتساب',
       numberLabel: 'الرقم المعتمد للورشة',
     },
     finalCta: {
       title: 'اختاري قطعة ليها حكاية',
-      subtitle: 'تصفحي الأرشيف الكامل لحقائب ومحافظ القروية المصنوعة يدوياً في مصر.',
-      button: 'استكشفي جميع القطع',
+      subtitle: 'اتفرجي على منتجاتنا كلها',
+      button: 'تصفحي المجموعة',
     },
     footer: {
       description:
@@ -102,40 +90,33 @@ export const COPY = {
     },
     aboutPage: {
       kicker: 'سيرة القروية',
-      title: 'رحلة من ذاكرة الريف إلى الحاضر المعاصر',
-      lead: 'ليست القروية مجرد علامة تصميم؛ إنها استعادة حية لخيوط كادت أن تُنسى بين حقول النيل وورش الحرفيين.',
+      title: 'قروية بين الماضي والحاضر',
       stages: [
         {
           number: '01',
-          title: 'الماضي',
-          subtitle: 'عندما كانت الأرض تمنح الخامة واليد تمنحها الروح',
+          subtitle: 'كانت إيه؟',
           body1:
-            'لعقود طويلة، برعت القرى المصرية في تحويل المخلفات الزراعية الطبيعية، ومن بينها ألياف سيقان الموز، إلى أدوات وسلال ومنسوجات يومية متقنة.',
+            'زمان، في قرى مصر، كانت الأرض بتمنح الخامة، والإيد بتدّيها الروح. كانت جدتنا بتضفر القروية، وكل حاجة البيت بيحتاجها.',
           body2:
-            'كانت الحرفة تُمارس بصبر داخل البيوت والورش الريفية، حيث تتوارث الأجيال سر تنقية الألياف وتجفيفها تحت الشمس ثم جدلها بأنماط دقيقة.',
-          quote: '«في الريف المصري، لم يُهدر نبات قط؛ بل تحول كل جزء منه إلى منفعة وجمال.»',
+            'مكنتش مجرد حرفة للعرض، كانت حياة. وكل إيد بتسلّم اللي بعدها سر الخامة، كأنها بتسلّمه حكاية.',
           caption: 'الأدوات التقليدية لمعالجة الألياف النباتية والجلود',
         },
         {
           number: '02',
-          title: 'الاندثار',
-          subtitle: 'تراجع الحرفة أمام تسارع الإنتاج الصناعي',
+          subtitle: 'اختفت ليه؟',
           body1:
-            'مع انتشار البدائل البلاستيكية الرخيصة والإنتاج الكمي السريع، تراجعت الحاجة إلى المنسوجات النباتية اليدوية وتناقص عدد الحرفيين المهرة.',
+            'وبعدين الدنيا تسارعت. جات الخامات جاهزة، والإنتاج اللي مبيستناش حد. الناس بقت تسأل عن السعر، ومحدش بقى يسأل عن الجودة والحكاية.',
           body2:
-            'ظلت معرفة استخلاص ألياف الموز محصورة في أيدٍ قليلة، مهددة بالاختفاء مع ابتعاد الأجيال الجديدة عن ورش القرى.',
-          quote: '«حين تغيب الحرفة اليدوية، لا نفقد قطعة فحسب، بل نفقد لغة كاملة من المعرفة المحلية.»',
+            'والإيد اللي كانت بتعرف تضفر، مبقاش حد يسلّمها لحد. وكل حرفي بيسيب الشغلة، حكاية كانت بتروح معاه، وبدأت الحرفة تختفي..',
           caption: 'ألياف الموز الخام قبل نسجها وإعادة تأهيلها',
         },
         {
           number: '03',
-          title: 'الإحياء',
-          subtitle: 'القروية: التراث حين يلتقي بالتصميم المعاصر',
+          subtitle: 'رجعت إزاي؟',
           body1:
-            'وُلدت القروية من سؤال بسيط: كيف نحفظ هذه الحرفة الريفية الأصيلة ونضعها في قلب الحياة العصرية؟',
+            'بس الحكاية ما خلصتش. قِروية ولدت من سؤال بسيط: إزاي نحفظ الحرفة دي، ونرجعها لقلب حياتنا؟',
           body2:
-            'اليوم نعمل جنباً إلى جنب مع حرفيي القرى لنسج ألياف الموز الطبيعية ودمجها مع الجلد الطبيعي المصري المدبوغ نباتياً في حقائب ومحافظ تجمع الرقي الكلاسيكي والاستدامة.',
-          quote: '«نحن لا ننسخ الماضي، بل نمنحه حياة جديدة تليق بيد من تحمله اليوم.»',
+            'النهارده بنشتغل مع حرفيين مبدعيين، وبنجمع ألياف الموز مع الجلد الطبيعي في حقائب ومحافظ، لكل قطعة رمز وحكاية. مش بننسخ الماضي، بنديله حياة جديدة تليق بيكي.. قروية حكاية أصلها الطبيعة.',
           caption: 'اللقاء بين النسيج التراثي والتشطيب الجلدي المعاصر',
         },
       ],
@@ -449,34 +430,28 @@ export const COPY = {
     aboutPreview: {
       kicker: 'Living Roots',
       title: 'Egyptian Rural Craft in Contemporary Form',
-      paragraph1:
-        'Across Egypt’s villages, botanical fibers were never discarded—they were braided into vessels of daily life, patience, and quiet dignity.',
+      paragraph1: 'In Egypt’s villages, plant-based materials were part of everyday life.',
       paragraph2:
-        'Qerwiah restores these inherited techniques in curing and weaving banana-tree fibers, uniting them with genuine Egyptian leather to create enduring heirloom pieces.',
+        'We revive these skills by processing banana fibers and bringing them together with genuine leather, creating pieces that last and tell a story rooted in nature.',
       cta: 'Discover Our Story',
-      caption: 'Hand-looming banana fibers and saddle-stitching leather in our Fayoum workshop',
+      caption: 'Handwoven natural-fiber bag against a burgundy backdrop',
     },
     videoSection: {
       kicker: 'Brand Portrait Film',
-      title: 'A Story Rooted in Heritage',
+      title: 'Qerwiah Between Past and Present',
       description:
-        'From natural materials and authentic craftsmanship comes a story that brings the beauty of heritage into contemporary design.',
+        'From natural materials to handcraft, every piece brings together the beauty of the past and the spirit of contemporary design.',
       playLabel: 'Play Film',
       pauseLabel: 'Pause Film',
       muteLabel: 'Mute Audio',
       unmuteLabel: 'Unmute Audio',
       fallbackNote: 'Editorial Motion Reel · Ready for local 2:3 MP4/WebM asset',
-      chapters: [
-        'Curing natural banana fibers beneath the Egyptian sun',
-        'Braiding golden botanical strands by master rural hands',
-        'Joining woven fiber panels with deep burgundy leather',
-      ],
     },
     materials: {
       kicker: 'Material Dialogue',
-      title: 'Where Botanical Fiber Meets Supple Leather',
+      title: 'From Banana Fibers and Leather to a Timeless Piece',
       description:
-        'Every Qerwiah silhouette is born from a deliberate balance between sun-dried banana fibers and vegetable-tanned hides, crafted to age gracefully.',
+        'Every piece combines genuine leather with banana fibers to stand the test of time and grow more beautiful.',
       leftTitle: 'Natural Banana Fibers',
       leftCaption: 'Extracted from Egyptian banana trunks and cured in sunlight for luminous strength.',
       centerTitle: 'The Finished Piece',
@@ -486,16 +461,15 @@ export const COPY = {
     },
     whatsapp: {
       kicker: 'Direct Atelier Concierge',
-      title: 'Inquire Directly With Our Workshop',
-      description:
-        'Whether you wish to learn more about a particular weave, dimensions, or bespoke leather accents, our team welcomes you directly on WhatsApp.',
-      button: 'Message Us on WhatsApp',
+      title: 'Love to stand out? Design a piece just for you.',
+      description: 'Tell us what you have in mind, and we’ll design a piece with your story.',
+      button: 'Chat with us on WhatsApp',
       numberLabel: 'Official Atelier Line',
     },
     finalCta: {
       title: 'Choose a Piece With a Story',
-      subtitle: 'Browse the complete informational archive of handcrafted bags and wallets.',
-      button: 'Explore All Pieces',
+      subtitle: 'Take a look at all our products.',
+      button: 'Explore Our Collection',
     },
     footer: {
       description:
@@ -507,40 +481,33 @@ export const COPY = {
     },
     aboutPage: {
       kicker: 'Brand Monograph',
-      title: 'From Rural Memory to Contemporary Craft',
-      lead: 'Qerwiah is more than an accessories house; it is the living restoration of fibers and techniques once woven along Egypt’s Nile Delta and oases.',
+      title: 'Qerwiah Between Past and Present',
       stages: [
         {
           number: '01',
-          title: 'The Past',
-          subtitle: 'When the land offered fiber, and rural hands gave it permanence',
+          subtitle: 'What was it?',
           body1:
-            'For generations, artisans in Egyptian villages transformed agricultural harvests—including the fibrous trunks of banana trees—into durable, sunlit textiles and woven vessels.',
+            'Long ago, in Egypt’s villages, the land provided the materials and skilled hands gave them life. Our grandmothers wove the Qerwiah craft and everything a home needed.',
           body2:
-            'Practiced patiently in courtyards and family workshops, every strand was stripped, sun-cured, and braided with knowledge passed down from elder to apprentice.',
-          quote: '“In the Egyptian countryside, nothing grown by the Nile was ever wasted; every fiber held a second life.”',
+            'It was not a craft for display; it was a way of life. Each generation passed the secret of the materials to the next, as if passing on a story.',
           caption: 'Traditional preparation of botanical strands and natural leather tools',
         },
         {
           number: '02',
-          title: 'The Disappearance',
-          subtitle: 'How industrial speed quietly eclipsed handwoven heritage',
+          subtitle: 'Why did it disappear?',
           body1:
-            'With the arrival of synthetic plastics and mass-produced imports, demand for time-intensive natural weaving faded across local markets.',
+            'Then the world sped up. Ready-made materials arrived, along with production that waited for no one. People began asking about price, and stopped asking about quality and the story.',
           body2:
-            'As younger generations moved away from rural workshops, the specialized craft of preparing banana fibers survived only in fragmented memories.',
-          quote: '“When a rural craft disappears, we lose more than objects—we lose an entire vocabulary of place.”',
+            'The hands that knew how to weave had no one to pass the craft on to. Each time an artisan left the trade, a story went with them, and the craft began to disappear.',
           caption: 'Unwoven raw Egyptian banana fibers preserved for archival revival',
         },
         {
           number: '03',
-          title: 'The Revival',
-          subtitle: 'Qerwiah: Heritage reimagined for today',
+          subtitle: 'How did it return?',
           body1:
-            'Qerwiah began with a commitment to restore dignity and contemporary relevance to Egypt’s rural weaving traditions.',
+            'But the story was not over. Qerwiah was born from a simple question: how can we preserve this craft and bring it back into our lives?',
           body2:
-            'Working closely with local artisans, we pair hand-loomed banana fibers with genuine vegetable-tanned leather to create refined bags and wallets built for modern life.',
-          quote: '“We do not imitate the past; we carry its finest hands into the present.”',
+            'Today, we work with talented artisans, pairing banana fibers with genuine leather in bags and wallets, each carrying a symbol and a story. We do not copy the past; we give it a new life worthy of you. Qerwiah—a story rooted in nature.',
           caption: 'Contemporary bags uniting rural weave and classic burgundy leather',
         },
       ],

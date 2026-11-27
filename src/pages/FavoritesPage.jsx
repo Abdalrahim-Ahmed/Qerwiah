@@ -95,7 +95,7 @@ export const FavoritesPage = () => {
                   <div className="p-6 flex-1 flex flex-col justify-between gap-4">
                     <div>
                       <p className="text-xs text-[#8A8861]">{product.edition[language]}</p>
-                      <h2 className="mt-2 text-xl font-semibold text-[#4B0011]">
+                      <h2 className="mt-2 text-[1.375rem] font-semibold text-[#4B0011]">
                         {product.name[language]}
                       </h2>
                       <p className="mt-2 text-sm text-[#2A0E14]/80 leading-relaxed">

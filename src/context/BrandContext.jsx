@@ -13,6 +13,7 @@ import { COPY } from '../data/translations';
 const STORAGE_KEYS = {
   lang: 'alqerwiah_lang',
   products: 'alqerwiah_products',
+  catalogVersion: 'alqerwiah_catalog_version',
   settings: 'alqerwiah_settings',
   admins: 'alqerwiah_admins',
   session: 'alqerwiah_admin_session',
@@ -22,6 +23,18 @@ const STORAGE_KEYS = {
   customerSession: 'alqerwiah_customer_session',
   favorites: 'alqerwiah_favorites',
 };
+
+const CATALOG_DATA_VERSION = '2026-11-27-v1';
+
+const OWNER_ADMIN_ID = 'admin-founder-1';
+const OWNER_EMAIL = 'hager.tayea1810@gmail.com';
+const PASSWORD_HASH_ALGORITHM = 'PBKDF2-SHA-256';
+const PASSWORD_HASH_ITERATIONS = 310000;
+
+const LEGACY_DEIRA_SIGNATURE_IMAGE = new URL(
+  '../assets/images/bag_tote_signature_1795087225085.jpg',
+  import.meta.url,
+).href;
 
 function readStorage(key, fallback) {
   try {
@@ -33,8 +46,92 @@ function readStorage(key, fallback) {
   }
 }
 
+function hasPasswordHash(passwordHash) {
+  return passwordHash?.algorithm === PASSWORD_HASH_ALGORITHM
+    && Number.isInteger(passwordHash.iterations)
+    && passwordHash.iterations >= 100000
+    && typeof passwordHash.salt === 'string'
+    && typeof passwordHash.hash === 'string';
+}
+
+function bytesToBase64(bytes) {
+  let binary = '';
+  bytes.forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
+  return btoa(binary);
+}
+
+function base64ToBytes(value) {
+  return Uint8Array.from(atob(value), (character) => character.charCodeAt(0));
+}
+
+async function derivePasswordHash(password, salt, iterations) {
+  if (!globalThis.crypto?.subtle) {
+    throw new Error('Web Crypto is unavailable in this browser context.');
+  }
+  const key = await globalThis.crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(password),
+    'PBKDF2',
+    false,
+    ['deriveBits'],
+  );
+  const digest = await globalThis.crypto.subtle.deriveBits(
+    { name: 'PBKDF2', salt, iterations, hash: 'SHA-256' },
+    key,
+    256,
+  );
+  return new Uint8Array(digest);
+}
+
+async function createPasswordHash(password) {
+  if (!globalThis.crypto?.getRandomValues) {
+    throw new Error('Secure random generation is unavailable in this browser context.');
+  }
+  const salt = globalThis.crypto.getRandomValues(new Uint8Array(16));
+  const hash = await derivePasswordHash(password, salt, PASSWORD_HASH_ITERATIONS);
+
+  return {
+    algorithm: PASSWORD_HASH_ALGORITHM,
+    iterations: PASSWORD_HASH_ITERATIONS,
+    salt: bytesToBase64(salt),
+    hash: bytesToBase64(hash),
+  };
+}
+
+async function verifyPasswordHash(password, passwordHash) {
+  if (!hasPasswordHash(passwordHash)) return false;
+  const salt = base64ToBytes(passwordHash.salt);
+  const expected = base64ToBytes(passwordHash.hash);
+  const actual = await derivePasswordHash(password, salt, passwordHash.iterations);
+  if (actual.length !== expected.length) return false;
+
+  let difference = 0;
+  actual.forEach((byte, index) => {
+    difference |= byte ^ expected[index];
+  });
+  return difference === 0;
+}
+
 function loadProducts() {
   const storedProducts = readStorage(STORAGE_KEYS.products, null);
+  let storedVersion = null;
+  try {
+    storedVersion = localStorage.getItem(STORAGE_KEYS.catalogVersion);
+  } catch {
+    storedVersion = null;
+  }
+  const needsCatalogSync = storedVersion !== CATALOG_DATA_VERSION;
+
+  if (needsCatalogSync) {
+    try {
+      localStorage.setItem(STORAGE_KEYS.catalogVersion, CATALOG_DATA_VERSION);
+    } catch {
+      // ignore storage quota errors
+    }
+  }
+
   if (!Array.isArray(storedProducts)) return INITIAL_PRODUCTS;
 
   const legacyProductImages = new Map([
@@ -52,11 +149,28 @@ function loadProducts() {
     const initialProduct = initialProductsById.get(product?.id);
     if (!initialProduct) return product;
     const legacyImage = legacyProductImages.get(product.id);
-    const shouldReplaceLegacyImage = !product.image || product.image === legacyImage;
+    const isKnownLegacyDeiraImage = product.id === 'prod-deira-tote'
+      && (product.image === LEGACY_DEIRA_SIGNATURE_IMAGE || product.image?.includes?.('bag_tote_signature'));
+    const shouldReplaceLegacyImage = !product.image
+      || product.image === legacyImage
+      || isKnownLegacyDeiraImage;
 
     return {
       ...initialProduct,
       ...product,
+      ...(needsCatalogSync
+        ? {
+            price: initialProduct.price,
+            name: {
+              ...(product.name || initialProduct.name),
+              ar: initialProduct.name.ar,
+            },
+            story: {
+              ...(product.story || initialProduct.story),
+              ar: initialProduct.story.ar,
+            },
+          }
+        : {}),
       image: shouldReplaceLegacyImage
         ? initialProduct.detailImages?.[0] || initialProduct.image
         : product.image,
@@ -69,6 +183,30 @@ function loadProducts() {
     ...mergedProducts,
     ...INITIAL_PRODUCTS.filter((product) => !storedIds.has(product.id)),
   ];
+}
+
+function loadAdmins() {
+  const storedAdmins = readStorage(STORAGE_KEYS.admins, null);
+  const admins = Array.isArray(storedAdmins) ? storedAdmins : INITIAL_ADMINS;
+  let ownerFound = false;
+
+  const migratedAdmins = admins.map((admin) => {
+    if (admin?.id !== OWNER_ADMIN_ID) return admin;
+    ownerFound = true;
+    const migratedOwner = { ...admin };
+    delete migratedOwner.password;
+    return {
+      ...migratedOwner,
+      email: OWNER_EMAIL,
+      passwordHash: hasPasswordHash(admin.passwordHash) ? admin.passwordHash : null,
+      role: 'owner',
+      active: true,
+    };
+  });
+
+  if (ownerFound) return migratedAdmins;
+  const initialOwner = INITIAL_ADMINS.find((admin) => admin.id === OWNER_ADMIN_ID);
+  return initialOwner ? [...migratedAdmins, initialOwner] : migratedAdmins;
 }
 
 function normalizeBrandSettings(stored) {
@@ -123,9 +261,7 @@ export const BrandProvider = ({ children }) => {
     };
   });
 
-  const [admins, setAdmins] = useState(() =>
-    readStorage(STORAGE_KEYS.admins, INITIAL_ADMINS)
-  );
+  const [admins, setAdmins] = useState(loadAdmins);
 
   const [session, setSession] = useState(() =>
     readStorage(STORAGE_KEYS.session, null)
@@ -321,9 +457,18 @@ export const BrandProvider = ({ children }) => {
   // Verify session against live active admin accounts
   const currentAdmin = useMemo(() => {
     if (!session) return null;
-    const matched = admins.find((a) => a.id === session.adminId && a.active);
+    const sessionEmail = session.email?.trim().toLowerCase();
+    const matched = admins.find((a) =>
+      a.id === session.adminId
+      && a.active
+      && a.email.trim().toLowerCase() === sessionEmail
+    );
     return matched ?? null;
   }, [admins, session]);
+
+  const ownerPasswordSetupRequired = !admins.some((admin) =>
+    admin.id === OWNER_ADMIN_ID && hasPasswordHash(admin.passwordHash)
+  );
 
   useEffect(() => {
     if (session && !currentAdmin) {
@@ -442,12 +587,20 @@ export const BrandProvider = ({ children }) => {
 
   // Single sign-in for everyone. The role comes ONLY from the configured administrator
   // accounts (matched by email + password), never from anything the visitor claims.
-  const login = (email, password, pendingProductId = null) => {
+  const login = async (email, password, pendingProductId = null) => {
     const normalized = email.trim().toLowerCase();
 
-    const adminMatch = admins.find((a) => a.email.trim().toLowerCase() === normalized);
+    const matchingAdmins = admins.filter((admin) =>
+      admin.email.trim().toLowerCase() === normalized
+    );
+    const adminMatch = normalized === OWNER_EMAIL
+      ? matchingAdmins.find((admin) => admin.id === OWNER_ADMIN_ID) || matchingAdmins[0]
+      : matchingAdmins[0];
     if (adminMatch) {
-      if (adminMatch.password !== password) return { ok: false, reason: 'invalid' };
+      const passwordMatches = hasPasswordHash(adminMatch.passwordHash)
+        ? await verifyPasswordHash(password, adminMatch.passwordHash)
+        : adminMatch.password === password;
+      if (!passwordMatches) return { ok: false, reason: 'invalid' };
       if (!adminMatch.active) return { ok: false, reason: 'inactive' };
       setSession({
         adminId: adminMatch.id,
@@ -462,6 +615,36 @@ export const BrandProvider = ({ children }) => {
     if (!customer) return { ok: false, reason: 'invalid' };
     completeCustomerAuth(customer.id, pendingProductId);
     return { ok: true, role: 'customer' };
+  };
+
+  const setOwnerPassword = async (password) => {
+    if (password.length < 12) return { ok: false, reason: 'weak' };
+    const owner = admins.find((admin) => admin.id === OWNER_ADMIN_ID);
+    if (!owner) return { ok: false, reason: 'missing' };
+    if (hasPasswordHash(owner.passwordHash)) {
+      return { ok: false, reason: 'alreadyConfigured' };
+    }
+
+    const passwordHash = await createPasswordHash(password);
+    setAdmins((previousAdmins) => previousAdmins.map((admin) => {
+      if (admin.id !== OWNER_ADMIN_ID) return admin;
+      const updatedOwner = { ...admin };
+      delete updatedOwner.password;
+      return {
+        ...updatedOwner,
+        email: OWNER_EMAIL,
+        passwordHash,
+        role: 'owner',
+        active: true,
+      };
+    }));
+    setSession({
+      adminId: OWNER_ADMIN_ID,
+      email: OWNER_EMAIL,
+      name: owner.name,
+      loggedInAt: new Date().toISOString(),
+    });
+    return { ok: true };
   };
 
   const logoutAdmin = () => {
@@ -525,6 +708,8 @@ export const BrandProvider = ({ children }) => {
     toggleFavorite,
     requestLogin,
     login,
+    ownerPasswordSetupRequired,
+    setOwnerPassword,
     admins,
     currentAdmin,
     logoutAdmin,

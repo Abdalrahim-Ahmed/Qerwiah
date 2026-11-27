@@ -11,6 +11,8 @@ const REEL_FRAMES = [
   { src: BRAND_IMAGES.toteSignature, objectPos: 'center center' },
 ];
 
+const VIDEO_VISIBILITY_THRESHOLD = 0.25;
+
 export const CinematicVideoSection = () => {
   const { t, settings } = useBrand();
   const prefersReduced = useReducedMotion();
@@ -27,6 +29,21 @@ export const CinematicVideoSection = () => {
     setIsPlaying(false);
     setReelIndex(0);
   }, [settings.videoSrc]);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || videoUnavailable) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.intersectionRatio <= VIDEO_VISIBILITY_THRESHOLD && !video.paused) {
+        video.pause();
+        setIsPlaying(false);
+      }
+    }, { threshold: [VIDEO_VISIBILITY_THRESHOLD] });
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [videoUnavailable]);
 
   // Fallback animated 2:3 heritage documentary reel if local MP4 asset is not yet placed
   useEffect(() => {
@@ -73,9 +90,6 @@ export const CinematicVideoSection = () => {
     }
   };
 
-  const activeChapter =
-    t.videoSection.chapters[reelIndex % t.videoSection.chapters.length];
-
   return (
     <section
       aria-labelledby="heritage-video-heading"
@@ -119,7 +133,6 @@ export const CinematicVideoSection = () => {
                   <video
                     ref={videoRef}
                     src={settings.videoSrc}
-                    poster={settings.videoPoster}
                     muted={isMuted}
                     playsInline
                     preload="metadata"
@@ -131,35 +144,26 @@ export const CinematicVideoSection = () => {
                   />
                 ) : (
                   <div className="relative w-full h-full">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={reelIndex}
-                        src={
-                          isPlaying
-                            ? REEL_FRAMES[reelIndex].src
-                            : settings.videoPoster
-                        }
-                        alt={t.videoSection.title}
-                        referrerPolicy="no-referrer"
-                        initial={{ opacity: 0.35, scale: prefersReduced ? 1 : 1.04 }}
-                        animate={{
-                          opacity: 1,
-                          scale: isPlaying && !prefersReduced ? 1.08 : 1,
-                        }}
-                        exit={{ opacity: 0.25 }}
-                        transition={{
-                          opacity: { duration: 0.7 },
-                          scale: { duration: 3.8, ease: 'easeOut' },
-                        }}
-                        className="w-full h-full object-cover"
-                      />
-                    </AnimatePresence>
                     {isPlaying && (
-                      <div className="absolute inset-x-0 top-0 p-5 bg-gradient-to-b from-[#4B0011]/70 to-transparent">
-                        <p className="text-xs text-[#FEDEA3] tracking-wide">
-                          {activeChapter}
-                        </p>
-                      </div>
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={reelIndex}
+                          src={REEL_FRAMES[reelIndex].src}
+                          alt={t.videoSection.title}
+                          referrerPolicy="no-referrer"
+                          initial={{ opacity: 0.35, scale: prefersReduced ? 1 : 1.04 }}
+                          animate={{
+                            opacity: 1,
+                            scale: isPlaying && !prefersReduced ? 1.08 : 1,
+                          }}
+                          exit={{ opacity: 0.25 }}
+                          transition={{
+                            opacity: { duration: 0.7 },
+                            scale: { duration: 3.8, ease: 'easeOut' },
+                          }}
+                          className="w-full h-full object-cover"
+                        />
+                      </AnimatePresence>
                     )}
                   </div>
                 )}
@@ -246,17 +250,6 @@ export const CinematicVideoSection = () => {
               {t.videoSection.description}
             </p>
 
-            {/* Poetic Craft Chapters */}
-            <ol className="mt-8 space-y-3 text-sm text-[#2A0E14]/80 border-t border-[#4B0011]/10 pt-6 max-w-lg">
-              {t.videoSection.chapters.map((chapter, idx) => (
-                <li key={chapter} className="flex items-baseline gap-3">
-                  <span className="text-xs font-semibold text-[#8A8861] tabular-nums">
-                    0{idx + 1}.
-                  </span>
-                  <span>{chapter}</span>
-                </li>
-              ))}
-            </ol>
           </motion.div>
         </div>
       </div>

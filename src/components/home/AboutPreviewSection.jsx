@@ -1,8 +1,8 @@
 import { motion, useReducedMotion } from 'motion/react';
 import { useBrand } from '../../context/BrandContext';
-import { BRAND_IMAGES } from '../../data/seedData';
 import { HeritageImage } from '../HeritageImage';
 import { LiquidButton } from '../LiquidButton';
+import homepageAboutPreview from '../../assets/images/homepage_about_preview.jpeg';
 
 export const AboutPreviewSection = () => {
   const { t } = useBrand();
@@ -23,7 +23,7 @@ export const AboutPreviewSection = () => {
             <figure>
               <div className="aspect-[4/3] rounded-2xl overflow-hidden border border-[#DFAC6D]/45 shadow-md bg-[#F4E8D5]">
                 <HeritageImage
-                  src={BRAND_IMAGES.artisanHands}
+                  src={homepageAboutPreview}
                   alt={t.aboutPreview.caption}
                   className="w-full h-full object-cover"
                 />
